@@ -1,7 +1,3 @@
-//
-// Created by Paul CLEMENT on 14/04/2022.
-//
-
 #ifndef PROJET_BOGGLE_MENU_H
 #define PROJET_BOGGLE_MENU_H
 
