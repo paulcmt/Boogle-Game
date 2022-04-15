@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "menu.h"
 #include "demarrage partie.h"
+#include "fonctions globales.h"
 
 int main()
 {
