@@ -1,4 +1,4 @@
-#include "demarrage partie.h"
+#include "generation grille.h"
 #include "fonctions globales.h"
 
 int Dimension_grille() // Demande la dimension de la grille
