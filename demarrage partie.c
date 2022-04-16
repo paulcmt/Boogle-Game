@@ -137,11 +137,15 @@ char Generation_lettre_aleatoire()
 
     return lettre;
 }
-void Generation_grille(char grille[8][8], short longueur)
+void Generation_sous_carre3x3(char sous_carre3x3[9])
 {
-    char sous_carre3x3[9];
     for (int i = 0; i < 9; ++i)
     {
         sous_carre3x3[i] = Generation_lettre_aleatoire();
     }
+}
+void Generation_grille(char grille[8][8], short longueur)
+{
+    char sous_carre3x3[9];
+    Generation_sous_carre3x3(sous_carre3x3);
 }
