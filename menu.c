@@ -13,13 +13,13 @@ int Menu()
     short choix; // Déclaration variable choix pour le controler
 
     // Debut du bloc "Contrôle du choix avec message d'erreur"
-    printf("Choix : \n");
+    printf("Choix : ");
     scanf(" %hd", &choix);
 
     while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
     {
         printf("Erreur de saisie, le choix doit être entre 1 et 3.");
-        printf("\nChoix : \n");
+        printf("\nChoix : ");
         scanf(" %hd", &choix);
     }
     // Fin du bloc "Contrôle du choix avec message d'erreur"

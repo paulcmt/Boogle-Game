@@ -26,8 +26,10 @@ char Generation_lettre_aleatoire()
 {
     // Debut du bloc "Générer une lettre selon les probabilités"
     int nb_random_lettre = rand() % 99999 + 1; // Tire un nombre random entre 1 et 100 000
-    char lettre = NULL;
-    switch (nb_random_lettre)
+
+    char lettre = NULL; // Intialisation de la variable qui contiendra la lettre
+
+    switch (nb_random_lettre) // Association du nombre tiré à la lettre correspondante
     {
         case 1 ... 49: // 49 chances sur 100 000 soit 0,049 %
             lettre = 'W';
@@ -109,7 +111,7 @@ char Generation_lettre_aleatoire()
             lettre = 'R';
             break;
 
-        case 45195 ... 52297: // 1067 chances sur 100 000 soit 1,067 %
+        case 45195 ... 52297: // 7103 chances sur 100 000 soit 1,067 %
             lettre = 'N';
             break;
 
@@ -117,19 +119,19 @@ char Generation_lettre_aleatoire()
             lettre = 'T';
             break;
 
-        case 59550 ... 67136: // 1067 chances sur 100 000 soit 1,067 %
+        case 59550 ... 67136: // 7587 chances sur 100 000 soit 7,587 %
             lettre = 'I';
             break;
 
-        case 67137 ... 75093: // 1067 chances sur 100 000 soit 1,067 %
+        case 67137 ... 75093: // 7957 chances sur 100 000 soit 7,957 %
             lettre = 'S';
             break;
 
-        case 75094 ... 83275: // 1067 chances sur 100 000 soit 1,067 %
+        case 75094 ... 83275: // 8182 chances sur 100 000 soit 8,182 %
             lettre = 'A';
             break;
 
-        case 83276 ... 100001: // 1067 chances sur 100 000 soit 1,067 %
+        case 83276 ... 100001: // 16726 chances sur 100 000 soit 16,726 %
             lettre = 'E';
             break;
     }
@@ -137,15 +139,35 @@ char Generation_lettre_aleatoire()
 
     return lettre;
 }
-void Generation_sous_carre3x3(char sous_carre3x3[9])
+
+void Generation_sous_carre3x3(char sous_carre3x3[]) // Première partie de la génération de la grille
 {
-    for (int i = 0; i < 9; ++i)
+    for (int i = 0; i <= 8; ++i)
     {
         sous_carre3x3[i] = Generation_lettre_aleatoire();
     }
 }
+
+void Lettre_commune(char sous_carre3x3[]) // Vérifie si présence de lettre commune dans un tableau donné
+{
+    int i,j;
+
+    for (i = 0; i < 9; ++i)
+    {
+        for (j = 0; j < 9; ++j)
+        {
+            if (sous_carre3x3[i] == sous_carre3x3[j] && i != j) // Si présence lettre similaire
+            {
+                sous_carre3x3[i] = Generation_lettre_aleatoire(); // Génération nouvelle lettre aléatoirement
+                j = -1;
+            }
+        }
+    }
+}
 void Generation_grille(char grille[8][8], short longueur)
 {
-    char sous_carre3x3[9];
-    Generation_sous_carre3x3(sous_carre3x3);
+    char sous_carre3x3[8]; // Création du sous carré 3x3
+    srand(time(0));
+    Generation_sous_carre3x3(sous_carre3x3); // Attribution des lettres dans le sous carré 3x3
+    Lettre_commune(sous_carre3x3); // Vérifie si présence de lettres similaires dans le sous carré
 }

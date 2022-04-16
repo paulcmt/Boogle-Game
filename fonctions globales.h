@@ -7,6 +7,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "ctype.h"
+#include "time.h"
 
 void Initialisation_tableau(char tabl[]);
 void Affichage_grille(char grille[8][8], int longueur);
