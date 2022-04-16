@@ -16,5 +16,7 @@ int main()
 
     Generation_grille(grille, longueur);
 
+    //Affichage_grille(grille, 4);
+
     return 0;
 }
