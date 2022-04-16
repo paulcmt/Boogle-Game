@@ -170,4 +170,5 @@ void Generation_grille(char grille[8][8], short longueur)
     char sous_carre3x3[9]; // Création du sous carré 3x3
     Generation_sous_carre3x3(sous_carre3x3); // Attribution des lettres dans le sous carré 3x3
     Lettre_commune(sous_carre3x3); // Vérifie si présence de lettres similaires dans le sous carré
+
 }
