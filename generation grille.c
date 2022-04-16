@@ -131,7 +131,7 @@ char Generation_lettre_aleatoire()
             lettre = 'A';
             break;
 
-        case 83276 ... 100001: // 16726 chances sur 100 000 soit 16,726 %
+        case 83276 ... 100000: // 16726 chances sur 100 000 soit 16,726 %
             lettre = 'E';
             break;
     }
@@ -142,7 +142,7 @@ char Generation_lettre_aleatoire()
 
 void Generation_sous_carre3x3(char sous_carre3x3[]) // Première partie de la génération de la grille
 {
-    for (int i = 0; i <= 8; ++i)
+    for (int i = 0; i < 9; ++i)
     {
         sous_carre3x3[i] = Generation_lettre_aleatoire();
     }
@@ -154,7 +154,7 @@ void Lettre_commune(char sous_carre3x3[]) // Vérifie si présence de lettre com
 
     for (i = 0; i < 9; ++i)
     {
-        for (j = 0; j < 9; ++j)
+        for (j = i; j < 9; ++j)
         {
             if (sous_carre3x3[i] == sous_carre3x3[j] && i != j) // Si présence lettre similaire
             {
@@ -163,6 +163,8 @@ void Lettre_commune(char sous_carre3x3[]) // Vérifie si présence de lettre com
             }
         }
     }
+
+    printf("Test");
 }
 void Generation_grille(char grille[8][8], short longueur)
 {
