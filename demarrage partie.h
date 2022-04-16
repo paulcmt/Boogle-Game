@@ -9,3 +9,4 @@
 #include "ctype.h"
 
 int Dimension_grille();
+void Generation_grille(char grille[8][8], short longueur);

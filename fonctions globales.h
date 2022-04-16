@@ -8,4 +8,5 @@
 #include "string.h"
 #include "ctype.h"
 
-void Initialisation_tableau(char Tabl[]);
+void Initialisation_tableau(char tabl[]);
+void Affichage_grille(char grille[8][8], int longueur);
