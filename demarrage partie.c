@@ -134,9 +134,14 @@ char Generation_lettre_aleatoire()
             break;
     }
     // Fin du bloc "Générer une lettre selon les probabilités"
+
+    return lettre;
 }
 void Generation_grille(char grille[8][8], short longueur)
 {
-
-
+    char sous_carre3x3[9];
+    for (int i = 0; i < 9; ++i)
+    {
+        sous_carre3x3[i] = Generation_lettre_aleatoire();
+    }
 }
