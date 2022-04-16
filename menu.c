@@ -4,7 +4,7 @@ int Menu()
 {
     // Debut du bloc "Affichage du menu"
     printf("--------------------------------\n");
-    printf("1. Démarrer une partie\n");
+    printf("1. Demarrer une partie\n");
     printf("2. Afficher les meilleurs scores\n");
     printf("3. Quitter\n");
     printf("--------------------------------\n");
@@ -13,13 +13,13 @@ int Menu()
     short choix; // Déclaration variable choix pour le controler
 
     // Debut du bloc "Contrôle du choix avec message d'erreur"
-    printf("Choix : ");
+    printf("Choix : \n");
     scanf(" %hd", &choix);
 
     while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
     {
         printf("Erreur de saisie, le choix doit être entre 1 et 3.");
-        printf("\nChoix : ");
+        printf("\nChoix : \n");
         scanf(" %hd", &choix);
     }
     // Fin du bloc "Contrôle du choix avec message d'erreur"
