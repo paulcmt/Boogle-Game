@@ -22,7 +22,7 @@ int Dimension_grille() // Demande la dimension de la grille
     return atoi(&dimension_grille[0]); // Longueur de la grille = premier caractère de la saisie de l'utilisateur
 }
 
-void Generation_grille(char grille[8][8], short longueur)
+char Generation_lettre_aleatoire()
 {
     // Debut du bloc "Générer une lettre selon les probabilités"
     int nb_random_lettre = rand() % 99999 + 1; // Tire un nombre random entre 1 et 100 000
@@ -45,18 +45,22 @@ void Generation_grille(char grille[8][8], short longueur)
             lettre = 'Z';
             break;
 
-        case 578 ... 1004: // 427 chances sur 100 000 soit
+        case 578 ... 1004: // 427 chances sur 100 000 soit 0,427 %
             lettre = 'X';
+            break;
+
+        case 1005 ... 1618: // 614 chances sur 100 000 soit 0,614 %
+            lettre = 'J';
+            break;
+
+        case 1619 ... 2356: // 738 chances sur 100 000 soit 0,738 %
+            lettre = 'H';
             break;
     }
     // Fin du bloc "Générer une lettre selon les probabilités"
-    /*
-    for (int i = 0; i < longueur; ++i)
-    {
-        for (int j = 0; j < longueur; ++j)
-        {
-            grille[i][j] = 'A';
-        }
-    }
-     */
+}
+void Generation_grille(char grille[8][8], short longueur)
+{
+
+
 }
