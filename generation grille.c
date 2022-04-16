@@ -140,7 +140,7 @@ char Generation_lettre_aleatoire()
     return lettre;
 }
 
-void Generation_sous_carre3x3(char sous_carre3x3[]) // Première partie de la génération de la grille
+void Generation_sous_carre3x3(char sous_carre3x3[9]) // Première partie de la génération de la grille
 {
     for (int i = 0; i < 9; ++i)
     {
@@ -148,7 +148,7 @@ void Generation_sous_carre3x3(char sous_carre3x3[]) // Première partie de la g�
     }
 }
 
-void Lettre_commune(char sous_carre3x3[]) // Vérifie si présence de lettre commune dans un tableau donné
+void Lettre_commune(char sous_carre3x3[9]) // Vérifie si présence de lettre commune dans un tableau donné
 {
     int i,j;
 
@@ -159,17 +159,15 @@ void Lettre_commune(char sous_carre3x3[]) // Vérifie si présence de lettre com
             if (sous_carre3x3[i] == sous_carre3x3[j] && i != j) // Si présence lettre similaire
             {
                 sous_carre3x3[i] = Generation_lettre_aleatoire(); // Génération nouvelle lettre aléatoirement
-                j = -1;
+                j = -1; // Va permettre de comparer la nouvelle lettre générée aux autres pour voir si doublon
             }
         }
     }
 
-    printf("Test");
 }
 void Generation_grille(char grille[8][8], short longueur)
 {
-    char sous_carre3x3[8]; // Création du sous carré 3x3
-    srand(time(0));
+    char sous_carre3x3[9]; // Création du sous carré 3x3
     Generation_sous_carre3x3(sous_carre3x3); // Attribution des lettres dans le sous carré 3x3
     Lettre_commune(sous_carre3x3); // Vérifie si présence de lettres similaires dans le sous carré
 }

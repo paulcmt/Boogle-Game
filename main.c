@@ -4,6 +4,7 @@
 
 int main()
 {
+    srand(time(0));
     // Utilisation du fichier "menu.c"
     //short choix = Menu(); // Initialisation du choix de l'utilisateur
 
