@@ -112,6 +112,26 @@ char Generation_lettre_aleatoire()
         case 45195 ... 52297:
             lettre = 'N';
             break;
+
+        case 52298 ... 59549:
+            lettre = 'T';
+            break;
+
+        case 59550 ... 67136:
+            lettre = 'I';
+            break;
+
+        case 67137 ... 75093:
+            lettre = 'S';
+            break;
+
+        case 75094 ... 83275:
+            lettre = 'A';
+            break;
+
+        case 83276 ... 100000:
+            lettre = 'E';
+            break;
     }
     // Fin du bloc "Générer une lettre selon les probabilités"
 }
