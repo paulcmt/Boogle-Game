@@ -109,10 +109,9 @@ char Generation_lettre_aleatoire()
             lettre = 'R';
             break;
 
-        /** case 45195 ... 52297: // 1067 chances sur 100 000 soit 1,067 %
+        case 45195 ... 52297: // 1067 chances sur 100 000 soit 1,067 %
             lettre = 'N';
             break;
-            */
 
         case 52298 ... 59549: // 7252 chances sur 100 000 soit 7,252 %
             lettre = 'T';
@@ -130,7 +129,7 @@ char Generation_lettre_aleatoire()
             lettre = 'A';
             break;
 
-        case 83276 ... 100000: // 1067 chances sur 100 000 soit 1,067 %
+        case 83276 ... 100001: // 1067 chances sur 100 000 soit 1,067 %
             lettre = 'E';
             break;
     }
