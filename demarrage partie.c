@@ -56,6 +56,62 @@ char Generation_lettre_aleatoire()
         case 1619 ... 2356: // 738 chances sur 100 000 soit 0,738 %
             lettre = 'H';
             break;
+
+        case 2357 ... 3223: // 867 chances sur 100 000 soit 0,867 %
+            lettre = 'G';
+            break;
+
+        case 3224 ... 4125: // 902 chances sur 100 000 soit 0,902 %
+            lettre = 'B';
+            break;
+
+        case 4126 ... 5192: // 1067 chances sur 100 000 soit 1,067 %
+            lettre = 'F';
+            break;
+
+        case 5193 ... 6555:
+            lettre = 'Q';
+            break;
+
+        case 6556 ... 8395:
+            lettre = 'V';
+            break;
+
+        case 8396 ... 10919:
+            lettre = 'P';
+            break;
+
+        case 10920 ... 13890:
+            lettre = 'M';
+            break;
+
+        case 13891 ... 17239:
+            lettre = 'C';
+            break;
+
+        case 17240 ... 20912:
+            lettre = 'D';
+            break;
+
+        case 20913 ... 26374:
+            lettre = 'L';
+            break;
+
+        case 26375 ... 32176:
+            lettre = 'O';
+            break;
+
+        case 32177 ... 38494:
+            lettre = 'U';
+            break;
+
+        case 38495 ... 45194:
+            lettre = 'R';
+            break;
+
+        case 45195 ... 52297:
+            lettre = 'N';
+            break;
     }
     // Fin du bloc "Générer une lettre selon les probabilités"
 }
