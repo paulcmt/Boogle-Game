@@ -9,3 +9,4 @@
 #include "ctype.h"
 
 int Menu();
+int Temps_de_la_partie();

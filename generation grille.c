@@ -6,7 +6,7 @@ int Dimension_grille() // Demande la dimension de la grille
     char dimension_grille[4]; // Création de la future réponse de l'utilisateur pour la dimension de la grille
     Initialisation_tableau(dimension_grille); // Tout élément devient NULL
 
-    printf("Quelle est la dimension souhaitee \(de 4x4 jusqu'a 8x8\) : ");
+    printf("Dimension souhaitee de la grille \(de 4x4 jusqu'a 8x8\) : ");
     scanf("%s", &dimension_grille); // Demande à l'utilisateur la dimension de la grille
 
     // Vérification de la saisie de la dimension de la grille (dimension carrée)
@@ -14,7 +14,7 @@ int Dimension_grille() // Demande la dimension de la grille
             strcmp(dimension_grille, "7x7") == 0 || strcmp(dimension_grille, "8x8") == 0 ))
     {
         printf("Erreur de saisie, la dimension doit etre entre 4x4 et 8x8.\n");
-        printf("Quelle est la dimension souhaitee \(de 4x4 jusqu'à 8x8\) : ");
+        printf("Dimension souhaitee de la grille \(de 4x4 jusqu'à 8x8\) : ");
         fflush(stdin);
         scanf("%s", &dimension_grille); // Redemande à l'utilisateur la dimension de la grille
     }
