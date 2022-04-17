@@ -2,17 +2,17 @@
 
 int Menu()
 {
-    // Debut du bloc "Affichage du menu"
+    /** Debut du bloc "Affichage du menu" **/
     printf("--------------------------------\n");
     printf("1. Demarrer une partie\n");
     printf("2. Afficher les meilleurs scores\n");
     printf("3. Quitter\n");
     printf("--------------------------------\n");
-    // Fin du bloc "Affichage du menu"
+    /** Fin du bloc "Affichage du menu" **/
 
     short choix; // Déclaration variable choix pour le controler
 
-    // Debut du bloc "Contrôle du choix avec message d'erreur"
+    /** Debut du bloc "Contrôle du choix avec message d'erreur" **/
     printf("Choix : ");
     scanf(" %hd", &choix);
 
@@ -22,9 +22,9 @@ int Menu()
         printf("\nChoix : ");
         scanf(" %hd", &choix);
     }
-    // Fin du bloc "Contrôle du choix avec message d'erreur"
+    /** Fin du bloc "Contrôle du choix avec message d'erreur" **/
 
-    // Debut du bloc "Renvoi du choix de l'utilisateur"
+    /** Debut du bloc "Renvoi du choix de l'utilisateur" **/
     switch (choix)
     {
         case 1: // Choix : démarrage d'une partie
@@ -36,5 +36,5 @@ int Menu()
         case 3: // Choix : quitter l'application
             exit(0);
     }
-    // Fin du bloc "Renvoi du choix de l'utilisateur"
+    /** Fin du bloc "Renvoi du choix de l'utilisateur" **/
 }

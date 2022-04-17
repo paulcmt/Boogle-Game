@@ -8,15 +8,15 @@ int main()
     // Utilisation du fichier "menu.c"
     //short choix = Menu(); // Initialisation du choix de l'utilisateur
 
-    // Utilisation du fichier "demarrage partie.c"
-    short longueur = 5;//Dimension_grille();
+    // Utilisation du fichier "generation grille.c"
+    short longueur = Dimension_grille();
 
-    // Debut du bloc "Definition de la grille"
+    /** Debut du bloc "Definition de la grille" **/
     char grille[8][8];
-
     Generation_grille(grille, longueur);
+    /** Fin du bloc "Definition de la grille" **/
 
-    //Affichage_grille(grille, 4);
+    Affichage_grille(grille, longueur);
 
     return 0;
 }
