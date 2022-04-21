@@ -34,7 +34,7 @@ int Menu()
             return 2;
 
         case 3: // Choix : quitter l'application
-            exit(0);
+            return 3;
     }
     /** Fin du bloc "Renvoi du choix de l'utilisateur" **/
 }
@@ -42,13 +42,13 @@ int Menu()
 int Temps_de_la_partie()
 {
     short temps = 0;
-    printf("Temps voulu pour la partie \(de 60 à 180 secondes\): ");
+    printf("Temps voulu pour la partie \(de 60 a 180 secondes\): ");
     scanf("%hd", &temps);
 
     while (!(60 <= temps && temps <= 180))
     {
         printf("Erreur de saisie, le temps doit être entre 60 et 180 secondes.");
-        printf("\nTemps voulu pour la partie \(de 60 à 180 secondes\): ");
+        printf("\nTemps voulu pour la partie \(de 60 a 180 secondes\): ");
         fflush(stdin);
         scanf("%hd", &temps);
     }
