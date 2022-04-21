@@ -1,6 +1,8 @@
-#include "fonctions globales.h"
-#include "menu.h"
-#include "generation grille.h"
+#include "fonctions globales.h" // Bibliothèque des fonctions nécessaires pour l'affichage ou les tests
+#include "menu.h" // Bibliothèque pour afficher le menu
+#include "generation grille.h" // Bibiliothèque pour générer la grille
+#include "score.h" // Bibliothèque pour calculer et afficher les scores
+#include "mots.h" // Bibliothèque pour saisir les mots et faire la vérification de la langue française
 
 int main()
 {
@@ -13,10 +15,10 @@ int main()
     //Conséquence du choix
     switch (choix)
     {
-        case 1 : // Le choix est de lancer une partie
+        case 1 : // Lancement de la partie
 
             // Utilisation du fichier "generation grille.c"
-            longueur = Dimension_grille();
+            longueur = Dimension_grille(); // Demande dimension de la grille
 
             /** Debut du bloc "Definition de la grille" **/
             char grille[8][8];
@@ -25,23 +27,18 @@ int main()
 
             short temps_limite = Temps_de_la_partie();
 
-            //Saisie_de_mots(temps_limite);
+            Saisie_de_mots(temps_limite);
 
-        break;
+            break;
 
-        case 2 : // Appel des scores
+        case 2 : // Calcul + affichage des scores
+
             printf("\n WALL OF FAME C-BOGGLE \n");
             printf("-----------------------");
-            /** Appel la fonction affichage des scores **/
+            /* Appel la fonction affichage des scores */
             //Affichage_meilleurs_scores(tabscore);
-        break;
 
-        case 3 : // Sortie du jeu avec message d'au revoir
-
-            printf("\nA bientot !\n");
-            exit(0);
-
-        break;
+            break;
     }
 
     return 0;

@@ -11,4 +11,4 @@
 #include "unistd.h"
 
 void Initialisation_tableau(char tabl[]);
-void Affichage_grille(char grille[8][8], int longueur);
+void Affichage_grille(char grille[8][8], int longueur); // Permet d'afficher la grille depuis n'importe quel fichier
