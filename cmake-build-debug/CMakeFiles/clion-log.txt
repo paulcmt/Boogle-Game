@@ -1,10 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja "/Users/paulclement/Library/CloudStorage/OneDrive-UniversiteDeTechnologieDeBelfort-Montbeliard/UTBM/TC02/UVs/IF2/Projet Boggle"
--- The C compiler identification is AppleClang 13.1.6.13160021
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
+"C:\Program Files\JetBrains\CLion 2022.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.1/bin/ninja/win/ninja.exe" -G Ninja -S "C:\Users\olivi\Desktop\Travail Florian\Ecole\UTBM\Informatique\TC02\Projet\Projet-Boggle" -B "C:\Users\olivi\Desktop\Travail Florian\Ecole\UTBM\Informatique\TC02\Projet\Projet-Boggle\cmake-build-debug"
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/paulclement/Library/CloudStorage/OneDrive-UniversiteDeTechnologieDeBelfort-Montbeliard/UTBM/TC02/UVs/IF2/Projet Boggle/cmake-build-debug
+-- Build files have been written to: C:/Users/olivi/Desktop/Travail Florian/Ecole/UTBM/Informatique/TC02/Projet/Projet-Boggle/cmake-build-debug
