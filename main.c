@@ -27,7 +27,8 @@ int main()
 
             short temps_limite = Temps_de_la_partie();
 
-            Saisie_de_mots(temps_limite);
+            //Saisie_de_mots(temps_limite);
+            Affichage_grille(grille, longueur);
 
             break;
 
