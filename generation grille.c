@@ -24,113 +24,113 @@ int Dimension_grille() // Demande la dimension de la grille
 char Generation_lettre_aleatoire()
 {
     /** Debut du bloc "Générer une lettre selon les probabilités" **/
-    int nb_random_lettre = rand() % 99999 + 1; // Tire un nombre random entre 1 et 100 000
+    int nb_random_lettre = rand() % 9999 + 1; // Tire un nombre random entre 1 et 100 000
 
     char lettre = NULL; // Intialisation de la variable qui contiendra la lettre
 
     switch (nb_random_lettre) // Association du nombre tiré à la lettre correspondante
     {
-        case 1 ... 49: // 49 chances sur 100 000 soit 0,049 %
+        case 1 ... 5: // 5 chances sur 10 000 soit 0,05 %
             lettre = 'W';
             break;
 
-        case 50 ... 123: // 74 chances sur 100 000 soit 0,074 %
+        case 6 ... 12: // 7 chances sur 10 000 soit 0,07 %
             lettre = 'K';
             break;
 
-        case 124 ... 251: // 128 chances sur 100 000 soit 0,128 %
+        case 13 ... 25: // 13 chances sur 10 000 soit 0,13 %
             lettre = 'Y';
             break;
 
-        case 252 ... 577: // 326 chances sur 100 000 soit 0,326 %
+        case 26 ... 58: // 33 chances sur 10 000 soit 0,33 %
             lettre = 'Z';
             break;
 
-        case 578 ... 1004: // 427 chances sur 100 000 soit 0,427 %
+        case 59 ... 101: // 43 chances sur 10 000 soit 0,43 %
             lettre = 'X';
             break;
 
-        case 1005 ... 1618: // 614 chances sur 100 000 soit 0,614 %
+        case 102 ... 162: // 61 chances sur 10 000 soit 0,61 %
             lettre = 'J';
             break;
 
-        case 1619 ... 2356: // 738 chances sur 100 000 soit 0,738 %
+        case 163 ... 236: // 74 chances sur 10 000 soit 0,74 %
             lettre = 'H';
             break;
 
-        case 2357 ... 3223: // 867 chances sur 100 000 soit 0,867 %
+        case 237 ... 323: // 87 chances sur 10 000 soit 0,87 %
             lettre = 'G';
             break;
 
-        case 3224 ... 4125: // 902 chances sur 100 000 soit 0,902 %
+        case 324 ... 413: // 90 chances sur 10 000 soit 0,90 %
             lettre = 'B';
             break;
 
-        case 4126 ... 5192: // 1067 chances sur 100 000 soit 1,067 %
+        case 414 ... 520: // 107 chances sur 10 000 soit 1,07 %
             lettre = 'F';
             break;
 
-        case 5193 ... 6555: // 1363 chances sur 100 000 soit 1,363 %
+        case 521 ... 656: // 136 chances sur 10 000 soit 1,36 %
             lettre = 'Q';
             break;
 
-        case 6556 ... 8395: // 1840 chances sur 100 000 soit 1,840 %
+        case 657 ... 840: // 184 chances sur 10 000 soit 1,84 %
             lettre = 'V';
             break;
 
-        case 8396 ... 10919: // 2524 chances sur 100 000 soit 2,524 %
+        case 841 ... 1092: // 252 chances sur 10 000 soit 2,52 %
             lettre = 'P';
             break;
 
-        case 10920 ... 13890: // 2971 chances sur 100 000 soit 2,971 %
+        case 1093 ... 1389: // 297 chances sur 10 000 soit 2,97 %
             lettre = 'M';
             break;
 
-        case 13891 ... 17239: // 3349 chances sur 100 000 soit 3,349 %
+        case 1390 ... 1724: // 335 chances sur 10 000 soit 3,35 %
             lettre = 'C';
             break;
 
-        case 17240 ... 20912: // 3673 chances sur 100 000 soit 3,673 %
+        case 1725 ... 2091: // 367 chances sur 10 000 soit 3,67 %
             lettre = 'D';
             break;
 
-        case 20913 ... 26374: // 5462 chances sur 100 000 soit 5,462 %
+        case 2092 ... 2637: // 546 chances sur 10 000 soit 5,46 %
             lettre = 'L';
             break;
 
-        case 26375 ... 32176: // 5802 chances sur 100 000 soit 5,802 %
+        case 2638 ... 3217: // 580 chances sur 10 000 soit 5,80 %
             lettre = 'O';
             break;
 
-        case 32177 ... 38494: // 6318 chances sur 100 000 soit 6,318 %
+        case 3218 ... 3849: // 632 chances sur 10 000 soit 6,32 %
             lettre = 'U';
             break;
 
-        case 38495 ... 45194: // 6700 chances sur 100 000 soit 6,700 %
+        case 3850 ... 4519: // 670 chances sur 10 000 soit 6,70 %
             lettre = 'R';
             break;
 
-        case 45195 ... 52297: // 7103 chances sur 100 000 soit 1,067 %
+        case 4520 ... 5229: // 710 chances sur 10 000 soit 7,10 %
             lettre = 'N';
             break;
 
-        case 52298 ... 59549: // 7252 chances sur 100 000 soit 7,252 %
+        case 5230 ... 5954: // 725 chances sur 10 000 soit 7,25 %
             lettre = 'T';
             break;
 
-        case 59550 ... 67136: // 7587 chances sur 100 000 soit 7,587 %
+        case 5955 ... 6713: // 759 chances sur 10 000 soit 7,59 %
             lettre = 'I';
             break;
 
-        case 67137 ... 75093: // 7957 chances sur 100 000 soit 7,957 %
+        case 6714 ... 7509: // 796 chances sur 10 000 soit 7,96 %
             lettre = 'S';
             break;
 
-        case 75094 ... 83275: // 8182 chances sur 100 000 soit 8,182 %
+        case 7510 ... 8327: // 818 chances sur 10 000 soit 8,18 %
             lettre = 'A';
             break;
 
-        case 83276 ... 100000: // 16726 chances sur 100 000 soit 16,726 %
+        case 8328 ... 100000: // 1673 chances sur 10 000 soit 16,73 %
             lettre = 'E';
             break;
     }
