@@ -19,6 +19,30 @@ int Nombre_de_lettres_connues(char grille[8][8], char lettre_a_compter, int long
     return compteur;
 }
 
+void Coordonnes_lettre(char lettre, int longueur, char grille[8][8], int *L, int *C)
+{
+    /** Début du bloc "Obtention des coordonnées de la première lettre" **/
+    int indiceC = -1, indiceL = 0, indiceCRetenu = 0; // Va permettre de parcourir la grille
+    lettre = toupper(lettre);
+    do
+    {
+        do
+        {
+            indiceC ++;
+        }
+        while (indiceC < longueur - 1 && lettre != grille[indiceL][indiceC]);
+
+        indiceL ++;
+        indiceCRetenu = indiceC;
+        indiceC = -1;
+    }
+    while (indiceL - 1 < longueur && lettre != grille[indiceL - 1][indiceCRetenu]);
+    /** Fin du bloc "Obtention des coordonnées de la première lettre" **/
+
+    *L = indiceL - 1;
+    *C = indiceCRetenu;
+}
+
 void Obtention_lettres_autour(char lettre_autour[8], char lettre, char grille[8][8], int longueur)
 {
     /** Début du bloc "Obtention des coordonnées de la première lettre" **/
@@ -129,9 +153,10 @@ void Obtention_lettres_autour(char lettre_autour[8], char lettre, char grille[8]
 void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
 {
     /** Début du bloc de traitement du mot entré **/
-    char lettre_autour[8];
+    char lettre_autour[8] = {0,0,0,0,0,0,0,0};
 
     char grille_copy[8][8];
+    int indiceL = 0, indiceC = 0;
 
     // Copie de la grille pour avoir de quoi différencier les lettres dans le mot de la grille
     for (int i = 0; i < longueur; ++i)
@@ -145,6 +170,21 @@ void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
     for (int i = 0; i < strlen(tabmots); ++i)
     {
         Obtention_lettres_autour(lettre_autour, tabmots[i], grille, longueur);
+        Coordonnes_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC);
+        grille_copy[indiceL][indiceC] = 0;
+
+        int nb_lettres_autour = -1, j = 0;
+
+        do
+        {
+            nb_lettres_autour ++;
+        }
+        while(lettre_autour[j] != 0);
+
+        if (Comptage_lettre_tableau(lettre_autour, tabmots[i+1], nb_lettres_autour) > 0)
+        {
+            Coordonnes_lettre(tabmots[i+1], longueur, grille, &indiceL, &indiceC);
+        }
 
         printf("%s",lettre_autour);
     }
