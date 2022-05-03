@@ -1,6 +1,156 @@
 #include "mots.h"
+#include "fonctions globales.h"
 
-void Saisie_de_mots(short temps_limite)
+int Nombre_de_lettres_connues(char grille[8][8], char lettre_a_compter, int longueur)
+{
+    int compteur = 0;
+
+    for (int i = 0; i < longueur; ++i)
+    {
+        for (int j = 0; j < longueur; ++j)
+        {
+            if (grille[i][j] == lettre_a_compter)
+            {
+                compteur++;
+            }
+        }
+    }
+
+    return compteur;
+}
+
+void Obtention_lettres_autour(char lettre_autour[8], char lettre, char grille[8][8], int longueur)
+{
+    /** Début du bloc "Obtention des coordonnées de la première lettre" **/
+
+    int indiceC = -1, indiceL = 0, indiceCRetenu = 0; // Va permettre de parcourir la grille
+    lettre = toupper(lettre);
+    do
+    {
+        do
+        {
+            indiceC ++;
+        }
+        while (indiceC < longueur - 1 && lettre != grille[indiceL][indiceC]);
+
+        indiceL ++;
+        indiceCRetenu = indiceC;
+        indiceC = -1;
+    }
+    while (indiceL - 1 < longueur && lettre != grille[indiceL - 1][indiceCRetenu]);
+    /** Fin du bloc "Obtention des coordonnées de la première lettre" **/
+
+    indiceL = indiceL - 1;
+    indiceC = indiceCRetenu;
+    //printf("%d  %d\n", indiceL, indiceC);
+
+    if (indiceC == 0)
+    {
+        if (indiceL == 0)
+        {
+            lettre_autour[0] = grille[0][1];
+            lettre_autour[1] = grille[1][0];
+            lettre_autour[2] = grille[1][1];
+        }
+        else if (1 <= indiceL && indiceL <= longueur - 2)
+        {
+            lettre_autour[0] = grille[indiceL-1][0];
+            lettre_autour[1] = grille[indiceL-1][1];
+            lettre_autour[2] = grille[indiceL][1];
+            lettre_autour[3] = grille[indiceL+1][0];
+            lettre_autour[4] = grille[indiceL+1][1];
+        }
+        else if (indiceL == longueur - 1)
+        {
+            lettre_autour[0] = grille[indiceL-1][0];
+            lettre_autour[1] = grille[indiceL-1][1];
+            lettre_autour[2] = grille[indiceL][1];
+        }
+    }
+
+    else if (indiceC == longueur - 1)
+    {
+        if (indiceL == 0)
+        {
+            lettre_autour[0] = grille[0][indiceC-1];
+            lettre_autour[1] = grille[1][indiceC-1];
+            lettre_autour[2] = grille[1][indiceC];
+        }
+        else if (1 <= indiceL && indiceL <= longueur - 2)
+        {
+            lettre_autour[0] = grille[indiceL-1][indiceC-1];
+            lettre_autour[1] = grille[indiceL-1][indiceC];
+            lettre_autour[2] = grille[indiceL][indiceC-1];
+            lettre_autour[3] = grille[indiceL+1][indiceC-1];
+            lettre_autour[4] = grille[indiceL+1][indiceC];
+        }
+        else if (indiceL == longueur - 1)
+        {
+            lettre_autour[0] = grille[indiceL-1][indiceC-1];
+            lettre_autour[1] = grille[indiceL-1][indiceC];
+            lettre_autour[2] = grille[indiceL][indiceC-1];
+        }
+    }
+
+    else if (1 <= indiceC && indiceC <= longueur - 2)
+    {
+        if (indiceL == 0)
+        {
+            lettre_autour[0] = grille[0][indiceC - 1];
+            lettre_autour[1] = grille[0][indiceC + 1];
+            lettre_autour[2] = grille[1][indiceC - 1];
+            lettre_autour[3] = grille[1][indiceC];
+            lettre_autour[4] = grille[1][indiceC + 1];
+        }
+
+        else if (indiceL == longueur - 1)
+        {
+            lettre_autour[0] = grille[indiceL-1][indiceC - 1];
+            lettre_autour[1] = grille[indiceL-1][indiceC];
+            lettre_autour[1] = grille[indiceL-1][indiceC + 1];
+            lettre_autour[2] = grille[indiceL][indiceC - 1];
+            lettre_autour[4] = grille[indiceL][indiceC + 1];
+        }
+
+        else if (1 <= indiceL && indiceL <= longueur - 2)
+        {
+            lettre_autour[0] = grille[indiceL-1][indiceC - 1];
+            lettre_autour[1] = grille[indiceL-1][indiceC];
+            lettre_autour[2] = grille[indiceL-1][indiceC + 1];
+            lettre_autour[3] = grille[indiceL][indiceC - 1];
+            lettre_autour[4] = grille[indiceL][indiceC + 1];
+            lettre_autour[5] = grille[indiceL+1][indiceC - 1];
+            lettre_autour[6] = grille[indiceL+1][indiceC];
+            lettre_autour[7] = grille[indiceL+1][indiceC + 1];
+        }
+    }
+}
+
+void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
+{
+    /** Début du bloc de traitement du mot entré **/
+    char lettre_autour[8];
+
+    char grille_copy[8][8];
+
+    for (int i = 0; i < longueur; ++i)
+    {
+        for (int j = 0; j < longueur; ++j)
+        {
+            grille_copy[i][j] = grille[i][j];
+        }
+    }
+
+    for (int i = 0; i < strlen(tabmots); ++i)
+    {
+        Obtention_lettres_autour(lettre_autour, tabmots[i], grille, longueur); // Reconnaissance des lettres de la grille
+
+        printf("%s",lettre_autour);
+    }
+    /** Fin du bloc de traitement du mot entré **/
+}
+
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 {
 
     /* Le stockage des mots se fera dans un tableau dont la dimension
@@ -8,15 +158,16 @@ void Saisie_de_mots(short temps_limite)
      * En effet on considère un vitesse max d'un mot par seconde et la longueur max sera celle du mot
      * français le plus long (anticonstitutionellement) soit 25 lettres => 26 caractères */
 
-    char tabmots[temps_limite][26];
-
     int i = 0; // Permet de pouvoir boucler
 
+    char tabmots[temps_limite][26];
+
     // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
-    while (/** Compteur de temps **/0)
-    {
+    //while (/** Compteur de temps **/)
+    //{
         printf("Saisir un mot : \n");
-        fgets(tabmots[i], 26, stdin); // Le mot taper se trouvera dans la i-ème ligne
-        i ++; // Incrémentation de i pour pouvoir passer à la ligne suivante du tableau
-    }
+        scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
+        Traitement_mot(tabmots[i], grille, longueur);
+        i ++; // Incrémentation de i pour pouvoir passer au mot suivant
+    //}
 }

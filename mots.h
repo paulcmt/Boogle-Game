@@ -8,4 +8,8 @@
 #include "string.h"
 #include "ctype.h"
 
-void Saisie_de_mots(short temps_limite);
+int Nombre_de_lettres_connues(char grille[8][8], char lettre_a_compter, int longueur);
+int
+void Obtention_lettres_autour(char lettre_autour[], char lettre, char grille[8][8], int longueur);
+void Traitement_mot(char tabmots[], char grille[8][8], int longueur);
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur);

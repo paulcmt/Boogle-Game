@@ -9,10 +9,10 @@ int main()
     srand(time(NULL));
 
     // Utilisation du fichier "menu.c"
-    short choix = Menu(); // Initialisation du choix de l'utilisateur
+    short choix = 1;//Menu(); // Initialisation du choix de l'utilisateur
     short longueur;
 
-    //Conséquence du choix
+    // Conséquence du choix
     switch (choix)
     {
         case 1 : // Lancement de la partie
@@ -27,12 +27,13 @@ int main()
 
             short temps_limite = Temps_de_la_partie();
 
-            //Saisie_de_mots(temps_limite);
             Affichage_grille(grille, longueur);
+
+            Saisie_de_mots(temps_limite, grille, longueur);
 
             break;
 
-        case 2 : // Calcul + affichage des scores
+        /*case 2 : // Calcul + affichage des scores
 
             printf("\n WALL OF FAME C-BOGGLE \n");
             printf("-----------------------");

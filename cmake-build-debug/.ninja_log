@@ -1,10 +1,19 @@
 # ninja log v5
-258	355	1650874741073827765	Projet_Boggle	1d707066958b1890
-3	258	1650874740968438147	CMakeFiles/Projet_Boggle.dir/score.c.o	ace7744014fcf4e7
-0	256	1650874740968481146	CMakeFiles/Projet_Boggle.dir/main.c.o	a37bd32e5340cb77
-2	257	1650874740971695790	CMakeFiles/Projet_Boggle.dir/generation_grille.c.o	6b0a79bb54f05015
-2	257	1650874740968434813	CMakeFiles/Projet_Boggle.dir/fonctions_globales.c.o	3595b1d8e56d558d
+1	49	1651575284456534580	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
 1	256	1650874740968475730	CMakeFiles/Projet_Boggle.dir/menu.c.o	e23ef826cfe0acd3
-3	258	1650874740969063475	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
-1	63	1650896041605297036	CMakeFiles/Projet_Boggle.dir/main.c.o	a37bd32e5340cb77
-64	104	1650896041646863515	Projet_Boggle	1d707066958b1890
+2	257	1650874740968434813	CMakeFiles/Projet_Boggle.dir/fonctions_globales.c.o	3595b1d8e56d558d
+1	200	1651557625611945918	CMakeFiles/Projet_Boggle.dir/generation_grille.c.o	6b0a79bb54f05015
+0	51	1651575247030605233	CMakeFiles/Projet_Boggle.dir/main.c.o	a37bd32e5340cb77
+3	258	1650874740968438147	CMakeFiles/Projet_Boggle.dir/score.c.o	ace7744014fcf4e7
+49	89	1651575284497983817	Projet_Boggle	1d707066958b1890
+0	49	1651575318829557432	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
+49	89	1651575318870124839	Projet_Boggle	1d707066958b1890
+1	65	1651575407372465527	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
+65	107	1651575407415683967	Projet_Boggle	1d707066958b1890
+0	37	1651575653740066935	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
+0	37	1651575653741030473	CMakeFiles/Projet_Boggle.dir/main.c.o	a37bd32e5340cb77
+37	75	1651575653779911803	Projet_Boggle	1d707066958b1890
+0	47	1651575852319424924	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
+48	91	1651575852364527441	Projet_Boggle	1d707066958b1890
+0	43	1651576162786060292	CMakeFiles/Projet_Boggle.dir/mots.c.o	cea900e5869df951
+43	81	1651576162825675035	Projet_Boggle	1d707066958b1890
