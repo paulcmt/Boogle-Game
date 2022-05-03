@@ -133,6 +133,7 @@ void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
 
     char grille_copy[8][8];
 
+    // Copie de la grille pour avoir de quoi différencier les lettres dans le mot de la grille
     for (int i = 0; i < longueur; ++i)
     {
         for (int j = 0; j < longueur; ++j)
@@ -143,7 +144,7 @@ void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
 
     for (int i = 0; i < strlen(tabmots); ++i)
     {
-        Obtention_lettres_autour(lettre_autour, tabmots[i], grille, longueur); // Reconnaissance des lettres de la grille
+        Obtention_lettres_autour(lettre_autour, tabmots[i], grille, longueur);
 
         printf("%s",lettre_autour);
     }
