@@ -4,6 +4,7 @@
 int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur)
 {
     int compteur = 0;
+    lettre_a_compter = toupper(lettre_a_compter);
 
     for (int i = 0; i < longueur; ++i)
     {
@@ -19,11 +20,10 @@ int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur)
     return compteur;
 }
 
-void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *L, int *C, int indiceC, int indiceL)
+void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indiceL, int *indiceC)
 {
     /** Début du bloc "Obtention des coordonnées de la première lettre" **/
-    indiceC = -1;
-    indiceL = 0;
+    *indiceC = *indiceC - 1;
     int indiceCRetenu = 0; // Va permettre de parcourir la grille
 
     lettre = toupper(lettre);
@@ -32,19 +32,19 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *L, in
     {
         do
         {
-            indiceC ++;
+            *indiceC = *indiceC + 1;
         }
-        while (indiceC < longueur - 1 && lettre != grille[indiceL][indiceC]);
+        while (*indiceC < longueur - 1 && lettre != grille[*indiceL][*indiceC]);
 
-        indiceL ++;
-        indiceCRetenu = indiceC;
-        indiceC = -1;
+        *indiceL = *indiceL + 1;
+        indiceCRetenu = *indiceC;
+        *indiceC = -1;
     }
-    while (indiceL - 1 < longueur && lettre != grille[indiceL - 1][indiceCRetenu]);
+    while (*indiceL - 1 < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
     /** Fin du bloc "Obtention des coordonnées de la première lettre" **/
 
-    *L = indiceL - 1;
-    *C = indiceCRetenu;
+    *indiceL = *indiceL - 1;
+    *indiceC = indiceCRetenu;
 }
 
 void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, char grille[8][8], int longueur)
@@ -133,9 +133,24 @@ void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, c
     }
 }
 
-void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
+int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int longueur)
 {
-    int mot_dans_grille_verifie = 0, indiceL = 0, indiceC = 0;
+    int i = -1;
+
+    lettre = toupper(lettre);
+
+    do
+    {
+        i = i + 1;
+    }
+    while (longueur > i && lettre_autour[i] != lettre);
+
+    return i;
+}
+
+void Traitement_mot(char mot[], char grille[8][8], int longueur)
+{
+    int mot_dans_grille_verifie = 0, indiceL = 0, indiceC = 0, indiceLPrecedent = 0, indiceCPrecedent = 0;
 
     /** Début du bloc de traitement du mot entré **/
     char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
@@ -151,43 +166,259 @@ void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
         }
     }
     /** Fin du bloc "Copie de la grille" pour avoir de quoi différencier les lettres dans la grille **/
-
-    for (int i = 0; i < strlen(tabmots); ++i)
+    for (int k = 0; k < Nb_de_lettres_grille(grille_copy, mot[0], longueur); ++k)
     {
-        Coordonnees_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC, indiceC, indiceL);
-        Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille, longueur);
+        Coordonnees_lettre(mot[k], longueur, grille_copy, &indiceL, &indiceC);
 
-        /** Début du bloc "Calcul nombres lettres autoures" **/
-        int nb_lettres_autour = -1, j = 0;
-        do
-        {
-            nb_lettres_autour ++;
-            j++;
-        }
-        while(lettre_autour[j] != 0);
-        /** Fin du bloc "Calcul nombres lettres autoures" **/
+        int i, nb_lettres_autour;
 
-        while (Comptage_lettre_tableau(lettre_autour, tabmots[i+1], nb_lettres_autour) == 0)
+        for (i = 0; i < strlen(mot)-1; ++i)
         {
-            if (tabmots[i+1] == '\0')
+            Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille_copy, longueur);
+
+            indiceLPrecedent = indiceL;
+            indiceCPrecedent = indiceC;
+
+            /** Début du bloc "Calcul nombres lettres autoures" **/
+            nb_lettres_autour = -1;
+            int j = 0;
+            do
             {
-                mot_dans_grille_verifie = 0;
-                break;
+                nb_lettres_autour ++;
+                j++;
             }
-            if (indiceC != longueur - 1)
+            while(lettre_autour[j] != 0);
+            /** Fin du bloc "Calcul nombres lettres autoures" **/
+
+            if (Comptage_lettre_tableau(lettre_autour, mot[i+1], nb_lettres_autour) > 0)
             {
-                indiceC ++;
+                /** Debut du bloc "Position lettre suivante" **/
+                if (indiceC == 0)
+                {
+                    if (indiceL == 0)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = 0;
+                                indiceC = 1;
+                                break;
+                            case 1:
+                                indiceL = 1;
+                                indiceC = 0;
+                                break;
+                            case 2:
+                                indiceL = 1;
+                                indiceC = 1;
+                                break;
+                        }
+                    }
+                    else if (1 <= indiceL && indiceL <= longueur - 2)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC + 1;
+                                break;
+                            case 2:
+                                indiceC = indiceC + 1;
+                                break;
+                            case 3:
+                                indiceL = indiceL + 1;
+                                break;
+                            case 4:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC + 1;
+                                break;
+                        }
+                    }
+                    else if (indiceL == longueur - 1)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC + 1;
+                                break;
+                            case 2:
+                                indiceC = indiceC + 1;
+                                break;
+                        }
+                    }
+                }
+
+                else if (indiceC == longueur - 1)
+                {
+                    if (indiceL == 0)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 2:
+                                indiceL = indiceL + 1;
+                                break;
+                        }
+                    }
+                    else if (1 <= indiceL && indiceL <= longueur - 2)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 2:
+                                indiceC = indiceC - 1;
+                                break;
+                            case 3:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 4:
+                                indiceL = indiceL + 1;
+                                break;
+                        }
+                    }
+                    else if (indiceL == longueur - 1)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 2:
+                                indiceC = indiceC - 1;
+                                break;
+                        }
+                    }
+                }
+
+                else if (1 <= indiceC && indiceC <= longueur - 2)
+                {
+                    if (indiceL == 0)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceC = indiceC + 1;
+                                break;
+                            case 2:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 3:
+                                indiceL = indiceL + 1;
+                                break;
+                            case 4:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC + 1;
+                                break;
+                        }
+                    }
+
+                    else if (indiceL == longueur - 1)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 2:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC + 1;
+                                break;
+                            case 3:
+                                indiceC = indiceC - 1;
+                                break;
+                            case 4:
+                                indiceC = indiceC + 1;
+                                break;
+                        }
+                    }
+
+                    else if (1 <= indiceL && indiceL <= longueur - 2)
+                    {
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        {
+                            case 0:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 1:
+                                indiceL = indiceL - 1;
+                                break;
+                            case 2:
+                                indiceL = indiceL - 1;
+                                indiceC = indiceC + 1;
+                                break;
+                            case 3:
+                                indiceC = indiceC - 1;
+                                break;
+                            case 4:
+                                indiceC = indiceC + 1;
+                                break;
+                            case 5:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC - 1;
+                                break;
+                            case 6:
+                                indiceL = indiceL + 1;
+                                break;
+                            case 7:
+                                indiceL = indiceL + 1;
+                                indiceC = indiceC + 1;
+                                break;
+                        }
+                    }
+                }
+                /** Fin du bloc "Position lettre suivante" **/
             }
             else
             {
-                indiceC = 0;
-                indiceL ++;
-            }
+                if (indiceCPrecedent == longueur - 1)
+                {
+                    indiceL = indiceL + 1;
+                    indiceC = 0;
+                    k = k - 1;
+                    break;
+                }
 
-            Coordonnees_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC, indiceC, indiceL);
-            Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille, longueur);
+                else
+                {
+                    indiceL = indiceLPrecedent;
+                    indiceC = indiceC + 1;
+                    k = k - 1;
+                    break;
+                }
+            }
         }
-        grille_copy[indiceL][indiceC] = ' ';
     }
 
     Affichage_grille(grille_copy, longueur);

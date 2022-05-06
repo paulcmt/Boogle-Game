@@ -10,7 +10,7 @@ int Comptage_lettre_tableau(char Tabl[], char lettre, int longueur)
     {
         if (Tabl[i] == lettre)
         {
-            compteur ++;
+            compteur = compteur + 1;
         }
     }
 
