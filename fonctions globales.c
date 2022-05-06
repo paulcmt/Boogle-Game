@@ -4,6 +4,8 @@ int Comptage_lettre_tableau(char Tabl[], char lettre, int longueur)
 {
     int compteur = 0;
 
+    lettre = toupper(lettre);
+
     for (int i = 0; i < longueur; ++i)
     {
         if (Tabl[i] == lettre)

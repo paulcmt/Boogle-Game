@@ -1,7 +1,7 @@
 #include "mots.h"
 #include "fonctions globales.h"
 
-int Nombre_de_lettres_connues(char grille[8][8], char lettre_a_compter, int longueur)
+int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur)
 {
     int compteur = 0;
 
@@ -19,11 +19,15 @@ int Nombre_de_lettres_connues(char grille[8][8], char lettre_a_compter, int long
     return compteur;
 }
 
-void Coordonnes_lettre(char lettre, int longueur, char grille[8][8], int *L, int *C)
+void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *L, int *C, int indiceC, int indiceL)
 {
     /** Début du bloc "Obtention des coordonnées de la première lettre" **/
-    int indiceC = -1, indiceL = 0, indiceCRetenu = 0; // Va permettre de parcourir la grille
+    indiceC = -1;
+    indiceL = 0;
+    int indiceCRetenu = 0; // Va permettre de parcourir la grille
+
     lettre = toupper(lettre);
+
     do
     {
         do
@@ -43,30 +47,9 @@ void Coordonnes_lettre(char lettre, int longueur, char grille[8][8], int *L, int
     *C = indiceCRetenu;
 }
 
-void Obtention_lettres_autour(char lettre_autour[8], char lettre, char grille[8][8], int longueur)
+void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, char grille[8][8], int longueur)
 {
     /** Début du bloc "Obtention des coordonnées de la première lettre" **/
-
-    int indiceC = -1, indiceL = 0, indiceCRetenu = 0; // Va permettre de parcourir la grille
-    lettre = toupper(lettre);
-    do
-    {
-        do
-        {
-            indiceC ++;
-        }
-        while (indiceC < longueur - 1 && lettre != grille[indiceL][indiceC]);
-
-        indiceL ++;
-        indiceCRetenu = indiceC;
-        indiceC = -1;
-    }
-    while (indiceL - 1 < longueur && lettre != grille[indiceL - 1][indiceCRetenu]);
-    /** Fin du bloc "Obtention des coordonnées de la première lettre" **/
-
-    indiceL = indiceL - 1;
-    indiceC = indiceCRetenu;
-    //printf("%d  %d\n", indiceL, indiceC);
 
     if (indiceC == 0)
     {
@@ -152,13 +135,14 @@ void Obtention_lettres_autour(char lettre_autour[8], char lettre, char grille[8]
 
 void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
 {
+    int mot_dans_grille_verifie = 0, indiceL = 0, indiceC = 0;
+
     /** Début du bloc de traitement du mot entré **/
-    char lettre_autour[8] = {0,0,0,0,0,0,0,0};
+    char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
     char grille_copy[8][8];
-    int indiceL = 0, indiceC = 0;
 
-    // Copie de la grille pour avoir de quoi différencier les lettres dans le mot de la grille
+    /** Début du bloc "Copie de la grille" pour avoir de quoi différencier les lettres dans la grille **/
     for (int i = 0; i < longueur; ++i)
     {
         for (int j = 0; j < longueur; ++j)
@@ -166,28 +150,47 @@ void Traitement_mot(char tabmots[], char grille[8][8], int longueur)
             grille_copy[i][j] = grille[i][j];
         }
     }
+    /** Fin du bloc "Copie de la grille" pour avoir de quoi différencier les lettres dans la grille **/
 
     for (int i = 0; i < strlen(tabmots); ++i)
     {
-        Obtention_lettres_autour(lettre_autour, tabmots[i], grille, longueur);
-        Coordonnes_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC);
-        grille_copy[indiceL][indiceC] = 0;
+        Coordonnees_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC, indiceC, indiceL);
+        Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille, longueur);
 
+        /** Début du bloc "Calcul nombres lettres autoures" **/
         int nb_lettres_autour = -1, j = 0;
-
         do
         {
             nb_lettres_autour ++;
+            j++;
         }
         while(lettre_autour[j] != 0);
+        /** Fin du bloc "Calcul nombres lettres autoures" **/
 
-        if (Comptage_lettre_tableau(lettre_autour, tabmots[i+1], nb_lettres_autour) > 0)
+        while (Comptage_lettre_tableau(lettre_autour, tabmots[i+1], nb_lettres_autour) == 0)
         {
-            Coordonnes_lettre(tabmots[i+1], longueur, grille, &indiceL, &indiceC);
-        }
+            if (tabmots[i+1] == '\0')
+            {
+                mot_dans_grille_verifie = 0;
+                break;
+            }
+            if (indiceC != longueur - 1)
+            {
+                indiceC ++;
+            }
+            else
+            {
+                indiceC = 0;
+                indiceL ++;
+            }
 
-        printf("%s",lettre_autour);
+            Coordonnees_lettre(tabmots[i], longueur, grille, &indiceL, &indiceC, indiceC, indiceL);
+            Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille, longueur);
+        }
+        grille_copy[indiceL][indiceC] = ' ';
     }
+
+    Affichage_grille(grille_copy, longueur);
     /** Fin du bloc de traitement du mot entré **/
 }
 
