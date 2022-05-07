@@ -1,12 +1,12 @@
 #include "fonctions globales.h"
 
-int Comptage_lettre_tableau(char Tabl[], char lettre, int longueur)
+int Comptage_lettre_tableau(char Tabl[], char lettre)
 {
     int compteur = 0;
 
     lettre = toupper(lettre);
 
-    for (int i = 0; i < longueur; ++i)
+    for (int i = 0; i < 8; ++i)
     {
         if (Tabl[i] == lettre)
         {

@@ -10,6 +10,6 @@
 #include "time.h"
 #include "unistd.h"
 
-int Comptage_lettre_tableau(char Tabl[], char lettre, int longueur);
+int Comptage_lettre_tableau(char Tabl[], char lettre);
 void Initialisation_tableau(char tabl[]);
 void Affichage_grille(char grille[8][8], int longueur); // Permet d'afficher la grille depuis n'importe quel fichier
