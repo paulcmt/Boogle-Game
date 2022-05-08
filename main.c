@@ -18,14 +18,14 @@ int main()
         case 1 : // Lancement de la partie
 
             // Utilisation du fichier "generation grille.c"
-            longueur = Dimension_grille(); // Demande dimension de la grille
+            longueur = 6;//Dimension_grille(); // Demande dimension de la grille
 
             /** Debut du bloc "Definition de la grille" **/
             char grille[8][8];
             Generation_grille(grille, longueur);
             /** Fin du bloc "Definition de la grille" **/
 
-            short temps_limite = Temps_de_la_partie();
+            short temps_limite = 90;// Temps_de_la_partie();
 
             Affichage_grille(grille, longueur);
 

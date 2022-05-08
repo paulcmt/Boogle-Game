@@ -189,75 +189,73 @@ int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int lo
 
 int Traitement_mot(char mot[], char grille[8][8], int longueur)
 {
-    int mot_dans_grille_verifie = 0, indiceL = 0, indiceC = 0, indiceLPrecedent = 0, indiceCPrecedent = 0;
-    int nb_lettres_verifiees = 0;
+    int indiceL = 0, indiceC = 0, nb_lettres_verifiees = 0;
+    int longueur_du_mot = strlen(mot) - 1;
+    int indiceLEtCPrecedent[26][2];
 
+    // Initialisation du tableau des sauvegardes des indices
+    /*for (int a = 0; a < 26; a = a + 1)
+    {
+        for (int b = 0; b < 2; b = b + 1)
+        {
+            indiceLEtCPrecedent[a][b] = NULL;
+        }
+    }*/
     /** Début du bloc de traitement du mot entré **/
 
-    /* Définition d'un tableau permettant de récupérer les différentes lettres présentes autour de la lettre étudiée */
+    // Définition d'un tableau permettant de récupérer les différentes lettres présentes autour de la lettre étudiée
     char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
-
-    for (int k = 0; k < Nb_de_lettres_grille(grille, mot[k], longueur)-1; ++k)
+    for (int c = 0; c < Nb_de_lettres_grille(grille, mot[c], longueur)-1; c = c + 1)
     {
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
-        Coordonnees_lettre(mot[k], longueur, grille, &indiceL, &indiceC);
+        Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
 
-        int i, nb_lettres_autour;
+        int d;
+        int nb_lettres_autour = 0;
 
         /** Début du bloc permettant d'analyser le mot lettre par lettre telles qu'elles ont été entrées par le joueur **/
-
-        for (i = 0; i < strlen(mot) - 1; ++i)   // On répète tant que toutes les lettre n'ont pas été examinées
+        for (d = 0; d < longueur_du_mot; d = d + 1)   // On répète tant que toutes les lettre n'ont pas été examinées
         {
             // Boucle permettant d'initialiser le tableau de récupération des lettres
-
-            for (int j = 0; j < 9; ++j)
+            for (int e = 0; e < 9; e = e + 1)
             {
-                lettre_autour[j] = NULL;
+                lettre_autour[e] = NULL;
             }
 
             // Envoie vers la fonction de récupération des lettres présentes autour de celle étudiée
-
             Obtention_lettres_autour(lettre_autour, indiceC, indiceL, grille, longueur);
 
-            /** Début du bloc "Calcul nombres lettres autoures" **/
-
+            /** Début du bloc "Calcul nombre lettres autoures" **/
             nb_lettres_autour = -1;
-            int j = 0;
+            int j = -1;
             do
             {
                 nb_lettres_autour ++;
                 j++;
             }
-            while(lettre_autour[j] != 0);
+            while (lettre_autour[j] != 0);
+            /** Fin du bloc "Calcul nombre lettres autoures" **/
 
-            /** Fin du bloc "Calcul nombres lettres autoures" **/
-
-            // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
-
-            indiceLPrecedent = indiceL;
-            indiceCPrecedent = indiceC;
-
-            if (Comptage_lettre_tableau(lettre_autour, mot[i+1]) > 0)
+            if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
-                indiceLPrecedent = indiceL;
-                indiceCPrecedent = indiceC;
 
-                /** Debut du bloc "Position de la lettre suivante" **/
-                /** Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
-                 * des conditions particulières sont présentes **/
+                // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
+                indiceLEtCPrecedent[d][0] = indiceL;
+                indiceLEtCPrecedent[d][1] = indiceC;
+
+                /** Debut du bloc "Position de la lettre suivante"
+                 Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
+                 des conditions particulières sont présentes **/
 
                 // Pour les lettres de la première colonne :
-
                 if (indiceC == 0)
                 {
                     // Et de la première ligne :
-
                     if (indiceL == 0)
                     {
                         // Grâce à ce "switch", nous pouvons récupérer les 3 lettres concernées
-
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = 0;
@@ -275,10 +273,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Lignes du milieu de grille :
-
                     else if (1 <= indiceL && indiceL <= longueur - 2)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -301,10 +298,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Dernière ligne :
-
                     else if (indiceL == longueur - 1)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -321,14 +317,12 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 }
 
                 // Pour la dernière colonne :
-
                 else if (indiceC == longueur - 1)
                 {
                     // Première ligne :
-
                     if (indiceL == 0)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceC = indiceC - 1;
@@ -344,10 +338,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Milieu de grille
-
                     else if (1 <= indiceL && indiceL <= longueur - 2)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -370,10 +363,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Dernière ligne
-
                     else if (indiceL == longueur - 1)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -390,14 +382,12 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 }
 
                 // Pour le milieu de grille :
-
                 else if (1 <= indiceC && indiceC <= longueur - 2)
                 {
                     // Première ligne :
-
                     if (indiceL == 0)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceC = indiceC - 1;
@@ -420,10 +410,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Milieu de grille :
-
                     else if (indiceL == longueur - 1)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -446,10 +435,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                     }
 
                     // Milieu de grille :
-
                     else if (1 <= indiceL && indiceL <= longueur - 2)
                     {
-                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[i+1], nb_lettres_autour))
+                        switch (Position_lettre_tab_lettre_autour(lettre_autour, mot[d+1], nb_lettres_autour))
                         {
                             case 0:
                                 indiceL = indiceL - 1;
@@ -489,9 +477,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 nb_lettres_verifiees = nb_lettres_verifiees + 1;
             }
 
-            else
+            else if (d == 0)
             {
-                k = k - 1;
+                c = c - 1;
                 nb_lettres_verifiees = 0;
                 printf("Lettre suivante introuvable\n");
 
@@ -500,17 +488,41 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                  * bonne lettre.
                  */
 
-                if (indiceCPrecedent == longueur - 1)
+                if (indiceC == longueur - 1)
                 {
-                    indiceL = indiceLPrecedent + 1;
+                    indiceL = indiceL + 1;
                     indiceC = 0;
                     break;
                 }
 
                 else
                 {
-                    indiceL = indiceLPrecedent;
-                    indiceC = indiceCPrecedent + 1;
+                    indiceC = indiceC + 1;
+                    break;
+                }
+            }
+
+            else {
+                c = c - 1;
+                nb_lettres_verifiees = 0;
+                printf("Lettre suivante introuvable\n");
+
+                /* La lettre suivante étant introuvable, on restaure les coordonnées de la lettre précedente.
+                 * A ces dernière, on incrémente l'indice de la colonne afin de pouvoir parcourir jusqu'à la
+                 * bonne lettre.
+                 */
+
+                if (indiceC == longueur - 1)
+                {
+                    indiceL = indiceLEtCPrecedent[d - 1][0] + 1;
+                    indiceC = 0;
+                    d = d - 1;
+                    break;
+                }
+                else
+                {
+                    indiceC = indiceLEtCPrecedent[d - 1][1] + 1;
+                    d = d - 1;
                     break;
                 }
             }
@@ -522,15 +534,15 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
      * le mot à été trouvé.
      */
 
-    if (nb_lettres_verifiees == strlen(mot)-1)
+    if (nb_lettres_verifiees == longueur_du_mot)
     {
         return 1;
     }
+
     else
     {
         return 0;
     }
-
     /** Fin du bloc de traitement du mot entré **/
 }
 
@@ -561,9 +573,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
      //{
     printf("Saisir un mot : \n");
     scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
-    printf("%d", strlen(tabmots[i]));
     mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-    printf("%d", mot_verif);
+    printf("Mot : %d", mot_verif);
     //i = i + 1; // Incrémentation de i pour pouvoir passer au mot suivant
      //}
      /*while (temps_limite > 0); // On répète tant que le temps n'est pas encore arrivé à 0*/
