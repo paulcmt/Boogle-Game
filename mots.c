@@ -243,7 +243,6 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
                 indiceLEtCPrecedent[d][1] = indiceL;
                 indiceLEtCPrecedent[d][2] = indiceC;
-
                 /** Debut du bloc "Position de la lettre suivante"
                  Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
                  des conditions particulières sont présentes **/
@@ -502,7 +501,8 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 }
             }
 
-            else {
+            else
+            {
                 c = c - 1;
                 nb_lettres_verifiees = 0;
                 //printf("Lettre suivante introuvable\n");
@@ -573,7 +573,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     printf("Saisir un mot : \n");
     scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
     mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-    printf("Mot : %d", mot_verif);
+    printf("Mot : %d\n", mot_verif);
     //i = i + 1; // Incrémentation de i pour pouvoir passer au mot suivant
      //}
      /*while (temps_limite > 0); // On répète tant que le temps n'est pas encore arrivé à 0*/
