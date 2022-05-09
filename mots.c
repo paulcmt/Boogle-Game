@@ -191,22 +191,22 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 {
     int indiceL = 0, indiceC = 0, nb_lettres_verifiees = 0;
     int longueur_du_mot = strlen(mot) - 1;
-    int indiceLEtCPrecedent[26][2];
+    int indiceLEtCPrecedent[26][3];
 
     // Initialisation du tableau des sauvegardes des indices
-    /*for (int a = 0; a < 26; a = a + 1)
+    for (int a = 0; a < 26; a = a + 1)
     {
-        for (int b = 0; b < 2; b = b + 1)
+        for (int b = 0; b < 3; b = b + 1)
         {
             indiceLEtCPrecedent[a][b] = NULL;
         }
-    }*/
+    }
     /** Début du bloc de traitement du mot entré **/
 
     // Définition d'un tableau permettant de récupérer les différentes lettres présentes autour de la lettre étudiée
     char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
-    for (int c = 0; c < Nb_de_lettres_grille(grille, mot[c], longueur)-1; c = c + 1)
+    for (int c = 0; c < Nb_de_lettres_grille(grille, mot[c], longueur); c = c + 1)
     {
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
@@ -241,8 +241,8 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             {
 
                 // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
-                indiceLEtCPrecedent[d][0] = indiceL;
-                indiceLEtCPrecedent[d][1] = indiceC;
+                indiceLEtCPrecedent[d][1] = indiceL;
+                indiceLEtCPrecedent[d][2] = indiceC;
 
                 /** Debut du bloc "Position de la lettre suivante"
                  Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
@@ -473,7 +473,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 
                 /** Fin du bloc "Position lettre suivante" **/
 
-                printf("Lettre suivante trouvée\n");
+                //printf("Lettre suivante trouvée\n");
                 nb_lettres_verifiees = nb_lettres_verifiees + 1;
             }
 
@@ -481,7 +481,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             {
                 c = c - 1;
                 nb_lettres_verifiees = 0;
-                printf("Lettre suivante introuvable\n");
+                //printf("Lettre suivante introuvable\n");
 
                 /* La lettre suivante étant introuvable, on restaure les coordonnées de la lettre précedente.
                  * A ces dernière, on incrémente l'indice de la colonne afin de pouvoir parcourir jusqu'à la
@@ -505,44 +505,43 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             else {
                 c = c - 1;
                 nb_lettres_verifiees = 0;
-                printf("Lettre suivante introuvable\n");
+                //printf("Lettre suivante introuvable\n");
 
                 /* La lettre suivante étant introuvable, on restaure les coordonnées de la lettre précedente.
                  * A ces dernière, on incrémente l'indice de la colonne afin de pouvoir parcourir jusqu'à la
                  * bonne lettre.
                  */
 
-                if (indiceC == longueur - 1)
+                if (indiceC == longueur - 1 || indiceLEtCPrecedent[d][2] == longueur - 1)
                 {
-                    indiceL = indiceLEtCPrecedent[d - 1][0] + 1;
+                    indiceL = indiceLEtCPrecedent[d - 1][1] + 1;
                     indiceC = 0;
                     d = d - 1;
                     break;
                 }
                 else
                 {
-                    indiceC = indiceLEtCPrecedent[d - 1][1] + 1;
+                    indiceC = indiceLEtCPrecedent[d - 1][2] + 1;
+                    indiceL = indiceLEtCPrecedent[d - 1][1];
                     d = d - 1;
                     break;
                 }
             }
 
         }
+        if (nb_lettres_verifiees == longueur_du_mot)
+        {
+            return 1;
+        }
+
     }
 
     /* Si le nombre de lettres trouvées et vérifiées correspond à la longueur du mot, alors cela signifie que
      * le mot à été trouvé.
      */
 
-    if (nb_lettres_verifiees == longueur_du_mot)
-    {
-        return 1;
-    }
+    return 0;
 
-    else
-    {
-        return 0;
-    }
     /** Fin du bloc de traitement du mot entré **/
 }
 
