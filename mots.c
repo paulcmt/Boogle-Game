@@ -553,8 +553,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
      * En effet on considère une vitesse max d'un mot par seconde et la longueur max sera celle du mot
      * français le plus long (anticonstitutionellement) soit 25 lettres => 26 caractères */
 
-    int i = 0; // Permet de pouvoir boucler
-    int mot_verif = 0;
+    int i = 0, mot_verif = 0; // Permet de pouvoir boucler
     char tabmots[temps_limite][26];
 
     for (int j = 0; j < temps_limite; ++j)
@@ -566,17 +565,29 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     }
 
     // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
+        /*
+        printf("Saisir un mot : \n"); // Saisie du mot
+        scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
+        /** Début du bloc "Vérification mot dans la grille" **/
+        /*
+        mot_verif = Traitement_mot(tabmots[i], grille, longueur);
+        printf("Mot : %d\n", mot_verif);
+        /** Fin du bloc "Vérification mot dans la grille" **/
 
-     //do
-     //{
-    printf("Saisir un mot : \n");
-    scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
-    mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-    printf("Mot : %d\n", mot_verif);
-    //i = i + 1; // Incrémentation de i pour pouvoir passer au mot suivant
-     //}
-     /*while (temps_limite > 0); // On répète tant que le temps n'est pas encore arrivé à 0*/
+        /** Début du bloc "Vérification mot français" **/
 
+        FILE* fichier = NULL;
+        fichier = fopen("liste_mot1.txt", "r");
+        char mot_fr[26];
+
+        if (fichier != NULL)
+        {
+            fscanf(fichier, "%s", mot_fr);
+            printf("%s", mot_fr);
+            printf("Ouvert");
+            fclose(fichier);
+        }
+        /** Fin du bloc "Vérification mot français" **/
 
 }
