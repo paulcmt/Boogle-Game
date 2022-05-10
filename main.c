@@ -31,7 +31,26 @@ int main()
 
             Affichage_grille(grille, longueur);
 
-            Saisie_de_mots(temps_limite, grille, longueur);
+            /** **/
+            char motFrancais[27] = "";
+
+            FILE* fichier = NULL;
+            fichier = fopen("test.txt", "r+");
+
+            if (fichier != NULL)
+            {
+                printf("Ouvert");
+                //fgets(motFrancais, 27, fichier);
+                //printf("%s", motFrancais);
+            }
+            else
+            {
+                printf("Echec");
+            }
+
+            printf("OK");
+            fclose(fichier);
+            //Saisie_de_mots(temps_limite, grille, longueur);
 
             break;
 
