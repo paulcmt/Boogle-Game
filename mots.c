@@ -564,7 +564,9 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         }
     }
 
-    // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
+    for (int i = 0; i < 10; i = i + 1)
+    {
+        // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
 
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
@@ -572,24 +574,36 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         /** Début du bloc "Vérification mot dans la grille" **/
 
         mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-        printf("Mot : %d\n", mot_verif);
+        printf("Mot dans la grille : %d\n", mot_verif);
 
         /** Fin du bloc "Vérification mot dans la grille" **/
 
         /** Début du bloc "Vérification mot français" **/
 
-        FILE* fichier = NULL;
+        FILE *fichier = NULL;
         fichier = fopen("liste_mot1.txt", "r");
         char mot_fr[26];
 
+        int mot_dans_liste = 0;
+
         if (fichier != NULL)
         {
-            for (int i = 0; i < 165000; ++i)
+            for (int e = 0; e < 165000; e = e + 1)
             {
                 fgets(mot_fr, 26, fichier);
-                printf("%s", mot_fr);
+
+                if (mot_fr == tabmots[i])
+                {
+                    mot_verif = 1;
+                    mot_dans_liste = 1;
+                }
             }
             fclose(fichier);
+
+            if (mot_dans_liste == 0)
+            {
+                mot_verif = 0;
+            }
         }
         else
         {
@@ -598,14 +612,26 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         fichier = NULL;
         fichier = fopen("liste_mot2.txt", "r");
+        mot_dans_liste = 0;
 
         if (fichier != NULL)
         {
-            for (int i = 0; i < 171533; ++i)
+            for (int f = 0; f < 171533; f = f + 1)
             {
                 fgets(mot_fr, 26, fichier);
-                printf("%s", mot_fr);
+
+                if (mot_fr == tabmots[i])
+                {
+                    mot_verif = 1;
+                    mot_dans_liste = 1;
+                }
             }
+
+            if (mot_dans_liste == 0)
+            {
+                mot_verif = 0;
+            }
+
             fclose(fichier);
         }
         else
@@ -613,6 +639,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
             printf("Echec");
         }
 
+        printf("Mot dans la liste : %d\n", mot_verif);
         /** Fin du bloc "Vérification mot français" **/
-
+    }
 }
