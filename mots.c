@@ -553,7 +553,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
      * En effet on considère une vitesse max d'un mot par seconde et la longueur max sera celle du mot
      * français le plus long (anticonstitutionellement) soit 25 lettres => 26 caractères */
 
-    int i = 0, mot_verif = 0; // Permet de pouvoir boucler
     char tabmots[temps_limite][26];
 
     for (int j = 0; j < temps_limite; ++j)
@@ -564,10 +563,12 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         }
     }
 
-    for (int i = 0; i < 10; i = i + 1)
+    int i = 0, mot_verif = 0; // Permet de pouvoir boucler
+
+    for (i = 0; i < 10; i = i + 1)
     {
         // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
-
+        mot_verif = 0;
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
@@ -592,18 +593,13 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
             {
                 fgets(mot_fr, 26, fichier);
 
-                if (mot_fr == tabmots[i])
+                if (strcmp(mot_fr, tabmots[i]) == 0)
                 {
-                    mot_verif = 1;
                     mot_dans_liste = 1;
                 }
+
             }
             fclose(fichier);
-
-            if (mot_dans_liste == 0)
-            {
-                mot_verif = 0;
-            }
         }
         else
         {
@@ -612,7 +608,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         fichier = NULL;
         fichier = fopen("liste_mot2.txt", "r");
-        mot_dans_liste = 0;
 
         if (fichier != NULL)
         {
@@ -620,16 +615,10 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
             {
                 fgets(mot_fr, 26, fichier);
 
-                if (mot_fr == tabmots[i])
+                if (strcmp(mot_fr, tabmots[i]) == 0)
                 {
-                    mot_verif = 1;
                     mot_dans_liste = 1;
                 }
-            }
-
-            if (mot_dans_liste == 0)
-            {
-                mot_verif = 0;
             }
 
             fclose(fichier);
@@ -639,7 +628,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
             printf("Echec");
         }
 
-        printf("Mot dans la liste : %d\n", mot_verif);
+        printf("Mot dans la liste : %d\n", mot_dans_liste);
         /** Fin du bloc "Vérification mot français" **/
     }
 }
