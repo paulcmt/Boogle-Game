@@ -3,6 +3,8 @@
 #include "generation grille.h" // Bibiliothèque pour générer la grille
 #include "score.h" // Bibliothèque pour calculer et afficher les scores
 #include "mots.h" // Bibliothèque pour saisir les mots et faire la vérification de la langue française
+#include <stdlib.h>
+#include <stdio.h>
 
 int main()
 {
@@ -30,17 +32,16 @@ int main()
             Affichage_grille(grille, longueur);
 
             /** **/
-            FILE* fichier = NULL;
-            fichier = fopen("liste_mot1.txt", "r+");
-
             char motFrancais[27] = "";
+
+            FILE* fichier = NULL;
+            fichier = fopen("test.txt", "r+");
 
             if (fichier != NULL)
             {
                 printf("Ouvert");
                 //fgets(motFrancais, 27, fichier);
                 //printf("%s", motFrancais);
-                fclose(fichier);
             }
             else
             {
@@ -48,6 +49,7 @@ int main()
             }
 
             printf("OK");
+            fclose(fichier);
             //Saisie_de_mots(temps_limite, grille, longueur);
 
             break;
