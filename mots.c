@@ -564,11 +564,12 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     }
 
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
+    int mot_dans_liste = 0;
+    char mot_fr[26];
 
-    for (i = 0; i < 10; i = i + 1)
-    {
         // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
         mot_verif = 0;
+        mot_dans_liste = 0;
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
@@ -583,24 +584,22 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         FILE *fichier = NULL;
         fichier = fopen("liste_mot1.txt", "r");
-        char mot_fr[26];
-
-        int mot_dans_liste = 0;
 
         if (fichier != NULL)
-        {
-            for (int e = 0; e < 165000; ++e)
             {
-                fgets(mot_fr, 26, fichier);
-
-                if (strcmp(mot_fr, tabmots[i]) == 0)
+                for (int e = 0; e < 165000; ++e)
                 {
-                    mot_dans_liste = 1;
-                }
+                    fgets(mot_fr, 26, fichier);
 
+                    if (strcmp(mot_fr, tabmots[i]) == 1)
+                    {
+                        mot_dans_liste = 1;
+                    }
+
+                }
+                fclose(fichier);
             }
-            fclose(fichier);
-        }
+
         else
         {
             printf("Echec");
@@ -615,7 +614,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
             {
                 fgets(mot_fr, 26, fichier);
 
-                if (strcmp(mot_fr, tabmots[i]) == 0)
+                if (strcmp(mot_fr, tabmots[i]) == 1)
                 {
                     mot_dans_liste = 1;
                 }
@@ -629,6 +628,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         }
 
         printf("Mot dans la liste : %d\n", mot_dans_liste);
-        /** Fin du bloc "Vérification mot français" **/
-    }
+
+    /** Fin du bloc "Vérification mot français" **/
 }
