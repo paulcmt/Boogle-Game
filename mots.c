@@ -589,7 +589,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         if (fichier != NULL)
         {
-            for (int e = 0; e < 165000; e = e + 1)
+            for (int e = 0; e < 165000; ++e)
             {
                 fgets(mot_fr, 26, fichier);
 
@@ -611,7 +611,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         if (fichier != NULL)
         {
-            for (int f = 0; f < 171533; f = f + 1)
+            for (int e = 0; e < 171533; ++e)
             {
                 fgets(mot_fr, 26, fichier);
 
