@@ -545,6 +545,57 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     /** Fin du bloc de traitement du mot entré **/
 }
 
+int Verification_francais(char mot_a_comparer[26])
+{
+    char mot_fr[26];
+    FILE *fichier = NULL;
+    fichier = fopen("liste_mot1.txt", "r");
+
+    if (fichier != NULL)
+    {
+        for (int e = 0; e < 165000; ++e)
+        {
+            fgets(mot_fr, 26, fichier);
+
+            if (strcmp(mot_fr, mot_a_comparer) == 0)
+            {
+                return 1;
+            }
+
+        }
+        fclose(fichier);
+    }
+
+    else
+    {
+        printf("Echec");
+    }
+
+    fichier = NULL;
+    fichier = fopen("liste_mot2.txt", "r");
+
+    if (fichier != NULL)
+    {
+        for (int e = 0; e < 171533; ++e)
+        {
+            fgets(mot_fr, 26, fichier);
+
+            if (strcmp(mot_fr, mot_a_comparer) == 0)
+            {
+                return 1;
+            }
+        }
+
+        fclose(fichier);
+    }
+    else
+    {
+        printf("Echec");
+    }
+
+    return 0;
+}
+
 void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 {
 
@@ -565,7 +616,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
     int mot_dans_liste = 0;
-    char mot_fr[26];
 
         // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
         mot_verif = 0;
@@ -582,52 +632,10 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         /** Début du bloc "Vérification mot français" **/
 
-        FILE *fichier = NULL;
-        fichier = fopen("liste_mot1.txt", "r");
-
-        if (fichier != NULL)
-            {
-                for (int e = 0; e < 165000; ++e)
-                {
-                    fgets(mot_fr, 26, fichier);
-
-                    if (strcmp(mot_fr, tabmots[i]) == 1)
-                    {
-                        mot_dans_liste = 1;
-                    }
-
-                }
-                fclose(fichier);
-            }
-
-        else
-        {
-            printf("Echec");
-        }
-
-        fichier = NULL;
-        fichier = fopen("liste_mot2.txt", "r");
-
-        if (fichier != NULL)
-        {
-            for (int e = 0; e < 171533; ++e)
-            {
-                fgets(mot_fr, 26, fichier);
-
-                if (strcmp(mot_fr, tabmots[i]) == 1)
-                {
-                    mot_dans_liste = 1;
-                }
-            }
-
-            fclose(fichier);
-        }
-        else
-        {
-            printf("Echec");
-        }
-
+        mot_dans_liste = Verification_francais(tabmots[i]);
         printf("Mot dans la liste : %d\n", mot_dans_liste);
+
+        /** Fin du bloc "Vérification mot français" **/
 
     /** Fin du bloc "Vérification mot français" **/
 }
