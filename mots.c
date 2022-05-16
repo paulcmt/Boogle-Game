@@ -51,7 +51,7 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indic
         {
             *indiceC = *indiceC + 1;    //passage à la lettre de droite
         }
-        while (*indiceC < longueur - 1 && lettre != grille[*indiceL][*indiceC]);
+        while (*indiceC < longueur - 1 && *indiceL < longueur && lettre != grille[*indiceL][*indiceC]);
 
         // Fin de la boucle
 
@@ -59,7 +59,7 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indic
         indiceCRetenu = *indiceC;   // Récupération de l'indice colonne de la lettre si trouvée ou de la dernière colonne.
         *indiceC = -1;              // On réinitialise l'indice colonne pour continuer à parcourir la grille si nécessaire.
     }
-    while (*indiceL - 1 < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
+    while (*indiceL < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
 
     // On répète la boucle tant la lettre ne correspond pas aux coordonnées proposées
 
@@ -545,7 +545,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     /** Fin du bloc de traitement du mot entré **/
 }
 
-int Verification_francais(char mot_a_comparer[26])
+int Verification_francais(char mot_a_comparer[])
 {
     char mot_fr[26];
     FILE *fichier = NULL;
@@ -555,7 +555,19 @@ int Verification_francais(char mot_a_comparer[26])
     {
         for (int e = 0; e < 165000; ++e)
         {
-            fgets(mot_fr, 26, fichier);
+            fgets(mot_fr, 25, fichier);
+
+            for (int i = 0; i < 26; ++i)
+            {
+                if (mot_fr[i] == '\n')
+                {
+                    mot_fr[i] = NULL;
+                }
+                if (mot_fr[i] == '\r')
+                {
+                    mot_fr[i] = NULL;
+                }
+            }
 
             if (strcmp(mot_fr, mot_a_comparer) == 0)
             {
@@ -578,7 +590,19 @@ int Verification_francais(char mot_a_comparer[26])
     {
         for (int e = 0; e < 171533; ++e)
         {
-            fgets(mot_fr, 26, fichier);
+            fgets(mot_fr, 25, fichier);
+
+            for (int i = 0; i < 26; ++i)
+            {
+                if (mot_fr[i] == '\n')
+                {
+                    mot_fr[i] = NULL;
+                }
+                if (mot_fr[i] == '\r')
+                {
+                    mot_fr[i] = NULL;
+                }
+            }
 
             if (strcmp(mot_fr, mot_a_comparer) == 0)
             {
@@ -626,16 +650,25 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         /** Début du bloc "Vérification mot dans la grille" **/
 
         mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-        printf("Mot dans la grille : %d\n", mot_verif);
+        //printf("Mot dans la grille : %d\n", mot_verif);
 
         /** Fin du bloc "Vérification mot dans la grille" **/
 
         /** Début du bloc "Vérification mot français" **/
 
         mot_dans_liste = Verification_francais(tabmots[i]);
-        printf("Mot dans la liste : %d\n", mot_dans_liste);
+        //printf("Mot dans la liste : %d\n", mot_dans_liste);
 
         /** Fin du bloc "Vérification mot français" **/
+
+        if (mot_dans_liste == 1 && mot_verif == 1)
+        {
+            printf("Le mot est valide");
+        }
+        else
+        {
+            printf("Le mot est invalide");
+        }
 
     /** Fin du bloc "Vérification mot français" **/
 }

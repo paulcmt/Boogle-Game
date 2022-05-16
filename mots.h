@@ -13,5 +13,5 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indic
 void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, char grille[8][8], int longueur);
 int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int longueur);
 int Traitement_mot(char tabmots[], char grille[8][8], int longueur);
-int Verification_francais(char mot_a_comparer[26]);
+int Verification_francais(char mot_a_comparer[]);
 void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur);
