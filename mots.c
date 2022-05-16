@@ -641,6 +641,9 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
     int mot_dans_liste = 0;
 
+    double t1 = clock(), t2 = 0, deltaT = 0;
+
+    //do {
         // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
         mot_verif = 0;
         mot_dans_liste = 0;
@@ -669,6 +672,11 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         {
             printf("Le mot est invalide");
         }
+
+        t2 = clock();
+        deltaT = t2 - t1;
+        printf("%lf", deltaT);
+    //} while (d);
 
     /** Fin du bloc "Vérification mot français" **/
 }
