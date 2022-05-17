@@ -1,4 +1,4 @@
-#include "score.h"
+#include "menu score.h"
 #include "generation grille.h"
 
 void recherche_par_joueur()

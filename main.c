@@ -1,8 +1,9 @@
 #include "fonctions globales.h" // Bibliothèque des fonctions nécessaires pour l'affichage ou les tests
 #include "menu.h" // Bibliothèque pour afficher le menu
 #include "generation grille.h" // Bibiliothèque pour générer la grille
-#include "score.h" // Bibliothèque pour calculer et afficher les scores
+#include "menu score.h" // Bibliothèque pour calculer et afficher les scores
 #include "mots.h" // Bibliothèque pour saisir les mots et faire la vérification de la langue française
+#include "calcul score.h"   //Blibliothèque pour le calcul des scores
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -30,6 +31,8 @@ int main()
             short temps_limite = 90;// Temps_de_la_partie();
 
             Saisie_de_mots(temps_limite, grille, longueur);
+
+            Calcul_du_score(temps_limite, tabmots);
 
             break;
 
