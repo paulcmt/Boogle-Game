@@ -28,7 +28,7 @@ int main()
             Generation_grille(grille, longueur);
             /** Fin du bloc "Definition de la grille" **/
 
-            short temps_limite = 90;// Temps_de_la_partie();
+            short temps_limite = 90;    // Temps_de_la_partie();
 
             char tabmots[temps_limite][26];
 
