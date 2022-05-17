@@ -660,7 +660,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         {
             if (strcmp(tabmots[i], tabmots[j]) == 0) // Mot dejà saisie
             {
-                printf("Mot déjà saisie\n");
+                printf("Mot deja saisi\n");
                 mot_deja_existant = 1;
             }
         }
