@@ -1,9 +1,2 @@
 # ninja log v5
 53	94	1652767763499049230	Projet_Boggle	1d707066958b1890
-970	5985	6744726873170853	CMakeFiles/Projet_Boggle.dir/menu.c.obj	45f79184e2525c70
-1104	6131	6744726875311056	CMakeFiles/Projet_Boggle.dir/menu_score.c.obj	cd12474635498b4f
-470	3037	6744728476649070	CMakeFiles/Projet_Boggle.dir/calcul_score.c.obj	977aa15902ba8529
-406	3269	6744728478066533	CMakeFiles/Projet_Boggle.dir/mots.c.obj	58e74b31c2af0e65
-214	2141	6744728716801680	CMakeFiles/Projet_Boggle.dir/generation_grille.c.obj	64ed7392d3cd947e
-127	2157	6744728716902844	CMakeFiles/Projet_Boggle.dir/fonctions_globales.c.obj	7d8536073fc3657a
-336	1520	6744729456727822	CMakeFiles/Projet_Boggle.dir/calcul_score.c.obj	977aa15902ba8529

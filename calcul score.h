@@ -7,5 +7,6 @@
 #include "stdlib.h"
 #include "string.h"
 #include "ctype.h"
+#include "math.h"
 
-int Calcul_du_score(int temps_limite, char tabmots[temps_limite][26]);
+float Calcul_du_score(int temps_limite, char tabmots[temps_limite][26]);

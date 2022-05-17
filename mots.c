@@ -620,15 +620,12 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
 {
-
     /* Le stockage des mots se fera dans un tableau dont la dimension
      * dépendra du temps de jeu et de la taille de la grille
      * En effet on considère une vitesse max d'un mot par seconde et la longueur max sera celle du mot
      * français le plus long (anticonstitutionellement) soit 25 lettres => 26 caractères */
-
-    char tabmots[temps_limite][26];
 
     for (int j = 0; j < temps_limite; ++j)
     {

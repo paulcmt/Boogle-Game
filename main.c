@@ -30,7 +30,9 @@ int main()
 
             short temps_limite = 90;// Temps_de_la_partie();
 
-            Saisie_de_mots(temps_limite, grille, longueur);
+            char tabmots[temps_limite][26];
+
+            Saisie_de_mots(temps_limite, grille, longueur, tabmots);
 
             Calcul_du_score(temps_limite, tabmots);
 
