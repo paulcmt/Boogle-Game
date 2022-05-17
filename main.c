@@ -12,7 +12,7 @@ int main()
     srand(time(NULL));
 
     // Utilisation du fichier "menu.c"
-    short choix = 1;//Menu(); // Initialisation du choix de l'utilisateur
+    short choix = Menu(); // Initialisation du choix de l'utilisateur
     short longueur;
 
     // Conséquence du choix
@@ -34,8 +34,7 @@ int main()
 
             Saisie_de_mots(temps_limite, grille, longueur, tabmots);
 
-            Calcul_du_score(temps_limite, tabmots);
-
+            //Calcul_du_score(temps_limite, tabmots);
             break;
 
         /*case 2 : // Calcul + affichage des scores
@@ -46,6 +45,7 @@ int main()
             //Affichage_meilleurs_scores(tabscore);
 
             break;
+
     }
 
     return 0;
