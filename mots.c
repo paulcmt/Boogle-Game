@@ -620,7 +620,7 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[180][26])
 {
     /* Le stockage des mots se fera dans un tableau dont la dimension
      * dépendra du temps de jeu et de la taille de la grille
@@ -638,7 +638,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
     int mot_dans_liste = 0, nb_de_mots_valide = 0, mot_deja_existant = 0;
 
-    float temps, minuteur = temps_limite;
+    float temps = 0.0, minuteur = 0.0;
     clock_t t1, t2;
 
     t1 = clock();
@@ -693,7 +693,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
             t2 = clock();
             temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
-            minuteur = minuteur - temps;
+            minuteur = minuteur + temps;
 
             i++;
         }
