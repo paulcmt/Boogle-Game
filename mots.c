@@ -661,8 +661,9 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         for (int j = 0; j < i; ++j)
         {
-            if (tabmots[i] == tabmots[j]) // Mot dejà saisie
+            if (strcmp(tabmots[i], tabmots[j]) == 0) // Mot dejà saisie
             {
+                printf("Mot déjà saisie\n");
                 mot_deja_existant = 1;
             }
         }
@@ -702,8 +703,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
     } while (temps_limite > minuteur);
 
-    printf("\n---------------------------");
+    printf("---------------------------");
 
-    printf("Fin de la partie !");
+    printf("\nFin de la partie !");
     /** Fin du bloc "Vérification mot français" **/
 }
