@@ -659,7 +659,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 
         for (int j = 0; j < i; ++j)
         {
-            if (tabmots[i] == tabmots[j])
+            if (tabmots[i] == tabmots[j]) // Mot dejà saisie
             {
                 mot_deja_existant = 1;
             }
