@@ -51,7 +51,7 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indic
         {
             *indiceC = *indiceC + 1;    //passage à la lettre de droite
         }
-        while (*indiceC < longueur - 1 && lettre != grille[*indiceL][*indiceC]);
+        while (*indiceC < longueur - 1 && *indiceL < longueur && lettre != grille[*indiceL][*indiceC]);
 
         // Fin de la boucle
 
@@ -59,7 +59,7 @@ void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indic
         indiceCRetenu = *indiceC;   // Récupération de l'indice colonne de la lettre si trouvée ou de la dernière colonne.
         *indiceC = -1;              // On réinitialise l'indice colonne pour continuer à parcourir la grille si nécessaire.
     }
-    while (*indiceL - 1 < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
+    while (*indiceL < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
 
     // On répète la boucle tant la lettre ne correspond pas aux coordonnées proposées
 
@@ -545,6 +545,81 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     /** Fin du bloc de traitement du mot entré **/
 }
 
+int Verification_francais(char mot_a_comparer[])
+{
+    char mot_fr[26];
+    FILE *fichier = NULL;
+    fichier = fopen("liste_mot1.txt", "r");
+
+    if (fichier != NULL)
+    {
+        for (int e = 0; e < 165000; ++e)
+        {
+            fgets(mot_fr, 25, fichier);
+
+            for (int i = 0; i < 26; ++i)
+            {
+                if (mot_fr[i] == '\n')
+                {
+                    mot_fr[i] = NULL;
+                }
+                if (mot_fr[i] == '\r')
+                {
+                    mot_fr[i] = NULL;
+                }
+            }
+
+            if (strcmp(mot_fr, mot_a_comparer) == 0)
+            {
+                return 1;
+            }
+
+        }
+        fclose(fichier);
+    }
+
+    else
+    {
+        printf("Echec");
+    }
+
+    fichier = NULL;
+    fichier = fopen("liste_mot2.txt", "r");
+
+    if (fichier != NULL)
+    {
+        for (int e = 0; e < 171533; ++e)
+        {
+            fgets(mot_fr, 25, fichier);
+
+            for (int i = 0; i < 26; ++i)
+            {
+                if (mot_fr[i] == '\n')
+                {
+                    mot_fr[i] = NULL;
+                }
+                if (mot_fr[i] == '\r')
+                {
+                    mot_fr[i] = NULL;
+                }
+            }
+
+            if (strcmp(mot_fr, mot_a_comparer) == 0)
+            {
+                return 1;
+            }
+        }
+
+        fclose(fichier);
+    }
+    else
+    {
+        printf("Echec");
+    }
+
+    return 0;
+}
+
 void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
 {
 
@@ -564,71 +639,72 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     }
 
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
+    int mot_dans_liste = 0, nb_de_mots_valide = 0, mot_deja_existant = 0;
 
-    for (i = 0; i < 10; i = i + 1)
+    float temps, minuteur = temps_limite;
+    clock_t t1, t2;
+
+    t1 = clock();
+
+    do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
         mot_verif = 0;
+        mot_dans_liste = 0;
+
+        printf("---------------------------\n");
+
+        printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
+        Affichage_grille(grille, longueur);
+
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
+        for (int j = 0; j < i; ++j)
+        {
+            if (strcmp(tabmots[i], tabmots[j]) == 0) // Mot dejà saisie
+            {
+                printf("Mot déjà saisie\n");
+                mot_deja_existant = 1;
+            }
+        }
+
         /** Début du bloc "Vérification mot dans la grille" **/
 
-        mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-        printf("Mot dans la grille : %d\n", mot_verif);
-
-        /** Fin du bloc "Vérification mot dans la grille" **/
-
-        /** Début du bloc "Vérification mot français" **/
-
-        FILE *fichier = NULL;
-        fichier = fopen("liste_mot1.txt", "r");
-        char mot_fr[26];
-
-        int mot_dans_liste = 0;
-
-        if (fichier != NULL)
+        if (mot_deja_existant == 0)
         {
-            for (int e = 0; e < 165000; ++e)
+            mot_verif = Traitement_mot(tabmots[i], grille, longueur);
+            //printf("Mot dans la grille : %d\n", mot_verif);
+
+            /** Fin du bloc "Vérification mot dans la grille" **/
+
+            /** Début du bloc "Vérification mot français" **/
+
+            mot_dans_liste = Verification_francais(tabmots[i]);
+            //printf("Mot dans la liste : %d\n", mot_dans_liste);
+
+            /** Fin du bloc "Vérification mot français" **/
+
+            if (mot_dans_liste == 1 && mot_verif == 1)
             {
-                fgets(mot_fr, 26, fichier);
-
-                if (strcmp(mot_fr, tabmots[i]) == 0)
-                {
-                    mot_dans_liste = 1;
-                }
-
+                printf("Le mot est valide\n");
+                nb_de_mots_valide = nb_de_mots_valide + 1;
             }
-            fclose(fichier);
-        }
-        else
-        {
-            printf("Echec");
-        }
-
-        fichier = NULL;
-        fichier = fopen("liste_mot2.txt", "r");
-
-        if (fichier != NULL)
-        {
-            for (int e = 0; e < 171533; ++e)
+            else
             {
-                fgets(mot_fr, 26, fichier);
-
-                if (strcmp(mot_fr, tabmots[i]) == 0)
-                {
-                    mot_dans_liste = 1;
-                }
+                printf("Le mot est invalide\n");
             }
 
-            fclose(fichier);
-        }
-        else
-        {
-            printf("Echec");
+            t2 = clock();
+            temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
+            minuteur = minuteur - temps;
+
+            i++;
         }
 
-        printf("Mot dans la liste : %d\n", mot_dans_liste);
-        /** Fin du bloc "Vérification mot français" **/
-    }
+    } while (temps_limite > minuteur);
+
+    printf("---------------------------");
+
+    printf("\nFin de la partie !");
+    /** Fin du bloc "Vérification mot français" **/
 }
