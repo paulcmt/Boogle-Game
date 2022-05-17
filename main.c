@@ -18,34 +18,35 @@ int main()
     // Conséquence du choix
     switch (choix)
     {
-        case 1 : // Lancement de la partie
+        case 1: // Lancement de la partie
 
             // Utilisation du fichier "generation grille.c"
-            longueur = 6;//Dimension_grille(); // Demande dimension de la grille
+            longueur = Dimension_grille(); // Demande dimension de la grille
 
             /** Debut du bloc "Definition de la grille" **/
             char grille[8][8];
             Generation_grille(grille, longueur);
             /** Fin du bloc "Definition de la grille" **/
 
-            short temps_limite = 90;    // Temps_de_la_partie();
+            short temps_limite = Temps_de_la_partie();
 
-            char tabmots[temps_limite][26];
+            char tabmots[180][26];
 
             Saisie_de_mots(temps_limite, grille, longueur, tabmots);
 
             //Calcul_du_score(temps_limite, tabmots);
             break;
 
-        /*case 2 : // Calcul + affichage des scores
+        case 2: // Calcul + affichage des scores
 
             printf("\n WALL OF FAME C-BOGGLE \n");
             printf("-----------------------");
             /* Appel la fonction affichage des scores */
             //Affichage_meilleurs_scores(tabscore);
-
             break;
 
+        case 3:
+            exit(0);
     }
 
     return 0;
