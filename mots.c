@@ -639,44 +639,67 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
     }
 
     int i = 0, mot_verif = 0; // Permet de pouvoir boucler
-    int mot_dans_liste = 0;
+    int mot_dans_liste = 0, nb_de_mots_valide = 0, mot_deja_existant = 0;
 
-    double t1 = clock(), t2 = 0, deltaT = 0;
+    float temps, minuteur = temps_limite;
+    clock_t t1, t2;
 
-    //do {
-        // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
+    t1 = clock();
+
+    do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
+    {
         mot_verif = 0;
         mot_dans_liste = 0;
+
+        printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
+        Affichage_grille(grille, longueur);
+
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
+        for (int j = 0; j < i; ++j)
+        {
+            if (tabmots[i] == tabmots[j])
+            {
+                mot_deja_existant = 1;
+            }
+        }
+
         /** Début du bloc "Vérification mot dans la grille" **/
 
-        mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-        //printf("Mot dans la grille : %d\n", mot_verif);
-
-        /** Fin du bloc "Vérification mot dans la grille" **/
-
-        /** Début du bloc "Vérification mot français" **/
-
-        mot_dans_liste = Verification_francais(tabmots[i]);
-        //printf("Mot dans la liste : %d\n", mot_dans_liste);
-
-        /** Fin du bloc "Vérification mot français" **/
-
-        if (mot_dans_liste == 1 && mot_verif == 1)
+        if (mot_deja_existant == 0)
         {
-            printf("Le mot est valide");
-        }
-        else
-        {
-            printf("Le mot est invalide");
+            mot_verif = Traitement_mot(tabmots[i], grille, longueur);
+            //printf("Mot dans la grille : %d\n", mot_verif);
+
+            /** Fin du bloc "Vérification mot dans la grille" **/
+
+            /** Début du bloc "Vérification mot français" **/
+
+            mot_dans_liste = Verification_francais(tabmots[i]);
+            //printf("Mot dans la liste : %d\n", mot_dans_liste);
+
+            /** Fin du bloc "Vérification mot français" **/
+
+            if (mot_dans_liste == 1 && mot_verif == 1)
+            {
+                printf("Le mot est valide\n");
+                nb_de_mots_valide = nb_de_mots_valide + 1;
+            }
+            else
+            {
+                printf("Le mot est invalide\n");
+            }
+
+            t2 = clock();
+            temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
+            minuteur = minuteur - temps;
+
+            i++;
         }
 
-        t2 = clock();
-        deltaT = t2 - t1;
-        printf("%lf", deltaT);
-    //} while (d);
+    } while (temps_limite > minuteur);
 
+    printf("Fin de la partie !");
     /** Fin du bloc "Vérification mot français" **/
 }
