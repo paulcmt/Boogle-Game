@@ -651,6 +651,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         mot_verif = 0;
         mot_dans_liste = 0;
 
+        printf("---------------------------\n");
+
         printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
         Affichage_grille(grille, longueur);
 
@@ -699,6 +701,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur)
         }
 
     } while (temps_limite > minuteur);
+
+    printf("\n---------------------------");
 
     printf("Fin de la partie !");
     /** Fin du bloc "Vérification mot français" **/
