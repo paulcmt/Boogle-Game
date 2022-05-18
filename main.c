@@ -28,9 +28,16 @@ int main()
             Generation_grille(grille, longueur);
             /** Fin du bloc "Definition de la grille" **/
 
-            short temps_limite = Temps_de_la_partie();
+            int temps_limite = 60;//Temps_de_la_partie();
 
-            char tabmots[180][26];
+            char** tabmots = (char **) malloc(temps_limite * 2 * sizeof (char*));
+
+            for (int i = 0 ; i < temps_limite * 2 ; ++i)
+            {
+                tabmots[i] = (char*) malloc(26 * sizeof (char));
+            }
+
+            //char tabmots[180][26];
 
             Saisie_de_mots(temps_limite, grille, longueur, tabmots);
             //Calcul_du_score(tabmots);

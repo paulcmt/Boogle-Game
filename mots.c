@@ -1,85 +1,59 @@
 #include "mots.h"
 #include "fonctions globales.h"
 
-/** Bloc fonction permettant de savoir combien de fois la première lettre est présente dans la grille**
- * @param grille
- * @param lettre_a_compter
- * @param longueur
- * @return
- */
-
-int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur)
+/** Fonction retournant le nombre de fois qu'une lettre est présente dans la grille **/
+int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur) // On donne la grille, la lettre à chercher et la longueur de la grille
 {
-    int compteur = 0;
+    int compteur = 0; // Compteur pour savoir combien de fois la lettre est présente dans la grille
 
-    /** Est-ce qu'on toupper le mot là ??**/
+    lettre_a_compter = toupper(lettre_a_compter); // Passage en majuscule obligatoire pour comparer avec les lettres de la grille
 
-    lettre_a_compter = toupper(lettre_a_compter); // Passage en majuscule obligatoire pour comparer
-
-    for (int i = 0; i < longueur; ++i)  // Boucle permettant de parcourir la grille
+    for (int i = 0; i < longueur; ++i)  // Boucle permettant de parcourir la grille sur les lignes
     {
-        for (int j = 0; j < longueur; ++j)
+        for (int j = 0; j < longueur; ++j) // Boucle permettant de parcourir la grille sur les colonnes
         {
-            if (grille[i][j] == lettre_a_compter)
+            if (grille[i][j] == lettre_a_compter) // Verification lettre à comparer est égale à la lettre actuelle de la grille
             {
-                compteur++; // Quand on trouve la lettre on incrémente un compteur
+                compteur++; // Si lettre à comparer est égale à la lettre actuelle de la grille on incrémente le compteur de 1
             }
         }
     }
 
-    return compteur; // On récupère la valeur du compteur pour pouvoir l'utiliser dans l'analyse du mot
+    return compteur; // On retourne la valeur du compteur (un entier)
 }
 
-/** Fin du bloc de comptage de la première lettre **/
-
-void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indiceL, int *indiceC)
+/** Fonction permettant de donner les coordonnées d'une lettre dans la grille à partir d'une position donnée **/
+void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indiceL, int *indiceC) // On donne la lettre de laquelle on veut les coordonnées, la longueur de la grille, la grille, deux pointeurs pointant vers la position à partir de laquelle ont veyr les coordonnées de la lettre voulue
 {
-    /** Début du bloc "Obtention des coordonnées de la première lettre" **/
 
-    *indiceC = *indiceC - 1;
-    int indiceCRetenu = 0; // Va permettre de parcourir la grille
+    *indiceC = *indiceC - 1; // On décremente la lettre d'une unité car le do while l'augmentera d'une unité lors du premier passage
+    int indiceCRetenu = 0; // Sauvegarde l'indice colonne car il est modifié et on veut le récupérer par la suite
 
-    lettre = toupper(lettre);   // Passage en majuscule obligatoire pour comparer
+    lettre = toupper(lettre); // Passage en majuscule obligatoire pour comparer la lettre dans la grille
 
-    /** Début de la boucle permettant de récupérer les coordonnées **/
-
-    do
+    do // Boucle permettant de parcourir la grille à la recherche de la lettre
     {
-        // Boucle permettant de parcourir la grille à la recherche de la lettre dans une même ligne
-
-        do
+        do // Boucle permettant de parcourir la grille de gauche à droite sur une même ligne
         {
-            *indiceC = *indiceC + 1;    //passage à la lettre de droite
+            *indiceC = *indiceC + 1; // Passage à la lettre suivante (à droite)
         }
-        while (*indiceC < longueur - 1 && *indiceL < longueur && lettre != grille[*indiceL][*indiceC]);
+        while (*indiceC < longueur - 1 && lettre != grille[*indiceL][*indiceC]); // Si l'indice colonne dépasse la grille ou que la lettre a été trouvé, on sors de la boucle
 
-        // Fin de la boucle
+        // Les instructions suivantes vont être éxécutées même si la lettre a été trouvé mais cela n'a aucun impact sur les résultats
 
-        *indiceL = *indiceL + 1;    // Passage à la ligne suivante
-        indiceCRetenu = *indiceC;   // Récupération de l'indice colonne de la lettre si trouvée ou de la dernière colonne.
-        *indiceC = -1;              // On réinitialise l'indice colonne pour continuer à parcourir la grille si nécessaire.
+        *indiceL = *indiceL + 1; // Passage à la ligne suivante
+        indiceCRetenu = *indiceC; // Récupération de l'indice colonne de la lettre si trouvée ou de la dernière colonne
+        *indiceC = -1; // On réinitialise l'indice colonne pour continuer à parcourir la grille si nécessaire (si lettre non trouvée)
     }
-    while (*indiceL < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]);
+    while (*indiceL < longueur && lettre != grille[*indiceL - 1][indiceCRetenu]); // Si on dépasse les dimensions de la grille ou si la lettre a été trouvé, on sors de la boucle
 
-    // On répète la boucle tant la lettre ne correspond pas aux coordonnées proposées
-
-    /** Fin de la boucle permettant de récupérer les coordonnées **/
-
-    /** Fin du bloc "Obtention des coordonnées de la première lettre" **/
-
-    // Sauvegarde des coordonées trouvées
-
-    *indiceL = *indiceL - 1;
-    *indiceC = indiceCRetenu;
+    // Résultats
+    *indiceL = *indiceL - 1; // On décremente l'indice de ligne car on l'a augmenté d'un au dessus (même si la lettre a été trouvé)
+    *indiceC = indiceCRetenu; // On récupère l'indice colonne qu'on avait sauvegardé précedemment
 }
 
 void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, char grille[8][8], int longueur)
 {
-    /** Début du bloc "Obtention des coordonnées de la première lettre" **/
-    /** Début du bloc nous permettant de récupérer les différentes lettres autour de celle étudiée **/
-
-    // Bloc de récupération spécifique à la première colonne de la grille car conditions particulières
-
     if (indiceC == 0)
     {
         if (indiceL == 0)
@@ -206,6 +180,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     // Définition d'un tableau permettant de récupérer les différentes lettres présentes autour de la lettre étudiée
     char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
+    // Permet de vérifier la lettre suivante en fonction du nombre de lettre actuelle dans la grille
     for (int c = 0; c < Nb_de_lettres_grille(grille, mot[c], longueur); c = c + 1)
     {
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
@@ -237,6 +212,13 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             while (lettre_autour[j] != 0);
             /** Fin du bloc "Calcul nombre lettres autoures" **/
 
+            // Condition pour faire la vérification de la dernière lettre
+            if (nb_lettres_verifiees == longueur_du_mot - 1 && Comptage_lettre_tableau(lettre_autour, mot[d+1]) == 0)
+            {
+                return 0;
+            }
+
+            // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
 
@@ -620,18 +602,14 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[180][26])
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
 {
-    /* Le stockage des mots se fera dans un tableau dont la dimension
-     * dépendra du temps de jeu et de la taille de la grille
-     * En effet on considère une vitesse max d'un mot par seconde et la longueur max sera celle du mot
-     * français le plus long (anticonstitutionellement) soit 25 lettres => 26 caractères */
-
-    for (int j = 0; j < temps_limite; ++j)
+    // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
+    for (int j = 0; j < temps_limite * 2; ++j)
     {
         for (int k = 0; k < 26; ++k)
         {
-            tabmots[j][k] = NULL; // Initialisation du tableau permettant de récupérer le mot saisi
+            tabmots[j][k] = NULL;
         }
     }
 
@@ -657,9 +635,9 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
-        for (int j = 0; j < i; ++j)
+        for (int h = 0; h < i; ++h)
         {
-            if (strcmp(tabmots[i], tabmots[j]) == 0) // Mot dejà saisie
+            if (strcmp(tabmots[i], tabmots[h]) == 0) // Mot dejà saisie
             {
                 printf("Mot deja saisi\n");
                 mot_deja_existant = 1;
@@ -702,7 +680,9 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     } while (temps_limite > minuteur);
 
     printf("---------------------------");
-
     printf("\nFin de la partie !");
+
+    free(tabmots);
+
     /** Fin du bloc "Vérification mot français" **/
 }
