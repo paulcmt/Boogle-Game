@@ -1,6 +1,6 @@
 #include "calcul score.h"
 
-float Calcul_du_score(int temps_limite, char tabmots[temps_limite][26])
+float Calcul_du_score(char tabmots[180][26])
 {
     int i, nb_lettre = 0;
     float score = 0 , score_total = 0;
@@ -8,7 +8,7 @@ float Calcul_du_score(int temps_limite, char tabmots[temps_limite][26])
     /** Boucle permettant de parcourir le tableau contenant les mots saisis afin d'en calculer le
      * score associé **/
 
-    for(i = 0 ; i < temps_limite ; i = i + 1)
+    for(i = 0 ; i < 180 ; i = i + 1)
     {
         nb_lettre = strlen(tabmots[i]); // Calcule du nombre de lettre du mot nécessaire pour le calcul du score
         score = pow(nb_lettre, 4/3);  // Calcul du score pour le mot selon la formule donnée par le sujet
@@ -16,7 +16,7 @@ float Calcul_du_score(int temps_limite, char tabmots[temps_limite][26])
     }
 
     // Affichage du score
-    printf("Le score réalise dans cette partie est de %.2f points !\n", score_total);
+    printf("Le score realise dans cette partie est de %.2f points !\n", score_total);
 
     /*
      * Si le score en fonction des paramètres de la partie, alors :

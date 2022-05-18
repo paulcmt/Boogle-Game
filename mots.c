@@ -647,6 +647,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     {
         mot_verif = 0;
         mot_dans_liste = 0;
+        mot_deja_existant = 0;
 
         printf("---------------------------\n");
 
@@ -695,7 +696,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
             temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
             minuteur = minuteur + temps;
 
-            i++;
+            i++;    // Sert à incrémenter la ligne dans le tableau de saisi des mots
         }
 
     } while (temps_limite > minuteur);

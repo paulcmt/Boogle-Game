@@ -9,4 +9,4 @@
 #include "ctype.h"
 #include "math.h"
 
-float Calcul_du_score(int temps_limite, char tabmots[temps_limite][26]);
+float Calcul_du_score(char tabmots[180][26]);

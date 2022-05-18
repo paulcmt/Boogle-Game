@@ -33,6 +33,7 @@ int main()
             char tabmots[180][26];
 
             Saisie_de_mots(temps_limite, grille, longueur, tabmots);
+            //Calcul_du_score(tabmots);
 
             //Calcul_du_score(temps_limite, tabmots);
             break;
