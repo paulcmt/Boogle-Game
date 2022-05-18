@@ -212,16 +212,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             while (lettre_autour[j] != 0);
             /** Fin du bloc "Calcul nombre lettres autoures" **/
 
-            // Condition pour faire la vérification de la dernière lettre
-            if (nb_lettres_verifiees == longueur_du_mot - 1 && Comptage_lettre_tableau(lettre_autour, mot[d+1]) == 0)
-            {
-                return 0;
-            }
-
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
-
                 // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
                 indiceLEtCPrecedent[d][1] = indiceL;
                 indiceLEtCPrecedent[d][2] = indiceC;
@@ -511,6 +504,12 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             }
 
         }
+        // Condition pour faire la vérification de la dernière lettre
+        if (nb_lettres_verifiees == longueur_du_mot - 1 && Comptage_lettre_tableau(lettre_autour, mot[d+1]) == 0)
+        {
+            return 0;
+        }
+
         if (nb_lettres_verifiees == longueur_du_mot)
         {
             return 1;

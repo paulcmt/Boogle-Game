@@ -37,8 +37,6 @@ int main()
                 tabmots[i] = (char*) malloc(26 * sizeof (char));
             }
 
-            //char tabmots[180][26];
-
             Saisie_de_mots(temps_limite, grille, longueur, tabmots);
             //Calcul_du_score(tabmots);
 
