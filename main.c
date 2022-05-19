@@ -11,49 +11,55 @@ int main()
 {
     srand(time(NULL));
 
-    // Utilisation du fichier "menu.c"
-    short choix = Menu(); // Initialisation du choix de l'utilisateur
-    short longueur;
+    short choix = 0;
 
-    // Conséquence du choix
-    switch (choix)
+    do
     {
-        case 1: // Lancement de la partie
+        // Utilisation du fichier "menu.c"
+        choix = Menu(); // Initialisation du choix de l'utilisateur
+        short longueur;
+        system("clear");
 
-            // Utilisation du fichier "generation grille.c"
-            longueur = Dimension_grille(); // Demande dimension de la grille
+        // Conséquence du choix
+        switch (choix)
+        {
+            case 1: // Lancement de la partie
 
-            /** Debut du bloc "Definition de la grille" **/
-            char grille[8][8];
-            Generation_grille(grille, longueur);
-            /** Fin du bloc "Definition de la grille" **/
+                // Utilisation du fichier "generation grille.c"
+                longueur = Dimension_grille(); // Demande dimension de la grille
 
-            int temps_limite = 60;//Temps_de_la_partie();
+                /** Debut du bloc "Definition de la grille" **/
+                char grille[8][8];
+                Generation_grille(grille, longueur);
+                /** Fin du bloc "Definition de la grille" **/
 
-            char** tabmots = (char **) malloc(temps_limite * 2 * sizeof (char*));
+                int temps_limite = 60;//Temps_de_la_partie();
 
-            for (int i = 0 ; i < temps_limite * 2 ; ++i)
-            {
-                tabmots[i] = (char*) malloc(26 * sizeof (char));
-            }
+                char **tabmots = (char **) malloc(temps_limite * 2 * sizeof(char *));
 
-            Saisie_de_mots(temps_limite, grille, longueur, tabmots);
-            //Calcul_du_score(tabmots);
+                for (int i = 0; i < temps_limite * 2; ++i)
+                {
+                    tabmots[i] = (char *) malloc(26 * sizeof(char));
+                }
 
-            //Calcul_du_score(temps_limite, tabmots);
-            break;
+                Saisie_de_mots(temps_limite, grille, longueur, tabmots);
 
-        case 2: // Calcul + affichage des scores
+                //Calcul_du_score(tabmots);
 
-            printf("\n WALL OF FAME C-BOGGLE \n");
-            printf("-----------------------");
-            /* Appel la fonction affichage des scores */
-            //Affichage_meilleurs_scores(tabscore);
-            break;
+                break;
 
-        case 3:
-            exit(0);
-    }
+            case 2: // Affichage des scores
+
+                // Appel la fonction menu des scores
+                choix = Menu_scores();
+                system("clear");
+                break;
+
+            case 3:
+                exit(0);
+        }
+
+    } while (choix == 3);
 
     return 0;
 }

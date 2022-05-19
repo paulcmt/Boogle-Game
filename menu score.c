@@ -1,7 +1,49 @@
 #include "menu score.h"
 #include "generation grille.h"
 
-void recherche_par_joueur()
+int Menu_scores()
+{
+    /** Debut du bloc "Affichage du menu score" **/
+    printf("-------- Menu des scores --------\n");
+    printf("1. Recherche du score d'un joueur\n");
+    printf("2. Meilleurs scores par grille\n");
+    printf("3. Retour au menu principal\n");
+    printf("---------------------------------\n");
+    /** Fin du bloc "Affichage du menu score" **/
+
+    short choix; // Déclaration variable choix pour le controler
+
+    /** Debut du bloc "Contrôle du choix avec message d'erreur" **/
+    printf("Choix : ");
+    scanf(" %hd", &choix);
+
+    while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
+    {
+        printf("Erreur de saisie, le choix doit être entre 1 et 3.");
+        printf("\nChoix : ");
+        scanf(" %hd", &choix);
+    }
+    /** Fin du bloc "Contrôle du choix avec message d'erreur" **/
+
+    /** Debut du bloc "Renvoi du choix de l'utilisateur" **/
+    switch (choix)
+    {
+        case 1: // Choix : Recherche du score d'un joueur
+
+            return 1;
+
+        case 2: // Choix : Meilleurs scores par grille
+
+            return 2;
+
+        case 3: // Choix : Revenir au menu intial
+
+            return 3;
+    }
+    /** Fin du bloc "Renvoi du choix de l'utilisateur" **/
+}
+
+void Recherche_par_joueur()
 {
     char nom_de_joueur_recherche[26];
 
@@ -16,7 +58,7 @@ void recherche_par_joueur()
 
 }
 
-void scores_par_grille()
+void Scores_par_grille()
 {
     int dim_grille;
 
@@ -24,32 +66,6 @@ void scores_par_grille()
 
     dim_grille = Dimension_grille();
 }
-
-
-int Affichage_meilleurs_scores(char tabscore[])
-{
-    int repscore;
-
-    printf("Menu des scores :\n");
-    printf("1) Recherche du score d'un joueur\n 2) Meilleurs scores par grille\n 3) EXIT\n");
-    scanf("%d", &repscore);     // Récupération du choix du joueur
-
-    switch (repscore) {
-        case 1 :
-            recherche_par_joueur();     // Envoi vers la recherche par joueur
-            break;
-
-        case 2:
-            scores_par_grille();    // Envoie vers la recherche par dimension de grille
-            break;
-
-        case 3 :
-            break;
-
-    }
-
-}
-
 
 /*
  * int i = 0; // Pour établir la boucle
