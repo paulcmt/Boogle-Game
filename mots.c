@@ -186,6 +186,11 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
 
+        if (indiceC == longueur - 1 && indiceL == longueur - 1 && mot[c] != grille[indiceL][indiceC])
+        {
+            return 0;
+        }
+
         int d;
         int nb_lettres_autour = 0;
 
@@ -505,7 +510,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 
         }
         // Condition pour faire la vérification de la dernière lettre
-        if (nb_lettres_verifiees == longueur_du_mot - 1 && Comptage_lettre_tableau(lettre_autour, mot[d+1]) == 0)
+        if (nb_lettres_verifiees == longueur_du_mot && Comptage_lettre_tableau(lettre_autour, mot[d]) == 0)
         {
             return 0;
         }
