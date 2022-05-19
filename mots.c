@@ -623,8 +623,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     float temps = 0.0, minuteur = 0.0;
     clock_t t1, t2;
 
-    t1 = clock();
-
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
         mot_verif = 0;
@@ -635,6 +633,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
         printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
         Affichage_grille(grille, longueur);
+
+        t1 = clock();
 
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
