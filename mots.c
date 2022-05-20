@@ -540,7 +540,7 @@ int Verification_francais(char mot_a_comparer[])
 {
     char mot_fr[26];
     FILE *fichier = NULL;
-    fichier = fopen("liste_mot1.txt", "r");
+    fichier = fopen("../liste_mot1.txt", "r");
 
     if (fichier != NULL)
     {
@@ -575,7 +575,7 @@ int Verification_francais(char mot_a_comparer[])
     }
 
     fichier = NULL;
-    fichier = fopen("liste_mot2.txt", "r");
+    fichier = fopen("../liste_mot2.txt", "r");
 
     if (fichier != NULL)
     {
