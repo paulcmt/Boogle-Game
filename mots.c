@@ -186,7 +186,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
 
-        if (indiceC == longueur - 1 && indiceL == longueur - 1 && mot[c] == grille[indiceL][indiceC])
+        if (indiceC == longueur - 1 && indiceL == longueur - 1 && toupper(mot[c]) != grille[indiceL][indiceC])
         {
             return 0;
         }
@@ -672,13 +672,21 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
             else
             {
                 printf("Le mot est invalide\n");
+
+                // Reset du mot saisi car non valide
+                for (int j = 0; j < 26; ++j)
+                {
+                    tabmots[i][j] = NULL;
+                }
+
+                i --;
             }
 
             t2 = clock();
             temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
             minuteur = minuteur + temps;
 
-            i++;    // Sert à incrémenter la ligne dans le tableau de saisi des mots
+            i++; // Sert à incrémenter la ligne dans le tableau de saisi des mots
         }
 
     } while (temps_limite > minuteur);
