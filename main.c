@@ -44,7 +44,7 @@ int main()
 
                 Saisie_de_mots(temps_limite, grille, longueur, tabmots);
 
-                //Calcul_du_score(tabmots);
+                Calcul_du_score(tabmots, temps_limite);
 
                 break;
 

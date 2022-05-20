@@ -686,7 +686,5 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     printf("---------------------------");
     printf("\nFin de la partie !");
 
-    free(tabmots);
-
     /** Fin du bloc "Vérification mot français" **/
 }
