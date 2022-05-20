@@ -80,7 +80,39 @@ int main()
 
                 /** Debut du bloc "Definition de la grille" **/
                 char grille[8][8];
-                Generation_grille(grille, longueur);
+
+
+                grille[0][0] = 'E';
+                grille[0][1] = 'D';
+                grille[0][2] = 'T';
+                grille[0][3] = 'O';
+                grille[0][4] = 'R';
+
+                grille[1][0] = 'I';
+                grille[1][1] = 'C';
+                grille[1][2] = 'M';
+                grille[1][3] = 'L';
+                grille[1][4] = 'A';
+
+                grille[2][0] = 'L';
+                grille[2][1] = 'A';
+                grille[2][2] = 'U';
+                grille[2][3] = 'E';
+                grille[2][4] = 'I';
+
+                grille[3][0] = 'Q';
+                grille[3][1] = 'O';
+                grille[3][2] = 'T';
+                grille[3][3] = 'R';
+                grille[3][4] = 'C';
+
+                grille[4][0] = 'R';
+                grille[4][1] = 'I';
+                grille[4][2] = 'N';
+                grille[4][3] = 'P';
+                grille[4][4] = 'L';
+
+                //Generation_grille(grille, longueur);
                 /** Fin du bloc "Definition de la grille" **/
 
                 int temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
@@ -108,7 +140,6 @@ int main()
                 choix = Menu_scores(); // Appel la fonction menu des scores
 
                 system("clear");
-                printf("Coming soon");
 
                 break;
 

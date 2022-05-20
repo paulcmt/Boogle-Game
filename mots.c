@@ -166,6 +166,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     int indiceL = 0, indiceC = 0, nb_lettres_verifiees = 0;
     int longueur_du_mot = strlen(mot) - 1;
     int indiceLEtCPrecedent[26][3];
+    int z = 1;
 
     // Initialisation du tableau des sauvegardes des indices
     for (int a = 0; a < 26; a = a + 1)
@@ -494,28 +495,31 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 
                 if (indiceC == longueur - 1 || indiceLEtCPrecedent[d][2] == longueur - 1)
                 {
-                    indiceL = indiceLEtCPrecedent[d - 1][1] + 1;
+                    indiceL = indiceLEtCPrecedent[d - z][1] + 1;
                     indiceC = 0;
                     d = d - 1;
+                    z ++;
                     break;
                 }
                 else
                 {
-                    indiceC = indiceLEtCPrecedent[d - 1][2] + 1;
-                    indiceL = indiceLEtCPrecedent[d - 1][1];
+                    indiceC = indiceLEtCPrecedent[d - z][2] + 1;
+                    indiceL = indiceLEtCPrecedent[d - z][1];
                     d = d - 1;
+                    z ++;
                     break;
                 }
             }
 
         }
+
         // Condition pour faire la vérification de la dernière lettre
         if (nb_lettres_verifiees == longueur_du_mot && Comptage_lettre_tableau(lettre_autour, mot[d]) == 0)
         {
             return 0;
         }
 
-        if (nb_lettres_verifiees == longueur_du_mot)
+        else if (nb_lettres_verifiees == longueur_du_mot && Comptage_lettre_tableau(lettre_autour, mot[d]) > 0)
         {
             return 1;
         }
