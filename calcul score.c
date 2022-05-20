@@ -14,16 +14,5 @@ float Calcul_du_score(char tabmots[][26], int temps_limite)
         score_total += (float) pow(nb_lettre, (float) 4/3);  // Incrémentation du score du i-ème mot
     }
 
-    printf("\nLe score realise dans cette partie est de %.2f points !", score_total); // Affichage du score
-
-    /*
-     * Si le score en fonction des paramètres de la partie, alors :
-     *     - on compare le score avec les autres
-     *     - on le met à la bonne place dans le classement
-     *
-     */
-
-
-
     return score_total;
 }
