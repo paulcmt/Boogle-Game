@@ -186,6 +186,11 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
 
+        if (indiceC == longueur - 1 && indiceL == longueur - 1 && toupper(mot[c]) != grille[indiceL][indiceC])
+        {
+            return 0;
+        }
+
         int d;
         int nb_lettres_autour = 0;
 
@@ -212,16 +217,9 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             while (lettre_autour[j] != 0);
             /** Fin du bloc "Calcul nombre lettres autoures" **/
 
-            // Condition pour faire la vérification de la dernière lettre
-            if (nb_lettres_verifiees == longueur_du_mot - 1 && Comptage_lettre_tableau(lettre_autour, mot[d+1]) == 0)
-            {
-                return 0;
-            }
-
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
-
                 // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
                 indiceLEtCPrecedent[d][1] = indiceL;
                 indiceLEtCPrecedent[d][2] = indiceC;
@@ -511,6 +509,12 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             }
 
         }
+        // Condition pour faire la vérification de la dernière lettre
+        if (nb_lettres_verifiees == longueur_du_mot && Comptage_lettre_tableau(lettre_autour, mot[d]) == 0)
+        {
+            return 0;
+        }
+
         if (nb_lettres_verifiees == longueur_du_mot)
         {
             return 1;
@@ -619,8 +623,6 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     float temps = 0.0, minuteur = 0.0;
     clock_t t1, t2;
 
-    t1 = clock();
-
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
         mot_verif = 0;
@@ -631,6 +633,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
         printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
         Affichage_grille(grille, longueur);
+
+        t1 = clock();
 
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
@@ -668,21 +672,27 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
             else
             {
                 printf("Le mot est invalide\n");
+
+                // Reset du mot saisi car non valide
+                for (int j = 0; j < 26; ++j)
+                {
+                    tabmots[i][j] = NULL;
+                }
+
+                i --;
             }
 
             t2 = clock();
             temps = (float) (t2 - t1) / CLOCKS_PER_SEC * 100;
             minuteur = minuteur + temps;
 
-            i++;    // Sert à incrémenter la ligne dans le tableau de saisi des mots
+            i++; // Sert à incrémenter la ligne dans le tableau de saisi des mots
         }
 
     } while (temps_limite > minuteur);
 
     printf("---------------------------");
     printf("\nFin de la partie !");
-
-    free(tabmots);
 
     /** Fin du bloc "Vérification mot français" **/
 }

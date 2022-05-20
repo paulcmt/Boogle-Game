@@ -8,4 +8,4 @@
 #include "string.h"
 #include "ctype.h"
 
-int Affichage_meilleurs_scores(char tabscore[]); // Fonction pour afficher les 10 meilleurs scores
+int Menu_scores(); // Fonction pour le menu des scores

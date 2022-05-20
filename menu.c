@@ -3,11 +3,11 @@
 int Menu()
 {
     /** Debut du bloc "Affichage du menu" **/
-    printf("--------------------------------\n");
+    printf("-------- Menu principal ---------\n");
     printf("1. Demarrer une partie\n");
     printf("2. Afficher les meilleurs scores\n");
     printf("3. Quitter\n");
-    printf("--------------------------------\n");
+    printf("---------------------------------\n");
     /** Fin du bloc "Affichage du menu" **/
 
     short choix; // Déclaration variable choix pour le controler

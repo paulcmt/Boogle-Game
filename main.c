@@ -7,55 +7,118 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/** Début de la partie prototype **/
+
+int Rejouer(short choix_intial);
+
+/** Fin de la partie prototype **/
+
+int Rejouer(short choix_intial)
+{
+    char choix[4];
+
+    if (choix_intial != 3)
+    {
+        printf("\nVoulez-vous rejouer (Oui / Non) : ");
+        scanf(" %s", choix);
+
+        for (int i = 0; i < 3; ++i)
+        {
+            choix[i] = toupper(choix[i]);
+        }
+
+        while (!(strcmp(choix, "NON") == 0 || strcmp(choix, "OUI") == 0)) // Choix doit être soit OUI soit NON
+        {
+            printf("\nErreur de saisie, veuillez respecter la casse");
+            printf("\nVoulez-vous rejouer (Oui / Non) : ");
+            scanf(" %s", choix);
+
+            for (int i = 0; i < 3; ++i)
+            {
+                choix[i] = toupper(choix[i]);
+            }
+        }
+        /** Fin du bloc "Contrôle du choix avec message d'erreur" **/
+
+        if (strcmp(choix, "OUI") == 0)
+        {
+            return 3; // Choix vaut 3 donc l'utilisateur va relancer le jeu
+        }
+        else
+        {
+            return 1; // Choix vaut 1 donc l'utilisateur ne veut pas relancer le jeu
+        }
+    }
+    else // Choix vaut 3 donc l'utilisateur va relancer le jeu
+    {
+        return 3;
+    }
+
+}
+
 int main()
 {
     srand(time(NULL));
 
-    // Utilisation du fichier "menu.c"
-    short choix = Menu(); // Initialisation du choix de l'utilisateur
-    short longueur;
+    short choix = 0, longueur;
 
-    // Conséquence du choix
-    switch (choix)
+    float score = 0.0;
+
+    do
     {
-        case 1: // Lancement de la partie
+        // Utilisation du fichier "menu.c"
+        choix = Menu(); // Demande du choix de l'utilisateur
+        system("clear");
 
-            // Utilisation du fichier "generation grille.c"
-            longueur = Dimension_grille(); // Demande dimension de la grille
+        // Conséquence du choix
+        switch (choix)
+        {
+            case 1: // Lancement de la partie
 
-            /** Debut du bloc "Definition de la grille" **/
-            char grille[8][8];
-            Generation_grille(grille, longueur);
-            /** Fin du bloc "Definition de la grille" **/
+                // Utilisation du fichier "generation grille.c"
+                longueur = Dimension_grille(); // Demande dimension de la grille
 
-            int temps_limite = 60;//Temps_de_la_partie();
+                /** Debut du bloc "Definition de la grille" **/
+                char grille[8][8];
+                Generation_grille(grille, longueur);
+                /** Fin du bloc "Definition de la grille" **/
 
-            char** tabmots = (char **) malloc(temps_limite * 2 * sizeof (char*));
+                int temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
-            for (int i = 0 ; i < temps_limite * 2 ; ++i)
-            {
-                tabmots[i] = (char*) malloc(26 * sizeof (char));
-            }
+                /** Début "Création tableau dynamique pour la saisie des mots" **/
 
-            //char tabmots[180][26];
+                char **tabmots = (char **) malloc(temps_limite * 2 * sizeof(char *)); // Déclaration double pointeur pour tableau dynamique à deux dimensions
 
-            Saisie_de_mots(temps_limite, grille, longueur, tabmots);
-            //Calcul_du_score(tabmots);
+                for (int i = 0; i < temps_limite * 2; ++i)
+                {
+                    tabmots[i] = (char *) malloc(26 * sizeof(char));
+                }
+                /** Fin "Création tableau dynamique pour la saisie des mots" **/
 
-            //Calcul_du_score(temps_limite, tabmots);
-            break;
+                Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + Vérification du mot
 
-        case 2: // Calcul + affichage des scores
+                score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
 
-            printf("\n WALL OF FAME C-BOGGLE \n");
-            printf("-----------------------");
-            /* Appel la fonction affichage des scores */
-            //Affichage_meilleurs_scores(tabscore);
-            break;
+                printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
-        case 3:
-            exit(0);
-    }
+                break;
+
+            case 2: // Affichage des scores
+
+                choix = Menu_scores(); // Appel la fonction menu des scores
+
+                system("clear");
+                printf("Coming soon");
+
+                break;
+
+            case 3:
+                exit(0);
+        }
+
+        choix = Rejouer(choix);
+
+    } while (choix == 3);
 
     return 0;
 }
