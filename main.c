@@ -68,7 +68,6 @@ int main()
     {
         // Utilisation du fichier "menu.c"
         choix = Menu(); // Demande du choix de l'utilisateur
-        system("clear");
 
         // Conséquence du choix
         switch (choix)
@@ -80,8 +79,7 @@ int main()
 
                 /** Debut du bloc "Definition de la grille" **/
                 char grille[8][8];
-
-
+                 /*
                 grille[0][0] = 'E';
                 grille[0][1] = 'D';
                 grille[0][2] = 'T';
@@ -110,9 +108,9 @@ int main()
                 grille[4][1] = 'I';
                 grille[4][2] = 'N';
                 grille[4][3] = 'P';
-                grille[4][4] = 'L';
+                grille[4][4] = 'L';*/
 
-                //Generation_grille(grille, longueur);
+                Generation_grille(grille, longueur);
                 /** Fin du bloc "Definition de la grille" **/
 
                 int temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
@@ -129,17 +127,15 @@ int main()
 
                 Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + Vérification du mot
 
-                score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
+                //score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
 
-                printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
+                //printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
                 break;
 
             case 2: // Affichage des scores
 
                 choix = Menu_scores(); // Appel la fonction menu des scores
-
-                system("clear");
 
                 break;
 

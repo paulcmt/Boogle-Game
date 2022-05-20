@@ -221,6 +221,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
+                z = 1;
                 // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
                 indiceLEtCPrecedent[d][1] = indiceL;
                 indiceLEtCPrecedent[d][2] = indiceC;
@@ -641,7 +642,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         t1 = clock();
 
         printf("Saisir un mot : \n"); // Saisie du mot
-        scanf("%s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
+        scanf(" %s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
         for (int h = 0; h < i; ++h)
         {
@@ -697,6 +698,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
     printf("---------------------------");
     printf("\nFin de la partie !");
+
+    free(tabmots);
 
     /** Fin du bloc "Vérification mot français" **/
 }
