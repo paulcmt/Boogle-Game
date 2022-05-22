@@ -5,8 +5,5 @@
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "string.h"
-#include "ctype.h"
 
-int Menu();
-int Temps_de_la_partie();
+int Menu(); // Fonctionnel + commenté

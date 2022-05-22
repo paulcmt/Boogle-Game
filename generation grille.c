@@ -5,13 +5,13 @@ int Dimension_grille() // Demande la dimension de la grille
 {
     short dimension = 0;
 
-    printf("Dimension souhaitee de la grille (de 4 à 8) : ");
+    printf("Dimension souhaitee de la grille (de 4 a 8) : ");
     scanf(" %hd", &dimension); // Demande à l'utilisateur la dimension de la grille
 
     while (dimension < 4 || dimension > 8) // Contrôle de la dimension
     {
         printf("Erreur de saisie, la dimension doit etre entre 4x4 et 8x8\n");
-        printf("Dimension souhaitee de la grille (de 4 à 8) : ");
+        printf("Dimension souhaitee de la grille (de 4 a 8) : ");
         scanf(" %hd", &dimension); // Demande à l'utilisateur la dimension de la grille
     }
 

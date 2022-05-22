@@ -1,17 +1,40 @@
-#include "fonctions globales.h" // Bibliothèque des fonctions nécessaires pour l'affichage ou les tests
-#include "menu.h" // Bibliothèque pour afficher le menu
-#include "generation grille.h" // Bibiliothèque pour générer la grille
-#include "menu score.h" // Bibliothèque pour calculer et afficher les scores
-#include "mots.h" // Bibliothèque pour saisir les mots et faire la vérification de la langue française
-#include "calcul score.h"   //Blibliothèque pour le calcul des scores
+#include "fonctions globales.h"
+#include "menu.h"
+#include "generation grille.h"
+#include "menu score.h"
+#include "mots.h"
+#include "calcul score.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 
-/** Début de la partie prototype **/
+/** Début du bloc "Prototype des fonctions dans le main" **/
 
+int Temps_de_la_partie(); // Fonctionnel + commenté
 int Rejouer(short choix_intial);
 
-/** Fin de la partie prototype **/
+/** Fin du bloc "Prototype des fonctions dans le main" **/
+
+/** Début du bloc "Définition des fonctions dans le main" **/
+
+int Temps_de_la_partie()
+{
+    short temps = 0;
+
+    /** Debut du bloc "Contrôle du temps limite avec message d'erreur" **/
+    printf("Temps voulu pour la partie \(de 60 a 180 secondes\): ");
+    scanf(" %hd", &temps);
+
+    while (60 < temps || temps > 180) // Temps entre doit être compris entre 60 et 180 secondes
+    {
+        printf("Erreur de saisie, le temps doit être entre 60 et 180 secondes"); // Message d'erreur
+        printf("\nTemps voulu pour la partie \(de 60 a 180 secondes\): ");
+        scanf(" %hd", &temps);
+    }
+    /** Fin du bloc "Contrôle du temps limite avec message d'erreur" **/
+
+    return temps; // Retourne le temps limite choisi
+}
 
 int Rejouer(short choix_intial)
 {
@@ -56,21 +79,21 @@ int Rejouer(short choix_intial)
 
 }
 
+/** Fin du bloc "Définition des fonctions dans le main" **/
+
 int main()
 {
     srand(time(NULL));
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
-    short choix = 0, longueur = 0;
+    short choix = 0, longueur = 0, temps_limite = 0;
     float score = 0.0;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
 
-    char sous_carre[9];
-
     do
     {
-        choix = 4;//Menu(); // Demande du choix de l'utilisateur
+        choix = Menu(); // Demande du choix de l'utilisateur
 
         switch (choix)
         {
@@ -80,7 +103,7 @@ int main()
 
                 Generation_grille(grille, longueur); // Generation de la grille
 
-                int temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
@@ -90,9 +113,10 @@ int main()
                 {
                     tabmots[i] = (char *) malloc(26 * sizeof(char));
                 }
+
                 /** Fin "Création tableau dynamique pour la saisie des mots" **/
 
-                Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + Vérification du mot
+                Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + vérification du mot
 
                 score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
 
@@ -110,11 +134,10 @@ int main()
                 exit(0);
 
             default: // Permet de faire les tests si choix = 4
-
                 break;
         }
 
-        //choix = Rejouer(choix);
+        choix = Rejouer(choix);
 
     } while (choix == 3);
 
