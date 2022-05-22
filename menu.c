@@ -16,27 +16,15 @@ int Menu()
     printf("Choix : ");
     scanf(" %hd", &choix);
 
-    while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
+    while (choix < 1 || choix > 4) // Choix doit être compris entre 1 et 3
     {
-        printf("Erreur de saisie, le choix doit être entre 1 et 3.");
+        printf("Erreur de saisie, le choix doit être entre 1 et 3"); // Message d'erreur
         printf("\nChoix : ");
         scanf(" %hd", &choix);
     }
     /** Fin du bloc "Contrôle du choix avec message d'erreur" **/
 
-    /** Debut du bloc "Renvoi du choix de l'utilisateur" **/
-    switch (choix)
-    {
-        case 1: // Choix : démarrage d'une partie
-            return 1;
-
-        case 2: // Choix : affichage des scores
-            return 2;
-
-        case 3: // Choix : quitter l'application
-            return 3;
-    }
-    /** Fin du bloc "Renvoi du choix de l'utilisateur" **/
+    return choix; // Retourne le choix de l'utilisateur
 }
 
 int Temps_de_la_partie()

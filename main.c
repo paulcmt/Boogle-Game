@@ -60,30 +60,27 @@ int main()
 {
     srand(time(NULL));
 
-    short choix = 0, longueur;
-
+    /** Début du bloc "Déclaration des variables nécessaires au programme" **/
+    short choix = 0, longueur = 0;
     float score = 0.0;
+    char grille[8][8];
+    /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
+
+    char sous_carre[9];
 
     do
     {
-        // Utilisation du fichier "menu.c"
-        choix = Menu(); // Demande du choix de l'utilisateur
+        choix = 4;//Menu(); // Demande du choix de l'utilisateur
 
-        // Conséquence du choix
         switch (choix)
         {
             case 1: // Lancement de la partie
 
-                // Utilisation du fichier "generation grille.c"
                 longueur = Dimension_grille(); // Demande dimension de la grille
 
-                /** Debut du bloc "Definition de la grille" **/
-                char grille[8][8];
+                Generation_grille(grille, longueur); // Generation de la grille
 
-                Generation_grille(grille, longueur);
-                /** Fin du bloc "Definition de la grille" **/
-
-                int temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                int temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
@@ -97,9 +94,9 @@ int main()
 
                 Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + Vérification du mot
 
-                //score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
+                score = Calcul_du_score(tabmots, temps_limite); // Calcul du score de tous les mots saisis
 
-                //printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
+                printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
                 break;
 
@@ -113,10 +110,11 @@ int main()
                 exit(0);
 
             default: // Permet de faire les tests si choix = 4
+
                 break;
         }
 
-        choix = Rejouer(choix);
+        //choix = Rejouer(choix);
 
     } while (choix == 3);
 
