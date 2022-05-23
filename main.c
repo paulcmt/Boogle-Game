@@ -178,7 +178,7 @@ int main()
 
                 /** Fin "Création tableau dynamique pour la saisie des mots" **/
 
-                Saisie_de_mots(temps_limite, grille, longueur, tabmots, score); // Saisir un mot + vérification du mot
+                Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + vérification du mot
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 

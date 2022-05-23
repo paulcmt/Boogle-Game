@@ -602,7 +602,7 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26], float score)
+void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26])
 {
 
     for (int j = 0; j < temps_limite * 2; ++j) // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
@@ -664,8 +664,6 @@ void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char 
             {
                 printf("Le mot est valide\n");
                 nb_de_mots_valide = nb_de_mots_valide + 1; // Incrémentation du nombre de mots valide
-                score += powf(strlen(tabmots[i]), (float) 4/3);
-                printf("Le score total est de : %.2f\n", score);
             }
 
             else

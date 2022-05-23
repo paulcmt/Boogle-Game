@@ -14,4 +14,4 @@ void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, c
 int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int longueur);
 int Traitement_mot(char tabmots[], char grille[8][8], short longueur);
 int Verification_francais(char mot_a_comparer[]);
-void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26], float score);
+void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26]);
