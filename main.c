@@ -10,7 +10,17 @@
 
 /** Début du bloc "Prototype des fonctions dans le main" **/
 
+/**
+ * Demande le temps limite pour effectuer une partie à l'utilisateur
+ * @return temps
+ */
 int Temps_de_la_partie(); // Fonctionnel + commenté
+
+/**
+ * Permet de demander au joueur si il veut rejouer seulement si il vient de finir une partie
+ * @param choix_intial
+ * @return 1 ou 3
+ */
 int Rejouer(short choix_intial); // Fonctionnel + commenté
 
 /** Fin du bloc "Prototype des fonctions dans le main" **/

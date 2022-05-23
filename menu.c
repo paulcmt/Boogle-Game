@@ -26,3 +26,5 @@ int Menu()
 
     return choix; // Retourne le choix de l'utilisateur
 }
+
+

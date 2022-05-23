@@ -163,8 +163,12 @@ int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int lo
 
 int Traitement_mot(char mot[], char grille[8][8], short longueur)
 {
-    int indiceL = 0, indiceC = 0, nb_lettres_verifiees = 0;
-    int longueur_du_mot = strlen(mot) - 1;
+    int indiceL = 0,
+        indiceC = 0,
+        indiceLRetenu = 0,
+        indiceCRetenu = 0,
+        nb_lettres_verifiees = 0,
+        longueur_du_mot = strlen(mot) - 1;
 
     /** Début du bloc de traitement du mot entré **/
 
@@ -176,6 +180,8 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
     {
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
+        indiceCRetenu = indiceC;
+        indiceLRetenu = indiceL;
 
         if (indiceC == longueur - 1 && indiceL == longueur - 1 && toupper(mot[c]) != grille[indiceL][indiceC])
         {
@@ -186,7 +192,7 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
         int nb_lettres_autour = 0;
 
         /** Début du bloc permettant d'analyser le mot lettre par lettre telles qu'elles ont été entrées par le joueur **/
-        for (d = 0; d < longueur_du_mot; d = d + 1)   // On répète tant que toutes les lettre n'ont pas été examinées
+        for (d = 0; d < longueur_du_mot; d = d + 1) // On répète tant que toutes les lettre n'ont pas été examinées
         {
             // Boucle permettant d'initialiser le tableau de récupération des lettres
             for (int e = 0; e < 9; e = e + 1)
@@ -211,11 +217,10 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
-                z = 1;
 
-                /** Debut du bloc "Position de la lettre suivante"
+                /* Debut du bloc "Position de la lettre suivante"
                  Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
-                 des conditions particulières sont présentes **/
+                 des conditions particulières sont présentes */
 
                 // Pour les lettres de la première colonne :
                 if (indiceC == 0)
@@ -482,20 +487,18 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
                  * bonne lettre.
                  */
 
-                if (indiceC == longueur - 1 || indiceLEtCPrecedent[d][2] == longueur - 1)
+                if (indiceC == longueur - 1 || indiceLRetenu == longueur - 1)
                 {
-                    indiceL = indiceLEtCPrecedent[d - z][0] + 1;
+                    indiceL = indiceLRetenu + 1;
                     indiceC = 0;
                     d = d - 1;
-                    z ++;
                     break;
                 }
                 else
                 {
-                    indiceC = indiceLEtCPrecedent[d - z][1] + 1;
-                    indiceL = indiceLEtCPrecedent[d - z][0];
+                    indiceC = indiceCRetenu + 1;
+                    indiceL = indiceLRetenu;
                     d = d - 1;
-                    z ++;
                     break;
                 }
             }

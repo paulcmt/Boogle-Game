@@ -9,4 +9,10 @@
 #include <ctype.h>
 #include <math.h>
 
+/**
+ *
+ * @param tabmots
+ * @param temps_limite
+ * @return score_total
+ */
 float Calcul_du_score(char tabmots[][26], int temps_limite);

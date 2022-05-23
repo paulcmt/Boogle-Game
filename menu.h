@@ -6,4 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Retourne le choix de l'utilisateur selon le menu proposé
+ * @return choix
+ */
 int Menu(); // Fonctionnel + commenté

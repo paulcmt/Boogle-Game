@@ -8,4 +8,8 @@
 #include <string.h>
 #include <ctype.h>
 
+/**
+ * Afficher le menu pour les scores + demande
+ * @return choix
+ */
 int Menu_scores(); // Fonction pour le menu des scores
