@@ -208,6 +208,21 @@ void Lettre_commune3(char sous_carre3x3[9]) // Vérification que les 3 nouvelles
 
 void Lettre_commune4(char sous_carre3x3[9])
 {
+    sous_carre3x3[10] = Generation_lettre_aleatoire(); // Génération de la lettre manquante (en bas à droite)
+
+    // Vérification comme les autres fonctions que la lettre générée n'est pas en double
+    for (int j = 0; j < 12; ++j)
+    {
+        if (sous_carre3x3[10] == sous_carre3x3[j] && j != 10)
+        {
+            sous_carre3x3[10] = Generation_lettre_aleatoire();
+            j = -1;
+        }
+    }
+}
+
+void Lettre_commune5(char sous_carre3x3[9])
+{
     sous_carre3x3[8] = Generation_lettre_aleatoire(); // Génération de la lettre manquante (en bas à droite)
 
     // Vérification comme les autres fonctions que la lettre générée n'est pas en double
@@ -280,7 +295,7 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
     short nouvelle_longueur = 4;
     // Taille minimale de la grille qui va permettre de descendre et décaler vers la droite autant de fois que nécéssaire
 
-    char sous_carre3x3[9];
+    char sous_carre3x3[12];
 
     for (int k = 0; k < longueur - 3; ++k)
 
@@ -316,19 +331,44 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
 
         for (int i = 0; i < longueur-3; ++i)
         {
-            // Affectation du sous carre à la grille
-            sous_carre3x3[0] = grille[k+1][i+1];
-            sous_carre3x3[1] = grille[k+1][i+2];
-            sous_carre3x3[2] = grille[k+1][i+3];
-            sous_carre3x3[3] = grille[k+2][i+1];
-            sous_carre3x3[4] = grille[k+2][i+2];
-            sous_carre3x3[5] = grille[k+2][i+3];
-            sous_carre3x3[6] = grille[k+3][i+1];
-            sous_carre3x3[7] = grille[k+3][i+2];
+            if (k != longueur-4)
+            {
+                // Affectation du sous carre à la grille
+                sous_carre3x3[0] = grille[k+1][i+1];
+                sous_carre3x3[1] = grille[k+1][i+2];
+                sous_carre3x3[2] = grille[k+1][i+3];
+                sous_carre3x3[3] = grille[k+1][i+4];
 
-            Lettre_commune4(sous_carre3x3); // Génération + vérification doublon de la lettre manquante
+                sous_carre3x3[4] = grille[k+2][i+1];
+                sous_carre3x3[5] = grille[k+2][i+2];
+                sous_carre3x3[6] = grille[k+2][i+3];
+                sous_carre3x3[7] = grille[k+2][i+4];
 
-            grille[nouvelle_longueur-1][i+3] = sous_carre3x3[8]; // Assignation de la lettre générée à la grille
+                sous_carre3x3[8] = grille[k+3][i+1];
+                sous_carre3x3[9] = grille[k+3][i+2];
+                sous_carre3x3[11] = grille[k+3][i+4];
+
+                Lettre_commune4(sous_carre3x3); // Génération + vérification doublon de la lettre manquante
+
+                grille[nouvelle_longueur-1][i+3] = sous_carre3x3[10]; // Assignation de la lettre générée à la grille
+            }
+            else
+            {
+                sous_carre3x3[0] = grille[k+1][i+1];
+                sous_carre3x3[1] = grille[k+1][i+2];
+                sous_carre3x3[2] = grille[k+1][i+3];
+
+                sous_carre3x3[3] = grille[k+2][i+1];
+                sous_carre3x3[4] = grille[k+2][i+2];
+                sous_carre3x3[5] = grille[k+2][i+3];
+
+                sous_carre3x3[6] = grille[k+3][i+1];
+                sous_carre3x3[7] = grille[k+3][i+2];
+
+                Lettre_commune5(sous_carre3x3);
+
+                grille[nouvelle_longueur-1][i+3] = sous_carre3x3[8]; // Assignation de la lettre générée à la grille
+            }
         }
 
         nouvelle_longueur ++; // Permet de descendre d'une ligne

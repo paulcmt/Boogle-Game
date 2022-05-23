@@ -73,3 +73,5 @@ void Lettre_commune3(char sous_carre3x3[9]); // Fonctionnel + commenté
  * @param sous_carre3x3
  */
 void Lettre_commune4(char sous_carre3x3[9]); // Fonctionnel + commenté
+
+void Lettre_commune5(char sous_carre3x3[9]);

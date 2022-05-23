@@ -35,7 +35,7 @@ int Temps_de_la_partie()
     scanf(" %hd", &temps);
 
     /** Debut du bloc "Contrôle du temps limite avec message d'erreur" **/
-    while (60 < temps || temps > 180) // Temps entre doit être compris entre 60 et 180 secondes
+    while (60 > temps || temps > 180) // Temps entre doit être compris entre 60 et 180 secondes
     {
         printf("Erreur de saisie, le temps doit être entre 60 et 180 secondes"); // Message d'erreur
         printf("\nTemps voulu pour la partie \(de 60 a 180 secondes\): ");
@@ -120,6 +120,7 @@ int main()
 
                 longueur = Dimension_grille(); // Demande dimension de la grille
 
+                /*
                 grille[5][0] = 'P';
                 grille[5][1] = 'E';
                 grille[5][2] = 'M';
@@ -160,9 +161,9 @@ int main()
                 grille[0][2] = 'L';
                 grille[0][3] = 'A';
                 grille[0][4] = 'U';
-                grille[0][5] = 'E';
+                grille[0][5] = 'E';*/
 
-                //Generation_grille(grille, longueur); // Generation de la grille
+                Generation_grille(grille, longueur); // Generation de la grille
 
                 temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
