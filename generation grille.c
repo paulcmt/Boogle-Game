@@ -187,16 +187,16 @@ void Lettre_commune2(char sous_carre3x3[9])
     }
 }
 
-void Lettre_commune3(char sous_carre3x3[9]) // Vérification que les 3 nouvelles lettres ne sont pas en double entre elles et dans le sous carre 3x3
+void Lettre_commune3(char sous_carre3x3[12]) // Vérification que les 3 nouvelles lettres ne sont pas en double entre elles et dans le sous carre 3x3
 {
-    int i = 6, // Permet de sélectionner les nouvelles lettres générées
+    int i = 8, // Permet de sélectionner les nouvelles lettres générées
         j = 0;
 
-    for (i = 6; i < 9; i++) // Pour juste comparer les 3 nouvelles lettres car les 6 autres sont déja différentes entre elles
+    for (i = 8; i < 12; i++) // Pour juste comparer les 3 nouvelles lettres car les 6 autres sont déja différentes entre elles
     {
-        for (j = 0; j < 9; ++j) // Permet la comparaison des nouvelles lettres aux 6 autres et entre elleds
+        for (j = 0; j < 12; ++j) // Permet la comparaison des nouvelles lettres aux 6 autres et entre elleds
         {
-            if (sous_carre3x3[i] == sous_carre3x3[j] && i != j /* Eviter de comparer les lettres du meme indice car forcément égales*/)
+            if (sous_carre3x3[i] == sous_carre3x3[j] && i != j) /* Eviter de comparer les lettres du meme indice car forcément égales*/
             {
                 sous_carre3x3[i] = Generation_lettre_aleatoire(); // Génération d'une nouvelle lettre selon les probabilités
                 j = -1; // Va permettre de comparer la nouvelle lettre générée aux autres pour voir si elle est en double donc on reprend à 0
@@ -297,22 +297,27 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
 
     char sous_carre3x3[12];
 
+    for (int i = 0; i < 12; ++i)
+    {
+        sous_carre3x3[i] = NULL;
+    }
+
     for (int k = 0; k < longueur - 3; ++k)
 
     // Descendre dans la grille autant que nécessaire, si longueur = 5 alors descendre 2 fois car il y a déjà un sous carre de 3x3 au dessus
 
     {
-        for (int j = 0; j < 9; ++j) // Descente du sous carré d'une ligne vers le bas
+        for (int j = 0; j < 11; ++j) // Descente du sous carré d'une ligne vers le bas
         {
-            if (j < 3)
+            if (j < 4)
             {
                 sous_carre3x3[j] = grille[k+1][j]; // La 2 ème ligne de l'ancien sous carré devient la 1 ère
             }
-            else if (3 <= j && j < 6)
+            else if (4 <= j && j <= 7)
             {
-                sous_carre3x3[j] = grille[k+2][j-3]; // La 3 ème ligne de l'ancien sous carré devient la 2 ème
+                sous_carre3x3[j] = grille[k+2][j-4]; // La 3 ème ligne de l'ancien sous carré devient la 2 ème
             }
-            else
+            else if (8 <= j && j <= 10)
             {
                 sous_carre3x3[j] = Generation_lettre_aleatoire(); // La 3 ème ligne du sous carré va être constituée de nouvelles lettres
             }
@@ -321,9 +326,9 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
         Lettre_commune3(sous_carre3x3); // Vérification lettres en doublon parmis les 6 lettres au dessus du sous carré
 
         /** Debut du bloc "Assignation des 3 nouvelles lettres du sous carré à la grille" **/
-        grille[nouvelle_longueur-1][0] = sous_carre3x3[6]; // nouvelle_longueur permet de sélectionner la bonne ligne
-        grille[nouvelle_longueur-1][1] = sous_carre3x3[7];
-        grille[nouvelle_longueur-1][2] = sous_carre3x3[8];
+        grille[nouvelle_longueur-1][0] = sous_carre3x3[8]; // nouvelle_longueur permet de sélectionner la bonne ligne
+        grille[nouvelle_longueur-1][1] = sous_carre3x3[9];
+        grille[nouvelle_longueur-1][2] = sous_carre3x3[10];
 
         // Le sous carré générant 3 lettres n'est réalisé qu'à chaque nouvelle ligne donc les indices de la deuxième dimension sont corrects
 
@@ -331,7 +336,7 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
 
         for (int i = 0; i < longueur-3; ++i)
         {
-            if (k != longueur-4)
+            if (i != longueur-4)
             {
                 // Affectation du sous carre à la grille
                 sous_carre3x3[0] = grille[k+1][i+1];
@@ -346,7 +351,8 @@ void Decalage_en_bas_et_vers_la_droite(char grille[8][8], short longueur)
 
                 sous_carre3x3[8] = grille[k+3][i+1];
                 sous_carre3x3[9] = grille[k+3][i+2];
-                sous_carre3x3[11] = grille[k+3][i+4];
+                sous_carre3x3[10] = ' ';
+                sous_carre3x3[11] = ' ';
 
                 Lettre_commune4(sous_carre3x3); // Génération + vérification doublon de la lettre manquante
 

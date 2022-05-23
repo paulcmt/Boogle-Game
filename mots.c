@@ -2,7 +2,7 @@
 #include "fonctions globales.h"
 
 /** Fonction retournant le nombre de fois qu'une lettre est présente dans la grille **/
-int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, short longueur) // On donne la grille, la lettre à chercher et la longueur de la grille
+int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur) // On donne la grille, la lettre à chercher et la longueur de la grille
 {
     int compteur = 0; // Compteur pour savoir combien de fois la lettre est présente dans la grille
 
@@ -161,7 +161,7 @@ int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int lo
     return i;
 }
 
-int Traitement_mot(char mot[], char grille[8][8], short longueur)
+int Traitement_mot(char mot[], char grille[8][8], int longueur)
 {
     int indiceL = 0,
         indiceC = 0,
@@ -188,8 +188,7 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
             return 0;
         }
 
-        int d;
-        int nb_lettres_autour = 0;
+        int d, nb_lettres_autour = 0;
 
         /** Début du bloc permettant d'analyser le mot lettre par lettre telles qu'elles ont été entrées par le joueur **/
         for (d = 0; d < longueur_du_mot; d = d + 1) // On répète tant que toutes les lettre n'ont pas été examinées
@@ -205,7 +204,9 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
 
             /** Début du bloc "Calcul nombre lettres autoures" **/
             nb_lettres_autour = -1;
+
             int j = -1;
+
             do
             {
                 nb_lettres_autour ++;
@@ -217,7 +218,6 @@ int Traitement_mot(char mot[], char grille[8][8], short longueur)
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
-
                 /* Debut du bloc "Position de la lettre suivante"
                  Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
                  des conditions particulières sont présentes */
@@ -602,7 +602,7 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26])
+void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
 {
 
     for (int j = 0; j < temps_limite * 2; ++j) // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
@@ -635,7 +635,7 @@ void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char 
         /** Fin du bloc "Intialisation des variables de validation pour un mot" **/
 
         printf("---------------------------\n");
-        printf("Nombre de mots valides : %d\n", nb_de_mots_valide); // Affiche le nombre de mots validés
+        printf("Nombre de mots valides : %hd\n", nb_de_mots_valide); // Affiche le nombre de mots validés
 
         Affichage_grille(grille, longueur); // Affichage de la grille
 
