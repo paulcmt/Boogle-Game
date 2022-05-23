@@ -19,28 +19,13 @@ int Menu_scores()
 
     while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
     {
-        printf("Erreur de saisie, le choix doit être entre 1 et 3.");
+        printf("Erreur de saisie, le choix doit être entre 1 et 3."); // Message d'erreur
         printf("\nChoix : ");
         scanf(" %hd", &choix);
     }
     /** Fin du bloc "Contrôle du choix avec message d'erreur" **/
 
-    /** Debut du bloc "Renvoi du choix de l'utilisateur" **/
-    switch (choix)
-    {
-        case 1: // Choix : Recherche du score d'un joueur
-
-            return 1;
-
-        case 2: // Choix : Meilleurs scores par grille
-
-            return 2;
-
-        case 3: // Choix : Revenir au menu intial
-
-            return 3;
-    }
-    /** Fin du bloc "Renvoi du choix de l'utilisateur" **/
+    return choix; // Retourne le choix de l'utilisateur
 }
 
 void Recherche_par_joueur()

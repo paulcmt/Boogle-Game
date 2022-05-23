@@ -3,19 +3,25 @@
 
 int Dimension_grille() // Demande la dimension de la grille
 {
-    short dimension = 0;
+    char dimension[4]; // Création de la future réponse de l'utilisateur
+    Initialisation_tableau(dimension); // Tout élément devient NULL
 
-    printf("Dimension souhaitee de la grille (de 4 a 8) : ");
-    scanf(" %hd", &dimension); // Demande à l'utilisateur la dimension de la grille
+    printf("Dimension souhaitee de la grille (de 4 a  8) : ");
+    fflush(stdin);
+    fgets(dimension, 3, stdin); // Demande à l'utilisateur la dimension de la grille
 
-    while (dimension < 4 || dimension > 8) // Contrôle de la dimension
+    while (!(strcmp(dimension, "4x4\n") == 0 || strcmp(dimension, "5x5\n") == 0 || strcmp(dimension, "6x6\n") == 0 ||
+             strcmp(dimension, "7x7\n") == 0 || strcmp(dimension, "8x8\n") == 0 || strcmp(dimension, "4\n") == 0
+             || strcmp(dimension, "5\n") == 0 || strcmp(dimension, "6\n") == 0 || strcmp(dimension, "7\n") == 0
+             || strcmp(dimension, "8\n") == 0)) // Contrôle de la dimension
     {
-        printf("Erreur de saisie, la dimension doit etre entre 4x4 et 8x8\n");
-        printf("Dimension souhaitee de la grille (de 4 a 8) : ");
-        scanf(" %hd", &dimension); // Demande à l'utilisateur la dimension de la grille
+        printf("Erreur de saisie, la dimension doit etre entre 4 et 8\n");
+        printf("Dimension souhaitee de la grille (de 4 a  8) : ");
+        fflush(stdin);
+        fgets(dimension, 3, stdin); // Demande à l'utilisateur la dimension de la grille
     }
 
-    return dimension;
+    return atoi(&dimension[0]); // Longueur de la grille = premier caractère de la saisie de l'utilisateur
 }
 
 char Generation_lettre_aleatoire()

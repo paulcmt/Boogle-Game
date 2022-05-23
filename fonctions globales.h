@@ -3,12 +3,13 @@
 
 #endif //PROJET_BOGGLE_FONCTIONS_GLOBALES_H
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
-#include "ctype.h"
-#include "time.h"
-#include "unistd.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+#include <unistd.h>
+#include <math.h>
 
 int Comptage_lettre_tableau(char Tabl[], char lettre);
 void Initialisation_tableau(char tabl[]);

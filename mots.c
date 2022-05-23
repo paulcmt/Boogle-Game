@@ -2,7 +2,7 @@
 #include "fonctions globales.h"
 
 /** Fonction retournant le nombre de fois qu'une lettre est présente dans la grille **/
-int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur) // On donne la grille, la lettre à chercher et la longueur de la grille
+int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, short longueur) // On donne la grille, la lettre à chercher et la longueur de la grille
 {
     int compteur = 0; // Compteur pour savoir combien de fois la lettre est présente dans la grille
 
@@ -161,28 +161,18 @@ int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int lo
     return i;
 }
 
-int Traitement_mot(char mot[], char grille[8][8], int longueur)
+int Traitement_mot(char mot[], char grille[8][8], short longueur)
 {
     int indiceL = 0, indiceC = 0, nb_lettres_verifiees = 0;
     int longueur_du_mot = strlen(mot) - 1;
-    int indiceLEtCPrecedent[26][2];
-    int z = 1;
 
-    // Initialisation du tableau des sauvegardes des indices
-    for (int a = 0; a < 26; a = a + 1)
-    {
-        for (int b = 0; b < 2; b = b + 1)
-        {
-            indiceLEtCPrecedent[a][b] = NULL;
-        }
-    }
     /** Début du bloc de traitement du mot entré **/
 
     // Définition d'un tableau permettant de récupérer les différentes lettres présentes autour de la lettre étudiée
     char lettre_autour[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
-    // Permet de vérifier la lettre suivante en fonction du nombre de lettre actuelle dans la grille
-    for (int c = 0; c < Nb_de_lettres_grille(grille, mot[c], longueur); c = c + 1)
+    // Va vérifier c fois la première lettre du mot présent dans la grille
+    for (int c = 0; c < Nb_de_lettres_grille(grille, mot[0], longueur); c = c + 1)
     {
         // Envoie vers une fonction permettant de récupérer les coordonnées de la lettre en cours d'étude
         Coordonnees_lettre(mot[c], longueur, grille, &indiceL, &indiceC);
@@ -222,9 +212,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
             if (Comptage_lettre_tableau(lettre_autour, mot[d+1]) > 0)
             {
                 z = 1;
-                // Sauvegarde des coordonnées de la lettre précédente ou de la première lettre (dépend de la lettre étudiée)
-                indiceLEtCPrecedent[d][0] = (int) indiceL;
-                indiceLEtCPrecedent[d][1] = (int) indiceC;
+
                 /** Debut du bloc "Position de la lettre suivante"
                  Comme pour la récupération des coordonées de la lettre précédent la nouvelle,
                  des conditions particulières sont présentes **/
@@ -611,10 +599,10 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
+void Saisie_de_mots(short temps_limite, char grille[8][8], short longueur, char tabmots[][26], float score)
 {
-    // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
-    for (int j = 0; j < temps_limite * 2; ++j)
+
+    for (int j = 0; j < temps_limite * 2; ++j) // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
     {
         for (int k = 0; k < 26; ++k)
         {
@@ -622,6 +610,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         }
     }
 
+    /** Début du bloc "Déclaration des variables nécessaires pour la fonction" **/
     int i = 0,
         mot_verif = 0,
         mot_dans_liste = 0,
@@ -630,76 +619,75 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
     double temps = 0;
     clock_t t1 = 0, t2 = 0;
+    /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        t1 = clock();
+        t1 = clock(); // Première mesure du temps
 
+        /** Début du bloc "Intialisation des variables de validation pour un mot" **/
         mot_verif = 0;
         mot_dans_liste = 0;
         mot_deja_existant = 0;
+        /** Fin du bloc "Intialisation des variables de validation pour un mot" **/
 
         printf("---------------------------\n");
+        printf("Nombre de mots valides : %d\n", nb_de_mots_valide); // Affiche le nombre de mots validés
 
-        printf("Nombre de mots valides : %d\n", nb_de_mots_valide);
-        Affichage_grille(grille, longueur);
+        Affichage_grille(grille, longueur); // Affichage de la grille
 
         printf("Saisir un mot : \n"); // Saisie du mot
         scanf(" %s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
+        /** Début du bloc "Vérification du mot existant" **/
         for (int h = 0; h < i; ++h)
         {
-            if (strcmp(tabmots[i], tabmots[h]) == 0) // Mot dejà saisie
+            if (strcmp(tabmots[i], tabmots[h]) == 0) // Mot dejà saisi
             {
                 printf("Mot deja saisi\n");
                 mot_deja_existant = 1;
             }
         }
+        /** Fin du bloc "Vérification du mot existant" **/
 
-        /** Début du bloc "Vérification mot dans la grille" **/
-
+        /** Début du bloc "Vérification mot dans la grille et dans la liste" **/
         if (mot_deja_existant == 0)
         {
-            mot_verif = Traitement_mot(tabmots[i], grille, longueur);
-            //printf("Mot dans la grille : %d\n", mot_verif);
+            mot_verif = Traitement_mot(tabmots[i], grille, longueur); // Vérification mot dans la grille
 
-            /** Fin du bloc "Vérification mot dans la grille" **/
+            mot_dans_liste = Verification_francais(tabmots[i]); // Vérification mot français
 
-            /** Début du bloc "Vérification mot français" **/
-
-            mot_dans_liste = Verification_francais(tabmots[i]);
-            //printf("Mot dans la liste : %d\n", mot_dans_liste);
-
-            /** Fin du bloc "Vérification mot français" **/
-
-            if (mot_dans_liste == 1 && mot_verif == 1)
+            if (mot_dans_liste == 1 && mot_verif == 1) // Mot présent dans la grille et dans la liste
             {
                 printf("Le mot est valide\n");
-                nb_de_mots_valide = nb_de_mots_valide + 1;
+                nb_de_mots_valide = nb_de_mots_valide + 1; // Incrémentation du nombre de mots valide
+                score += powf(strlen(tabmots[i]), (float) 4/3);
+                printf("Le score total est de : %.2f\n", score);
             }
+
             else
             {
                 printf("Le mot est invalide\n");
 
-                // Reset du mot saisi car non valide
+                // Reset de la place occuppé par le mot saisi car non valide
                 for (int j = 0; j < 26; ++j)
                 {
                     tabmots[i][j] = NULL;
                 }
 
-                i --;
+                i --; // Permet de se resituer à la bonne position pour saisir un mot
             }
 
             i++; // Sert à incrémenter la ligne dans le tableau de saisi des mots
         }
+        /** Fin du bloc "Vérification mot dans la grille et dans la liste" **/
 
-        t2 = clock(); // Enregistrement date fin
-        temps += (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence
+        t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
+        temps = temps + (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
 
-    } while (temps_limite > temps); // Minuteur depassé ou non ?
+    } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 
     printf("---------------------------");
     printf("\nFin de la partie !");
 
-    /** Fin du bloc "Vérification mot français" **/
 }
