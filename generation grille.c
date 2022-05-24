@@ -6,7 +6,7 @@ int Dimension_grille() // Demande la dimension de la grille
     char dimension[4]; // Création de la future réponse de l'utilisateur
     Initialisation_tableau(dimension); // Tout élément devient NULL
 
-    printf("Dimension souhaitee de la grille (de 4 a  8) : ");
+    printf("Dimension souhaitee de la grille (de 4 a 8) : ");
     fflush(stdin);
     fgets(dimension, 4, stdin); // Demande à l'utilisateur la dimension de la grille
 

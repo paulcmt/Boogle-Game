@@ -17,7 +17,7 @@ float Calcul_du_score(char tabmots[][26], int temps_limite)
         {
             nb_lettre ++;
         }
-        while (tabmots[i][j] != NULL);
+        while (tabmots[i][j] != '\0');
 
         score_total += (float) pow(nb_lettre, (float) 4/3);  // Incrémentation du score du i-ème mot
     }
