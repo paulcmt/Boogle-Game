@@ -122,47 +122,25 @@ int main()
                 longueur = Dimension_grille(); // Demande dimension de la grille
 
                 /*
-                grille[5][0] = 'P';
-                grille[5][1] = 'E';
-                grille[5][2] = 'M';
-                grille[5][3] = 'S';
-                grille[5][4] = 'N';
-                grille[5][5] = 'Z';
-
-                grille[4][0] = 'S';
-                grille[4][1] = 'D';
-                grille[4][2] = 'F';
-                grille[4][3] = 'U';
-                grille[4][4] = 'T';
-                grille[4][5] = 'P';
-
-                grille[3][0] = 'L';
-                grille[3][1] = 'T';
-                grille[3][2] = 'O';
-                grille[3][3] = 'A';
-                grille[3][4] = 'U';
-                grille[3][5] = 'E';
+                grille[3][0] = 'U';
+                grille[3][1] = 'J';
+                grille[3][2] = 'H';
+                grille[3][3] = 'B';
 
                 grille[2][0] = 'A';
-                grille[2][1] = 'R';
-                grille[2][2] = 'E';
-                grille[2][3] = 'N';
-                grille[2][4] = 'D';
-                grille[2][5] = 'O';
+                grille[2][1] = 'P';
+                grille[2][2] = 'R';
+                grille[2][3] = 'O';
 
-                grille[1][0] = 'H';
-                grille[1][1] = 'J';
-                grille[1][2] = 'I';
-                grille[1][3] = 'C';
-                grille[1][4] = 'T';
-                grille[1][5] = 'R';
+                grille[1][0] = 'I';
+                grille[1][1] = 'D';
+                grille[1][2] = 'S';
+                grille[1][3] = 'E';
 
-                grille[0][0] = 'C';
-                grille[0][1] = 'S';
-                grille[0][2] = 'L';
-                grille[0][3] = 'A';
-                grille[0][4] = 'U';
-                grille[0][5] = 'E';*/
+                grille[0][0] = 'E';
+                grille[0][1] = 'V';
+                grille[0][2] = 'N';
+                grille[0][3] = 'J'; */
 
                 Generation_grille(grille, longueur); // Generation de la grille
 

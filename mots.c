@@ -453,7 +453,14 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 
             else if (d == 0)
             {
-                c = c - 1;
+                if (Nb_de_lettres_grille(grille, mot[0], longueur) == 1)
+                {
+                    return 0;
+                }
+                else
+                {
+                    c = c - 1;
+                }
                 nb_lettres_verifiees = 0;
                 //printf("Lettre suivante introuvable\n");
 
@@ -478,7 +485,14 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
 
             else
             {
-                c = c - 1;
+                if (Nb_de_lettres_grille(grille, mot[0], longueur) == 1)
+                {
+                    return 0;
+                }
+                else
+                {
+                    c = c - 1;
+                }
                 nb_lettres_verifiees = 0;
                 //printf("Lettre suivante introuvable\n");
 
@@ -621,14 +635,13 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         mot_deja_existant = 0;
 
     double temps = 0;
-    //clock_t t1 = 0, t2 = 0;
-    double t1 = 0, t2 = 0;
+    clock_t t1 = 0, t2 = 0;
+    //double t1 = 0, t2 = 0;
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        //t1 = clock(); // Première mesure du temps
-        t1 = clock();
+        t1 = clock(); // Première mesure du temps
 
         /** Début du bloc "Intialisation des variables de validation pour un mot" **/
         mot_verif = 0;
@@ -685,14 +698,16 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         }
         /** Fin du bloc "Vérification mot dans la grille et dans la liste" **/
 
-        //t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
-        t2 = clock();
-        //temps = temps + (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
-        temps = temps + (t2 - t1) / CLOCKS_PER_SEC;
+        t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
+
+        temps += (double) (t2 - t1) / (double) CLOCKS_PER_SEC * 100; // Calcul de la différence + ajout au temps déjà présent
+        //temps = temps + (t2 - t1) / CLOCKS_PER_SEC;
 
     } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 
     printf("---------------------------");
     printf("\nFin de la partie !");
+
+    fflush(stdout);
 
 }
