@@ -3,10 +3,11 @@
 
 #endif //PROJET_BOGGLE_MENU_H
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
-#include "ctype.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int Menu();
-int Temps_de_la_partie();
+/**
+ * Retourne le choix de l'utilisateur selon le menu proposé
+ * @return choix
+ */
+int Menu(); // Fonctionnel + commenté
