@@ -614,6 +614,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     }
 
     /** Début du bloc "Déclaration des variables nécessaires pour la fonction" **/
+
     int i = 0,
         mot_verif = 0,
         mot_dans_liste = 0,
@@ -621,14 +622,18 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         mot_deja_existant = 0;
 
     double temps = 0;
+
+    /** Initialisation des variables relatives au temps pour Mac OS **/
     //clock_t t1 = 0, t2 = 0;
+
+    /** Initialisation des variables relatives au temps pour Windows OS **/
     double t1 = 0, t2 = 0;
+
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        //t1 = clock(); // Première mesure du temps
-        t1 = clock();
+        t1 = clock(); // Première mesure du temps
 
         /** Début du bloc "Intialisation des variables de validation pour un mot" **/
         mot_verif = 0;
@@ -645,6 +650,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         scanf(" %s", &tabmots[i]); // Le mot taper se trouvera à la i-ème ligne
 
         /** Début du bloc "Vérification du mot existant" **/
+
         for (int h = 0; h < i; ++h)
         {
             if (strcmp(tabmots[i], tabmots[h]) == 0) // Mot dejà saisi
@@ -656,6 +662,7 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         /** Fin du bloc "Vérification du mot existant" **/
 
         /** Début du bloc "Vérification mot dans la grille et dans la liste" **/
+
         if (mot_deja_existant == 0)
         {
             mot_verif = Traitement_mot(tabmots[i], grille, longueur); // Vérification mot dans la grille
@@ -685,10 +692,13 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         }
         /** Fin du bloc "Vérification mot dans la grille et dans la liste" **/
 
-        //t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
-        t2 = clock();
+        t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
+
+        /** Calcul du temps de jeu total pour Mac OS **/
         //temps = temps + (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
-        temps = temps + (t2 - t1) / CLOCKS_PER_SEC;
+
+        /** Calcul du temps de jeu total pour Windows OS **/
+        temps = temps + (t2 - t1) / CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
 
     } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 
