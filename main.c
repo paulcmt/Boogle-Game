@@ -4,6 +4,7 @@
 #include "menu score.h"
 #include "mots.h"
 #include "calcul score.h"
+#include "enregistrement score.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -31,14 +32,14 @@ int Temps_de_la_partie()
 {
     short temps = 0;
 
-    printf("Temps voulu pour la partie \(de 60 a 180 secondes\): ");
+    printf("Temps voulu pour la partie \(de 60 a 180 secondes\) : ");
     scanf(" %hd", &temps);
 
     /** Debut du bloc "Contrôle du temps limite avec message d'erreur" **/
     while (60 > temps || temps > 180) // Temps entre doit être compris entre 60 et 180 secondes
     {
         printf("Erreur de saisie, le temps doit être entre 60 et 180 secondes"); // Message d'erreur
-        printf("\nTemps voulu pour la partie \(de 60 a 180 secondes\): ");
+        printf("\nTemps voulu pour la partie \(de 60 a 180 secondes\) : ");
         scanf(" %hd", &temps);
     }
     /** Fin du bloc "Contrôle du temps limite avec message d'erreur" **/
@@ -179,6 +180,8 @@ int main()
                 /** Fin "Création tableau dynamique pour la saisie des mots" **/
 
                 Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + vérification du mot
+
+                score = Calcul_du_score(tabmots, temps_limite);
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 

@@ -527,11 +527,6 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     /** Fin du bloc de traitement du mot entré **/
 }
 
-int Test(char mot[], char grille[8][8], int longueur)
-{
-    return 1;
-}
-
 int Verification_francais(char mot_a_comparer[])
 {
     char mot_fr[26];
