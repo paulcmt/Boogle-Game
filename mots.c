@@ -626,12 +626,14 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         mot_deja_existant = 0;
 
     double temps = 0;
-    clock_t t1 = 0, t2 = 0;
+    //clock_t t1 = 0, t2 = 0;
+    double t1 = 0, t2 = 0;
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        t1 = clock(); // Première mesure du temps
+        //t1 = clock(); // Première mesure du temps
+        t1 = clock();
 
         /** Début du bloc "Intialisation des variables de validation pour un mot" **/
         mot_verif = 0;
@@ -688,8 +690,10 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         }
         /** Fin du bloc "Vérification mot dans la grille et dans la liste" **/
 
-        t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
-        temps = temps + (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
+        //t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
+        t2 = clock();
+        //temps = temps + (double) (t2 - t1) / (double) CLOCKS_PER_SEC; // Calcul de la différence + ajout au temps déjà présent
+        temps = temps + (t2 - t1) / CLOCKS_PER_SEC;
 
     } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 
