@@ -144,7 +144,7 @@ int main()
 
                 Generation_grille(grille, longueur); // Generation de la grille
 
-                temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
