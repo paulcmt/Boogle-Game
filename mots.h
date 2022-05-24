@@ -8,6 +8,7 @@
 #include <string.h>
 #include <ctype.h>
 
+int Test(char mot[], char grille[8][8], int longueur);
 int Nb_de_lettres_grille(char grille[8][8], char lettre_a_compter, int longueur);
 void Coordonnees_lettre(char lettre, int longueur, char grille[8][8], int *indiceL, int *indiceC);
 void Obtention_lettres_autour(char lettre_autour[8], int indiceC, int indiceL, char grille[8][8], int longueur);

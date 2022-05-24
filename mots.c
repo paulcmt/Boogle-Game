@@ -194,7 +194,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
         for (d = 0; d < longueur_du_mot; d = d + 1) // On répète tant que toutes les lettre n'ont pas été examinées
         {
             // Boucle permettant d'initialiser le tableau de récupération des lettres
-            for (int e = 0; e < 9; e = e + 1)
+            for (int e = 0; e < 8; e = e + 1)
             {
                 lettre_autour[e] = NULL;
             }
@@ -212,7 +212,7 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
                 nb_lettres_autour ++;
                 j++;
             }
-            while (lettre_autour[j] != 0);
+            while (lettre_autour[j] != NULL);
             /** Fin du bloc "Calcul nombre lettres autoures" **/
 
             // Condition pour faire la vérification de la présence de la lettre suivante dans les lettres autours
@@ -525,6 +525,11 @@ int Traitement_mot(char mot[], char grille[8][8], int longueur)
     return 0;
 
     /** Fin du bloc de traitement du mot entré **/
+}
+
+int Test(char mot[], char grille[8][8], int longueur)
+{
+    return 1;
 }
 
 int Verification_francais(char mot_a_comparer[])

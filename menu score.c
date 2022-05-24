@@ -14,12 +14,14 @@ int Menu_scores()
     short choix; // Déclaration variable choix pour le controler
 
     /** Debut du bloc "Contrôle du choix avec message d'erreur" **/
+    fflush(stdin);
     printf("Choix : ");
     scanf(" %hd", &choix);
 
     while (!(choix >=1 && choix <= 3)) // Choix doit être compris entre 1 et 3
     {
         printf("Erreur de saisie, le choix doit être entre 1 et 3."); // Message d'erreur
+        fflush(stdin);
         printf("\nChoix : ");
         scanf(" %hd", &choix);
     }
