@@ -29,6 +29,7 @@ float Calcul_du_score(char tabmots[][26], short temps_limite)
     return score_total;
 }
 
+
     /*
      * Où sont tous les mots ?      Ils sont stockés dans "tabmots"
      * Combien y en a t-il ?        Il y en a [i]
@@ -38,24 +39,12 @@ float Calcul_du_score(char tabmots[][26], short temps_limite)
      *      Total   V
      */
 
-    /*
-    int Compteur_lettre(char tabmots[][26], short temps_limite)
-    {
-        j = 0;
-        while (tabmots[j] != NULL)
-        {
-            j = j + 1;
-            nb_lettre = nb_lettre + 1;
-        }
-
-        return nb_lettre;
-    }
-
+/*
     float score = 0;
 
     for (i = 0 ; i < temps_limite * 2 ; i = i + 1)
     {
-        nb_lettre = Compteur_lettre(tabmots[][26], temps_limite);
+        nb_lettre = Compteur_lettre(tabmots[temps_limite][26], temps_limite, i);
         score = pow(nb_lettre,4/3);
         score_total = score + score_total;
     }
@@ -63,4 +52,16 @@ float Calcul_du_score(char tabmots[][26], short temps_limite)
 
     return score_total;
 }
-  */
+
+int Compteur_lettre(char tabmots[][26], short temps_limite, int i)
+    {
+        int j = 0, nb_lettre;
+        while (tabmots[i][j] != NULL)
+        {
+            j = j + 1;
+            nb_lettre = nb_lettre + 1;
+        }
+
+        return nb_lettre;
+    }
+    */

@@ -17,4 +17,4 @@
  */
 float Calcul_du_score(char tabmots[][26], short temps_limite);
 
-int Compteur_lettre(char tabmots[][26], short temps_limite);
+int Compteur_lettre(char tabmots[][26], short temps_limite, int i);

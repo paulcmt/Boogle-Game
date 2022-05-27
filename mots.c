@@ -637,8 +637,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     double temps = 0;
 
     /** Déclaration des variables relatives au temps pour Mac OS **/
-    clock_t t1 = 0, t2 = 0;
-    //double t1 = 0, t2 = 0;
+    //clock_t t1 = 0, t2 = 0;
+    double t1 = 0, t2 = 0;
 
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
