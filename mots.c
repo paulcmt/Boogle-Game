@@ -637,10 +637,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     double temps = 0;
 
     /** Déclaration des variables relatives au temps pour Mac OS **/
-    //clock_t t1 = 0, t2 = 0;
-
-    /** Déclaration des variables relatives au temps pour Mac OS **/
-    double t1 = 0, t2 = 0;
+    clock_t t1 = 0, t2 = 0;
+    //double t1 = 0, t2 = 0;
 
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
 
@@ -705,11 +703,8 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
 
         t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
 
-        /** Calcul temps total pour Mac OS **/
-        //temps += (double) (t2 - t1) / (double) CLOCKS_PER_SEC * 100; // Calcul de la différence + ajout au temps déjà présent
-
         /** Calcul temps total pour windows OS **/
-        temps = temps + (t2 - t1) / CLOCKS_PER_SEC;
+        temps += (float) (t2 - t1) / CLOCKS_PER_SEC;
 
     } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 

@@ -1,6 +1,7 @@
 #include "calcul score.h"
 
-float Calcul_du_score(char tabmots[][26], short temps_limite) {
+float Calcul_du_score(char tabmots[][26], short temps_limite)
+{
     int i, j, nb_lettre = -1;
     float score_total = 0.0;
 
@@ -9,15 +10,16 @@ float Calcul_du_score(char tabmots[][26], short temps_limite) {
 
     printf("\n\nCalcul des scores");
 
-/*
+
     for(i = 0 ; i < temps_limite * 2 ; i = i + 1)
     {
-        j = 0;
+        j = -1;
         do
         {
             nb_lettre = nb_lettre + 1;
+            j ++;
         }
-        while (tabmots[j] != NULL);
+        while (tabmots[i][j] != NULL);
 
         score_total = score_total + (float) pow(nb_lettre, (float) 4/3);  // Incrémentation du score du i-ème mot
     }
@@ -26,7 +28,6 @@ float Calcul_du_score(char tabmots[][26], short temps_limite) {
 
     return score_total;
 }
-*/
 
     /*
      * Où sont tous les mots ?      Ils sont stockés dans "tabmots"
@@ -37,7 +38,7 @@ float Calcul_du_score(char tabmots[][26], short temps_limite) {
      *      Total   V
      */
 
- /*
+    /*
     int Compteur_lettre(char tabmots[][26], short temps_limite)
     {
         j = 0;
@@ -52,7 +53,7 @@ float Calcul_du_score(char tabmots[][26], short temps_limite) {
 
     float score = 0;
 
-    for(i = 0 ; i < temps_limite * 2 ; i = i + 1)
+    for (i = 0 ; i < temps_limite * 2 ; i = i + 1)
     {
         nb_lettre = Compteur_lettre(tabmots[][26], temps_limite);
         score = pow(nb_lettre,4/3);
