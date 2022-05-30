@@ -616,7 +616,7 @@ int Verification_francais(char mot_a_comparer[])
     return 0;
 }
 
-void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
+int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmots[][26])
 {
 
     for (int j = 0; j < temps_limite * 2; ++j) // Boucle permettant l'initialisation du tableau pour récupérer le mot saisi
@@ -637,15 +637,13 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
     double temps = 0;
 
     /** Déclaration des variables relatives au temps pour Mac OS **/
-    //clock_t t1 = 0, t2 = 0;
-    double t1 = 0, t2 = 0;
+    time_t t1, t2;
+    //double t1 = 0, t2 = 0;
 
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
-
+    time(&t1); // Première mesure du temps
     do // Tant que le temps imparti n'est pas écouler alors l'utilisateur peut saisir un mot
     {
-        t1 = clock(); // Première mesure du temps
-
         /** Début du bloc "Intialisation des variables de validation pour un mot" **/
         mot_verif = 0;
         mot_dans_liste = 0;
@@ -701,16 +699,14 @@ void Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabm
         }
         /** Fin du bloc "Vérification mot dans la grille et dans la liste" **/
 
-        t2 = clock(); // Enregistrement date fin, deuxième mesure de temps
+        time(&t2); // Enregistrement date fin, deuxième mesure de temps
 
-        /** Calcul temps total pour windows OS **/
-        temps += (float) (t2 - t1) / CLOCKS_PER_SEC;
-
-    } while (temps_limite > temps); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
+    } while (difftime(t2,t1) < temps_limite); // Vérification que le temps pris par l'utilisateur n'a pas dépassé le temps fixé au début
 
     printf("---------------------------");
     printf("\nFin de la partie !");
 
     fflush(stdout);
 
+    return nb_de_mots_valide;
 }

@@ -15,6 +15,6 @@
  * @param temps_limite
  * @return score_total
  */
-float Calcul_du_score(char tabmots[][26], short temps_limite);
+float Calcul_du_score(char tabmots[][26], short nb_de_mots_valides);
 
 int Compteur_lettre(char tabmots[][26], short temps_limite, int i);

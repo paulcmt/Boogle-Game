@@ -58,8 +58,8 @@ int Rejouer(short choix_intial)
 
     {
         printf("\nVoulez-vous rejouer (Oui / Non) : ");
-        fgets(choix, 3, stdin);
         fflush(stdin);
+        fgets(choix, 3, stdin);
 
         for (int i = 0; i < 3; ++i) // On passe la réponse de l'utilisateur en majuscules pour effectuer la vérification plus loin
         {
@@ -71,9 +71,9 @@ int Rejouer(short choix_intial)
         {
             printf("\nErreur de saisie, veuillez respecter la casse"); // Message d'erreur
             printf("\nVoulez-vous rejouer (Oui / Non) : ");
-
-            fgets(choix, 3, stdin);
             fflush(stdin);
+            fgets(choix, 3, stdin);
+
 
             for (int i = 0; i < 3; ++i) // On passe la réponse de l'utilisateur en majuscules pour effectuer la vérification plus loin
             {
@@ -106,7 +106,7 @@ int main()
     srand(time(NULL)); // Intialisation du générateur aléatoire
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
-    short choix = 0, longueur = 0, temps_limite = 0;
+    short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0;
     float score = 0.0;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
@@ -157,9 +157,9 @@ int main()
 
                 /** Fin "Création tableau dynamique pour la saisie des mots" **/
 
-                Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + vérification du mot
+                nb_de_mots_valides = Saisie_de_mots(temps_limite, grille, longueur, tabmots); // Saisir un mot + vérification du mot
 
-                score = Calcul_du_score(tabmots, temps_limite);
+                score = Calcul_du_score(tabmots, nb_de_mots_valides);
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
