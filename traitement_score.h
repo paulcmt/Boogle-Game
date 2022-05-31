@@ -9,3 +9,8 @@
  * @param longueur
  */
 void Enregistrement_score(float score, short longueur);
+
+/**
+ * Fonction réalisant le tri des scores lors de l'ajout d'un nouveau score
+ */
+void tri_score();

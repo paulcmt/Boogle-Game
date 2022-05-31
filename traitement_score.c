@@ -23,3 +23,16 @@ void Enregistrement_score(float score, short longueur)
 
 }
 
+void tri_score()
+{
+    char score_1[256], score_2[256];
+
+    FILE *fichier_score = NULL;
+    fichier_score = fopen("../score", "r+");
+
+    if (fichier_score != NULL)
+    {
+
+    }
+}
+
