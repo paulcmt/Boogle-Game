@@ -636,7 +636,7 @@ int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmo
 
     double temps = 0;
 
-    /** Déclaration des variables relatives au temps pour Mac OS **/
+    /** Déclaration des variables relatives au temps **/
     time_t t1, t2;
     //double t1 = 0, t2 = 0;
 
