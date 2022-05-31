@@ -13,7 +13,7 @@ void enregistrement_score(float score, short longueur)
 
     if (fichier != NULL)
     {
-        fprintf(fichier, "Grille : %hd Prenom : %s Score : %.2f", longueur, pseudo, score);
+        fprintf(fichier, "Grille : %hd Prenom : %s Score : %.2f\n", longueur, pseudo, score);
         fclose(fichier);
     }
     else

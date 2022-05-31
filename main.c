@@ -57,9 +57,9 @@ int Rejouer(short choix_intial)
      * menu principal, on ne lui demande pas si il veut rejouer donc condition nécessaire */
 
     {
-        printf("\nVoulez-vous rejouer (Oui / Non) : ");
+        printf("Voulez-vous rejouer (Oui / Non) : ");
         fflush(stdin);
-        fgets(choix, 3, stdin);
+        fgets(choix, 4, stdin);
 
         for (int i = 0; i < 3; ++i) // On passe la réponse de l'utilisateur en majuscules pour effectuer la vérification plus loin
         {
@@ -69,10 +69,10 @@ int Rejouer(short choix_intial)
         /** Début du bloc "Contrôle du choix avec message d'erreur" **/
         while (!(strcmp(choix, "NON") == 0 || strcmp(choix, "OUI") == 0)) // Réponse doit être soit oui soit non
         {
-            printf("\nErreur de saisie, veuillez respecter la casse"); // Message d'erreur
+            printf("Erreur de saisie, veuillez respecter la casse"); // Message d'erreur
             printf("\nVoulez-vous rejouer (Oui / Non) : ");
             fflush(stdin);
-            fgets(choix, 3, stdin);
+            fgets(choix, 4, stdin);
 
 
             for (int i = 0; i < 3; ++i) // On passe la réponse de l'utilisateur en majuscules pour effectuer la vérification plus loin
