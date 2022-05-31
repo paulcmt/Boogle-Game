@@ -21,6 +21,7 @@ void Enregistrement_score(float score, short longueur)
         printf("Erreur ouverture");
     }
 
+    Tri_score();
 }
 
 void Tri_score()
