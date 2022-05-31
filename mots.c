@@ -161,7 +161,7 @@ int Position_lettre_tab_lettre_autour(char lettre_autour[8], char lettre, int lo
     return i;
 }
 
-int Traitement_mot(char mot[], char grille[8][8], int longueur)
+int Verification_grille(char mot[], char grille[8][8], int longueur)
 {
     int indiceL = 0,
         indiceC = 0,
@@ -672,7 +672,7 @@ int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmo
         /** Début du bloc "Vérification mot dans la grille et dans la liste" **/
         if (mot_deja_existant == 0)
         {
-            mot_verif = Traitement_mot(tabmots[i], grille, longueur); // Vérification mot dans la grille
+            mot_verif = Verification_grille(tabmots[i], grille, longueur); // Vérification mot dans la grille
 
             mot_dans_liste = Verification_francais(tabmots[i]); // Vérification mot français
 

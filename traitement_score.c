@@ -1,7 +1,7 @@
-#include "enregistrement score.h"
+#include "traitement_score.h"
 #include "fonctions globales.h"
 
-void enregistrement_score(float score, short longueur)
+void Enregistrement_score(float score, short longueur)
 {
     char pseudo[26];
     printf("\nVeuillez saisir votre prenom : ");
@@ -13,7 +13,7 @@ void enregistrement_score(float score, short longueur)
 
     if (fichier != NULL)
     {
-        fprintf(fichier, "Grille : %hd Prenom : %s Score : %.2f\n", longueur, pseudo, score);
+        fprintf(fichier, "Score : %.2f Prenom : %s Grille : %hd\n", score, pseudo, longueur);
         fclose(fichier);
     }
     else

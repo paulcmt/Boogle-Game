@@ -4,7 +4,7 @@
 #include "menu score.h"
 #include "mots.h"
 #include "calcul score.h"
-#include "enregistrement score.h"
+#include "traitement_score.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -121,27 +121,6 @@ int main()
 
                 longueur = 4;//Dimension_grille(); // Demande dimension de la grille
 
-                /*
-                grille[3][0] = 'U';
-                grille[3][1] = 'J';
-                grille[3][2] = 'H';
-                grille[3][3] = 'B';
-
-                grille[2][0] = 'A';
-                grille[2][1] = 'P';
-                grille[2][2] = 'R';
-                grille[2][3] = 'O';
-
-                grille[1][0] = 'I';
-                grille[1][1] = 'D';
-                grille[1][2] = 'S';
-                grille[1][3] = 'E';
-
-                grille[0][0] = 'E';
-                grille[0][1] = 'V';
-                grille[0][2] = 'N';
-                grille[0][3] = 'J'; */
-
                 Generation_grille(grille, longueur); // Generation de la grille
 
                 temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
@@ -163,7 +142,7 @@ int main()
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
-                enregistrement_score(score, longueur);
+                Enregistrement_score(score, longueur);
 
                 break;
 
