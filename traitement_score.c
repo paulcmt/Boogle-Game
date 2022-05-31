@@ -6,15 +6,17 @@ void Enregistrement_score(float score, short longueur)
     char pseudo[26];
     printf("\nVeuillez saisir votre prenom : ");
     fflush(stdin);
-    scanf(" %s", &pseudo);
+    scanf(" %s", &pseudo); // Acquisition du pseudo du joueur
 
     FILE *fichier = NULL;
-    fichier = fopen("../score.txt", "a");
+    fichier = fopen("../score.txt", "a"); // Ouverture du fichier "score"
 
-    if (fichier != NULL)
+    if (fichier != NULL) // Si le fichier est ouvert
     {
+        // Ecriture des paramètres de la partie dans le fichier score
         fprintf(fichier, "Score : %.2f Prenom : %s Grille : %hd\n", score, pseudo, longueur);
-        fclose(fichier);
+
+        fclose(fichier); // Fermeture du fichier "score"
     }
     else
     {
