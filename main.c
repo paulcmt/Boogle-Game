@@ -107,7 +107,7 @@ int main()
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
     short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0;
-    float score = 0.0;
+    float score = 0.0f;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
 
@@ -119,7 +119,7 @@ int main()
         {
             case 1: // Lancement de la partie
 
-                longueur = Dimension_grille(); // Demande dimension de la grille
+                longueur = 4;//Dimension_grille(); // Demande dimension de la grille
 
                 /*
                 grille[3][0] = 'U';
@@ -144,7 +144,7 @@ int main()
 
                 Generation_grille(grille, longueur); // Generation de la grille
 
-                temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
@@ -162,6 +162,8 @@ int main()
                 score = Calcul_du_score(tabmots, nb_de_mots_valides);
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
+
+                enregistrement_score(score, longueur);
 
                 break;
 
