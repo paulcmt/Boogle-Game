@@ -5,6 +5,7 @@
 #include "mots.h"
 #include "calcul score.h"
 #include "traitement_score.h"
+#include "affichage des scores.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -107,6 +108,7 @@ int main()
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
     short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0, dimension_grille_score = 0;
+    int longueur_fichier_score = 0;
     float score = 0.0f;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
@@ -159,7 +161,9 @@ int main()
 
                     case 2:
 
-                        dimension_grille_score = Dimension_grille();
+                        dimension_grille_score = Dimension_grille(); // Récupération des dimensions pour la recherche par grille
+                        longueur_fichier_score = Nombre_de_lignes();
+                        Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
                         break;
 
                     default: // Passe pour retourner au menu principal
