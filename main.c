@@ -57,7 +57,7 @@ int Rejouer(short choix_intial)
      * menu principal, on ne lui demande pas si il veut rejouer donc condition nécessaire */
 
     {
-        printf("Voulez-vous rejouer (Oui / Non) : ");
+        printf("Voulez-vous retouner au menu principal (Oui / Non) : ");
         fflush(stdin);
         fgets(choix, 4, stdin);
 
@@ -70,7 +70,7 @@ int Rejouer(short choix_intial)
         while (!(strcmp(choix, "NON") == 0 || strcmp(choix, "OUI") == 0)) // Réponse doit être soit oui soit non
         {
             printf("Erreur de saisie, veuillez respecter la casse"); // Message d'erreur
-            printf("\nVoulez-vous rejouer (Oui / Non) : ");
+            printf("\nVoulez-vous retouner au menu principal (Oui / Non) : ");
             fflush(stdin);
             fgets(choix, 4, stdin);
 
@@ -106,7 +106,7 @@ int main()
     srand(time(NULL)); // Intialisation du générateur aléatoire
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
-    short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0;
+    short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0, dimension_grille_score = 0;
     float score = 0.0f;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
@@ -144,11 +144,27 @@ int main()
 
                 Enregistrement_score(score, longueur);
 
+                Tri_score();
+
                 break;
 
             case 2: // Affichage des scores
 
                 choix = Menu_scores(); // Appel la fonction menu des scores
+
+                switch (choix)
+                {
+                    case 1:
+                        break;
+
+                    case 2:
+
+                        dimension_grille_score = Dimension_grille();
+                        break;
+
+                    default: // Passe pour retourner au menu principal
+                        break;
+                }
 
                 break;
 

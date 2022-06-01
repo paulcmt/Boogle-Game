@@ -11,6 +11,12 @@
 void Enregistrement_score(float score, short longueur);
 
 /**
+ * Fonction permettant de compter le nombre de lignes dans le fichier score
+ * @return nombre_de_lignes
+ */
+int Nombre_de_lignes();
+
+/**
  * Fonction réalisant le tri des scores lors de l'ajout d'un nouveau score
  */
 void Tri_score();

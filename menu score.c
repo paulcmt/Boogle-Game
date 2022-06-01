@@ -45,15 +45,6 @@ void Recherche_par_joueur()
 
 }
 
-void Scores_par_grille()
-{
-    int dim_grille;
-
-    // Récupération des dimensions de la grille dont on souhaite voir les scores
-
-    dim_grille = Dimension_grille();
-}
-
 /*
  * int i = 0; // Pour établir la boucle
 
