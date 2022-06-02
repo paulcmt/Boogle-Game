@@ -49,7 +49,7 @@ void Suppression_fin_fichier()
 
 }
 
-void Enregistrement_score(float score, short longueur)
+void Enregistrement_score(float score, short longueur, short temps)
 {
     char pseudo[26];
 
@@ -66,7 +66,7 @@ void Enregistrement_score(float score, short longueur)
 
     if (fichier != NULL) // Vérification que le fichier est bien ouvert
     {
-        fprintf(fichier, "Score : %.2f Prenom : %s Grille : %hd\n", score, pseudo, longueur); // Stockage des données de la partie
+        fprintf(fichier, "Score : %.2f Prenom : %s Temps : %hd Grille : %hd\n", score, pseudo, temps, longueur); // Stockage des données de la partie
         fprintf(fichier, "--- FIN FICHIER ---\n"); // Signalement de la fin du texte contenu par le fichier
         fclose(fichier); // Fermeture du fichier des scores
     }

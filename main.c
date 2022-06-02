@@ -121,11 +121,11 @@ int main()
         {
             case 1: // Lancement de la partie
 
-                longueur = 4;//Dimension_grille(); // Demande dimension de la grille
+                longueur = Dimension_grille(); // Demande dimension de la grille
 
                 Generation_grille(grille, longueur); // Generation de la grille
 
-                temps_limite = 30;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
@@ -144,7 +144,7 @@ int main()
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
-                Enregistrement_score(score, longueur);
+                Enregistrement_score(score, longueur, temps_limite);
                 Tri_score();
 
                 break;
@@ -163,7 +163,6 @@ int main()
                         dimension_grille_score = Dimension_grille_score(); // Récupération des dimensions pour la recherche par grille
                         longueur_fichier_score = Nombre_de_lignes();
                         Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
-
                         break;
 
                     default: // Passe pour retourner au menu principal

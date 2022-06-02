@@ -49,7 +49,7 @@ void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 
                 if (affichage_presentation == 1)
                 {
-                    printf("---------- Score(s) de la grille %d ----------\n", dimension_grille);
+                    printf("-------------- Score(s) de la grille %d --------------\n", dimension_grille);
                     printf("%s", ligne);
                 }
                 else
@@ -63,7 +63,7 @@ void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 
         if (affichage_presentation != 0)
         {
-            printf("---------------------------------------------\n");
+            printf("------------------------------------------------------\n");
         }
         else
         {

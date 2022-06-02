@@ -1,6 +1,3 @@
-Score : 43.60 Prenom : Paul Grille : 4
-Score : 41.08 Prenom : Sylvain Grille : 4
-Score : 37.25 Prenom : Grégoire Grille : 4
-Score : 34.55 Prenom : Antoine Grille : 4
-Score : 31.22 Prenom : Lucas Grille : 5
+Score : 69.00 Prenom : Paul Temps : 60 Grille : 4
+Score : 62.21 Prenom : Paul Temps : 60 Grille : 4
 --- FIN FICHIER ---

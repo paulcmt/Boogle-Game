@@ -8,7 +8,7 @@
  * @param score
  * @param longueur
  */
-void Enregistrement_score(float score, short longueur);
+void Enregistrement_score(float score, short longueur, short temps);
 
 /**
  * Fonction permettant de compter le nombre de lignes dans le fichier score
