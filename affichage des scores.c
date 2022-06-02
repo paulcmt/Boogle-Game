@@ -3,8 +3,8 @@
 
 int Affichage_par_grille(short dimension_grille, short longueur_fichier)
 {
-    short i = 0, j = 0, emplacement_dimension = 0, recherche_suivante = 0;
-    char ligne_lue[256] = {0}, reponse[4];
+    short i = 0, j = 0, emplacement_dimension = 0, recherche_suivante = 0, dimscorecomp = 0;
+    char ligne_lue[256] = {0}, reponse[4], dim_score[3];
 
     FILE *fichier;
     fopen("../score.txt", "r");
@@ -20,7 +20,11 @@ int Affichage_par_grille(short dimension_grille, short longueur_fichier)
                 emplacement_dimension = emplacement_dimension + 1;
             }
 
-            if ( ligne_lue[emplacement_dimension] == dimension_grille)
+            dim_score[0] = ligne_lue[emplacement_dimension];
+
+            dimscorecomp = atoi(&dim_score[0]);
+
+            if (dim_score == dimension_grille)
             {
                 printf("%s\n", ligne_lue);
             }
@@ -43,11 +47,11 @@ int Affichage_par_grille(short dimension_grille, short longueur_fichier)
 
     if (strcmp(reponse, "OUI") == 0)
     {
-        recherche_suivante = 1;
+        recherche_suivante = 0;
     }
     else
     {
-        recherche_suivante = 0;
+        recherche_suivante = 1;
     }
 
     return recherche_suivante;
