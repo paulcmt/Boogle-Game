@@ -1,9 +1,9 @@
 #include "affichage des scores.h"
 #include "fonctions globales.h"
 
-int Affichage_par_grille(int dimension_grille, int longueur_fichier)
+int Affichage_par_grille(short dimension_grille, short longueur_fichier)
 {
-    int i = 0, j = 0, emplacement_dimension = 0;
+    short i = 0, j = 0, emplacement_dimension = 0, recherche_suivante = 0;
     char ligne_lue[256] = {0}, reponse[4];
 
     FILE *fichier;
@@ -40,4 +40,15 @@ int Affichage_par_grille(int dimension_grille, int longueur_fichier)
     {
         reponse[i] = toupper(reponse[i]);
     }
+
+    if (strcmp(reponse, "OUI") == 0)
+    {
+        recherche_suivante = 1;
+    }
+    else
+    {
+        recherche_suivante = 0;
+    }
+
+    return recherche_suivante;
 }
