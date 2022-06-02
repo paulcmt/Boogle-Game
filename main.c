@@ -54,8 +54,8 @@ int Rejouer(short choix_intial)
 
     if (choix_intial != 3)
 
-    /* Si l'utilisateur est passé par le menu des scores et veut retourner au
-     * menu principal, on ne lui demande pas si il veut rejouer donc condition nécessaire */
+        /* Si l'utilisateur est passé par le menu des scores et veut retourner au
+         * menu principal, on ne lui demande pas si il veut rejouer donc condition nécessaire */
 
     {
         printf("Voulez-vous retouner au menu principal (Oui / Non) : ");
@@ -108,7 +108,7 @@ int main()
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
     short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0,
-        dimension_grille_score = 0, reponse = 0,longueur_fichier_score = 0;
+            dimension_grille_score = 0, reponse = 0,longueur_fichier_score = 0;
     float score = 0.0f;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
