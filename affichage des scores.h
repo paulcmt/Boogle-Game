@@ -3,4 +3,4 @@
 
 #endif //MAIN_C_AFFICHAGE_DES_SCORES_H
 
-int Affichage_par_grille(short dimension_grille, short longueur_fichier);
+void Affichage_par_grille(short dimension_grille, short longueur_fichier);

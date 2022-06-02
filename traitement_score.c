@@ -1,6 +1,54 @@
 #include "traitement_score.h"
 #include "fonctions globales.h"
 
+void Suppression_fin_fichier()
+{
+    int nombre_de_lignes = Nombre_de_lignes(); // Récupération du nombre de ligne contenu par le fichier
+
+    /** Début "Création tableau dynamique pour la saisie des mots" **/
+    char **tabscore = (char **) malloc(nombre_de_lignes * sizeof(char *)); // Déclaration double pointeur pour tableau dynamique à deux dimensions
+
+    for (int i = 0; i < nombre_de_lignes; ++i) // Répeter pour toutes les lignes
+    {
+        tabscore[i] = (char *) malloc(200 * sizeof(char)); // Création d'un tableau de 200 places pour stocker chaque ligne du fichier
+    }
+    /** Fin "Création tableau dynamique pour la saisie des mots" **/
+
+    FILE *fichier = NULL;
+    fichier = fopen("../score.txt", "r"); // Ouverture du fichier des scores
+
+    if (fichier != NULL) // Vérification que le fichier est bien ouvert
+    {
+        for (int j = 0; j < nombre_de_lignes; ++j) // Tant que le fichier n'a pas été entièrement parcouru :
+        {
+            fgets(tabscore[j], 200, fichier); // Récupération de la j-ième ligne du fichier
+        }
+
+        fclose(fichier); // Fermeture du fichier
+    }
+    else
+    {
+        printf("Echec ouverture");
+    }
+
+    fichier = fopen("../score.txt", "w"); // Ouverture du fichier des scores
+
+    if (fichier != NULL) // Vérification que le fichier est bien ouvert
+    {
+        for (int l = 0; l < nombre_de_lignes; ++l)
+        {
+            fprintf(fichier, "%s", tabscore[l]); // On réécrit tous les scores triés dans le fichier
+        }
+
+        fclose(fichier); // Fermeture du fichier
+    }
+    else
+    {
+        printf("Echec ouverture"); // Signalement de l'échec de l'ouverture du fichier
+    }
+
+}
+
 void Enregistrement_score(float score, short longueur)
 {
     char pseudo[26];
@@ -10,6 +58,8 @@ void Enregistrement_score(float score, short longueur)
     fflush(stdin);
     scanf(" %s", &pseudo);
     /** Fin du bloc de saisi du nom du joueur **/
+
+    Suppression_fin_fichier();
 
     FILE *fichier = NULL;
     fichier = fopen("../score.txt", "a"); // OUverture du fichier contenant les  scores
@@ -34,17 +84,6 @@ int Nombre_de_lignes() // Fonction permettant de savoir combien de lignes contie
     int i = 0, nombre_de_lignes = 0;
 
     FILE *fichier = NULL;
-    fichier = fopen("../score.txt", "a"); // Ouverture du fichier des scores
-    if (fichier != NULL) // Vérification que le fichier est bien ouvert
-    {
-        fprintf(fichier, "--- FIN FICHIER ---\n"); // Signalement de la fin du texte contenu par le fichier
-    }
-    else
-    {
-        printf("Echec ouverture"); // Signalement de l'échec de l'ouverture du fichier
-    }
-    fclose(fichier);
-
     fichier = fopen("../score.txt", "r"); // Ouverture du fichier des scores
 
     if (fichier != NULL) // Vérification que le fichier est bien ouvert
@@ -75,14 +114,13 @@ int Nombre_de_lignes() // Fonction permettant de savoir combien de lignes contie
 
             nombre_de_lignes ++; // Incrémentation du nombre de ligne
         }
-    }
 
+        fclose(fichier); // Fermeture du fichier des scores
+    }
     else
     {
         printf("Echec ouverture"); // Signalement de l'échec de l'ouverture du fichier
     }
-
-    fclose(fichier); // Fermeture du fichier des scores
 
     return nombre_de_lignes; // Renvoie du nombre de ligne contenu par le fichier
 }
@@ -145,6 +183,7 @@ void Tri_score()
                 fprintf(fichier, "%s", tabscore[l]); // On réécrit tous les scores triés dans le fichier
             }
 
+            fprintf(fichier, "--- FIN FICHIER ---\n"); // Signalement de la fin du texte contenu par le fichier
             fclose(fichier); // Fermeture du fichier
         }
 

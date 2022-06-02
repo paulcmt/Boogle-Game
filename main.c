@@ -107,8 +107,8 @@ int main()
     srand(time(NULL)); // Intialisation du générateur aléatoire
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
-    short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0, dimension_grille_score = 0, reponse;
-    int longueur_fichier_score = 0;
+    short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0,
+        dimension_grille_score = 0, reponse = 0,longueur_fichier_score = 0;
     float score = 0.0f;
     char grille[8][8];
     /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
@@ -145,7 +145,6 @@ int main()
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
                 Enregistrement_score(score, longueur);
-
                 Tri_score();
 
                 break;
@@ -161,12 +160,10 @@ int main()
 
                     case 2:
 
-                        while (reponse != 0)
-                        {
-                            dimension_grille_score = Dimension_grille(); // Récupération des dimensions pour la recherche par grille
-                            longueur_fichier_score = Nombre_de_lignes();
-                            reponse = Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
-                        }
+                        dimension_grille_score = Dimension_grille(); // Récupération des dimensions pour la recherche par grille
+                        longueur_fichier_score = Nombre_de_lignes();
+                        Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
+
                         break;
 
                     default: // Passe pour retourner au menu principal

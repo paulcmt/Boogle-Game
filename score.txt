@@ -1,5 +1,6 @@
 Score : 43.60 Prenom : Paul Grille : 4
-Score : 31.00 Prenom : Florian Grille : 4
-Score : 30.22 Prenom : Paul Grille : 4
-Score : 23.06 Prenom : Flofi Grille : 4
+Score : 41.08 Prenom : Sylvain Grille : 4
+Score : 37.25 Prenom : Grégoire Grille : 4
+Score : 34.55 Prenom : Antoine Grille : 4
+Score : 31.22 Prenom : Lucas Grille : 5
 --- FIN FICHIER ---

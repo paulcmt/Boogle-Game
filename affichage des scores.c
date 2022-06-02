@@ -1,58 +1,38 @@
 #include "affichage des scores.h"
 #include "fonctions globales.h"
 
-int Affichage_par_grille(short dimension_grille, short longueur_fichier)
+void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 {
-    short i = 0, j = 0, emplacement_dimension = 0, recherche_suivante = 0, dimscorecomp = 0;
-    char ligne_lue[256] = {0}, reponse[4], dim_score[3];
+    short indice_grille_fichier = 0;
+    char ligne[256] = {0};
 
-    FILE *fichier;
-    fopen("../score.txt", "r");
+    FILE *fichier = NULL;
+    fichier = fopen("../score.txt", "r");
 
     if (fichier != NULL)
     {
-        for (i = 0 ; i < longueur_fichier ; i = i + 1)
+        for (short i = 0 ; i < longueur_fichier ; i++)
         {
-            fgets(ligne_lue, 256, fichier);
+            fgets(ligne, 256, fichier);
 
-            while (ligne_lue[emplacement_dimension] != '\n')
+            while (ligne[indice_grille_fichier] != '\n')
             {
-                emplacement_dimension = emplacement_dimension + 1;
+                indice_grille_fichier ++;
             }
 
-            dim_score[0] = ligne_lue[emplacement_dimension];
-
-            dimscorecomp = atoi(&dim_score[0]);
-
-            if (dim_score == dimension_grille)
+            if (atoi(&ligne[indice_grille_fichier-1]) == dimension_grille)
             {
-                printf("%s\n", ligne_lue);
+                printf("%s", ligne);
             }
+
+            indice_grille_fichier = 0;
         }
     }
+
     else
     {
         printf("Erreur ouverture"); // Signalement de l'échec de l'ouverture du fichier
     }
 
     fclose(fichier);
-
-    printf("Voulez visualiser d'autres scores ? (oui/non)");
-    fgets(reponse, 4, stdin);
-
-    for(j = 0 ; j < 4 ; j = j + 1)
-    {
-        reponse[i] = toupper(reponse[i]);
-    }
-
-    if (strcmp(reponse, "OUI") == 0)
-    {
-        recherche_suivante = 0;
-    }
-    else
-    {
-        recherche_suivante = 1;
-    }
-
-    return recherche_suivante;
 }

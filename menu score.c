@@ -44,15 +44,3 @@ void Recherche_par_joueur()
     /** Bloc d'envoie et de recherche dans le fichier des scores **/
 
 }
-
-/*
- * int i = 0; // Pour établir la boucle
-
-    /* Boucle pour afficher les 10 premiers meilleurs scores enregistrés précédemment
-     * dans le tableau à 1 dimension tabscore[] */
-/*
-for (i = 0 ; i < 10 ; ++i)
-{
-printf("%d. %d", i + 1, tabscore[i]);
-}
- */
