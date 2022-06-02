@@ -160,7 +160,7 @@ int main()
 
                     case 2:
 
-                        dimension_grille_score = Dimension_grille(); // Récupération des dimensions pour la recherche par grille
+                        dimension_grille_score = Dimension_grille_score(); // Récupération des dimensions pour la recherche par grille
                         longueur_fichier_score = Nombre_de_lignes();
                         Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
 

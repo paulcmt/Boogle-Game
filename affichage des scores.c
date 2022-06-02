@@ -1,9 +1,32 @@
 #include "affichage des scores.h"
 #include "fonctions globales.h"
 
+int Dimension_grille_score() // Demande la dimension de la grille
+{
+    char dimension[4]; // Création de la future réponse de l'utilisateur
+    Initialisation_tableau(dimension); // Tout élément devient NULL
+
+    printf("Grille voulue pour les scores (de 4 a 8) : ");
+    fflush(stdin);
+    fgets(dimension, 4, stdin); // Demande à l'utilisateur la dimension de la grille
+
+    while (!(strcmp(dimension, "4x4") == 0 || strcmp(dimension, "5x5") == 0 || strcmp(dimension, "6x6") == 0 ||
+             strcmp(dimension, "7x7") == 0 || strcmp(dimension, "8x8") == 0 || strcmp(dimension, "4\n") == 0
+             || strcmp(dimension, "5\n") == 0 || strcmp(dimension, "6\n") == 0 || strcmp(dimension, "7\n") == 0
+             || strcmp(dimension, "8\n") == 0)) // Contrôle de la dimension
+    {
+        printf("Erreur de saisie, la dimension doit etre entre 4 et 8\n");
+        printf("Grille voulue pour les scores (de 4 a 8) : ");
+        fflush(stdin);
+        fgets(dimension, 4, stdin); // Demande à l'utilisateur la dimension de la grille
+    }
+
+    return atoi(&dimension[0]); // Longueur de la grille = premier caractère de la saisie de l'utilisateur
+}
+
 void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 {
-    short indice_grille_fichier = 0;
+    short indice_grille_fichier = 0, affichage_presentation = 0;
     char ligne[256] = {0};
 
     FILE *fichier = NULL;
@@ -22,10 +45,31 @@ void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 
             if (atoi(&ligne[indice_grille_fichier-1]) == dimension_grille)
             {
-                printf("%s", ligne);
+                affichage_presentation ++;
+
+                if (affichage_presentation == 1)
+                {
+                    printf("---------- Score(s) de la grille %d ----------\n", dimension_grille);
+                    printf("%s", ligne);
+                }
+                else
+                {
+                    printf("%s", ligne);
+                }
             }
 
             indice_grille_fichier = 0;
+        }
+
+        if (affichage_presentation != 0)
+        {
+            printf("---------------------------------------------\n");
+        }
+        else
+        {
+            printf("----------------------------------------------------\n");
+            printf("Pas de score enregistree pour cette taille de grille\n");
+            printf("----------------------------------------------------\n");
         }
     }
 
