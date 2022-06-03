@@ -1,5 +1,3 @@
 Score : 69.00 Prenom : Paul Temps : 60 Grille : 4
-Score : 62.21 Prenom : Paul Temps : 60 Grille : 4
-Score : 51.75 Prenom : Florian Temps : 60 Grille : 4
 Score : 33.95 Prenom : Aurélien Temps : 60 Grille : 7
 --- FIN FICHIER ---

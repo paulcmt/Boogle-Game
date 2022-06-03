@@ -144,8 +144,8 @@ int main()
 
                 printf("\nLe score realise dans cette partie est de %.2f points !", score); // Affichage du score
 
-                Enregistrement_score(score, longueur, temps_limite);
-                Tri_score();
+                Enregistrement_score(score, longueur, temps_limite); // Enregistre le score réalisé par l'utilisateur
+                Tri_score(); // Tri du fichier score
 
                 break;
 
@@ -156,15 +156,16 @@ int main()
                 switch (choix)
                 {
                     case 1:
-                        longueur_fichier_score = Nombre_de_lignes();
+
+                        longueur_fichier_score = Nombre_de_lignes(); // On récupère le nombre de lignes de score du fichier score.txt
                         Affichage_par_pseudo(longueur_fichier_score);
                         break;
 
                     case 2:
 
                         dimension_grille_score = Dimension_grille_score(); // Récupération des dimensions pour la recherche par grille
-                        longueur_fichier_score = Nombre_de_lignes();
-                        Affichage_par_grille(dimension_grille_score, longueur_fichier_score);
+                        longueur_fichier_score = Nombre_de_lignes(); // On récupère le nombre de lignes de score du fichier score.txt
+                        Affichage_par_grille(dimension_grille_score, longueur_fichier_score); // Affichage des scores associés à une grille
                         break;
 
                     default: // Passe pour retourner au menu principal
@@ -180,9 +181,10 @@ int main()
                 break;
         }
 
-        choix = Rejouer(choix);
+        choix = Rejouer(choix); // Demande à l'utilisateur si il veut revenir au menu principal
 
-    } while (choix == 3);
+    }
+    while (choix == 3); // Repéter le programme tant que l'utilisateur ne veut pas quitter le programme (reponse != non)
 
     return 0;
 }
