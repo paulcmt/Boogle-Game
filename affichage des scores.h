@@ -5,3 +5,4 @@
 
 int Dimension_grille_score();
 void Affichage_par_grille(short dimension_grille, short longueur_fichier);
+void Affichage_par_pseudo(short longueur_fichier);

@@ -156,6 +156,8 @@ int main()
                 switch (choix)
                 {
                     case 1:
+                        longueur_fichier_score = Nombre_de_lignes();
+                        Affichage_par_pseudo(longueur_fichier_score);
                         break;
 
                     case 2:

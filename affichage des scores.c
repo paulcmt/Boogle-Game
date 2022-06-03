@@ -80,3 +80,103 @@ void Affichage_par_grille(short dimension_grille, short longueur_fichier)
 
     fclose(fichier);
 }
+
+void Affichage_par_pseudo(short longueur_fichier)
+{
+    char pseudo[100] = {0}, ligne[256] = {0}, copie_ligne[256] = {0};
+    short indice_pseudo_ligne = 0, nb_caractere_valide = 0, affichage_presentation = 0;
+
+    printf("Nom du joueur a chercher : ");
+    fflush(stdin);
+    fgets(pseudo, 100, stdin);
+
+    FILE *fichier = NULL;
+    fichier = fopen("../score.txt", "r");
+
+    if (fichier != NULL)
+    {
+        pseudo[strlen(pseudo) - 1] = NULL;
+
+        for (short i = 0 ; i < longueur_fichier ; i++)
+        {
+            fgets(ligne, 256, fichier);
+            strcpy(copie_ligne, ligne);
+
+            while (ligne[indice_pseudo_ligne] != 'm')
+            {
+                indice_pseudo_ligne ++;
+            }
+
+            indice_pseudo_ligne += 4;
+
+            for (int k = indice_pseudo_ligne; k < strlen(pseudo)+indice_pseudo_ligne; ++k)
+            {
+                pseudo[k-indice_pseudo_ligne] = toupper(pseudo[k-indice_pseudo_ligne]);
+                copie_ligne[k] = toupper(copie_ligne[k]);
+            }
+
+            for (int j = 0; j < strlen(pseudo); ++j)
+            {
+                if (copie_ligne[indice_pseudo_ligne] == pseudo[j])
+                {
+                    nb_caractere_valide ++;
+                }
+                else
+                {
+                    nb_caractere_valide = 0;
+                    break;
+                }
+
+                indice_pseudo_ligne ++;
+            }
+
+            if (nb_caractere_valide == strlen(pseudo))
+            {
+                affichage_presentation ++;
+
+                if (affichage_presentation == 1)
+                {
+                    pseudo[0] = toupper(pseudo[0]);
+                    for (int l = 1; l < strlen(pseudo); ++l)
+                    {
+                        pseudo[l] = tolower(pseudo[l]);
+                    }
+
+                    printf("-------------- Score(s) du joueur %s --------------\n", pseudo);
+                    printf("%s", ligne);
+                }
+                else
+                {
+                    printf("%s", ligne);
+                }
+            }
+
+            indice_pseudo_ligne = 0;
+            nb_caractere_valide = 0;
+        }
+
+        if (affichage_presentation != 0)
+        {
+            printf("---------------------------------");
+            for (int q = 0; q < strlen(pseudo); ++q)
+            {
+                printf("-");
+            }
+            printf("----------------\n");
+        }
+        else
+        {
+            printf("---------------------------------------\n");
+            printf("Pas de score enregistree pour ce joueur\n");
+            printf("---------------------------------------\n");
+        }
+
+    }
+
+    else
+    {
+        printf("Erreur ouverture"); // Signalement de l'échec de l'ouverture du fichier
+    }
+
+    fclose(fichier);
+}
