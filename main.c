@@ -108,10 +108,10 @@ int main()
 
     /** Début du bloc "Déclaration des variables nécessaires au programme" **/
     short choix = 0, longueur = 0, temps_limite = 0, nb_de_mots_valides = 0,
-            dimension_grille_score = 0, reponse = 0,longueur_fichier_score = 0;
+            dimension_grille_score = 0, longueur_fichier_score = 0;
     float score = 0.0f;
     char grille[8][8];
-    /** Fin du bloc "Déclaration des variables nécessaires au programme" **/
+    /** Fin du bloc "Déclaration des variables nécess   aires au programme" **/
 
     do
     {

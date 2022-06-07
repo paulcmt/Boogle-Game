@@ -634,8 +634,6 @@ int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmo
         nb_de_mots_valide = 0,
         mot_deja_existant = 0;
 
-    double temps = 0;
-
     /** Déclaration des variables relatives au temps **/
     time_t t1, t2;
     //double t1 = 0, t2 = 0;
@@ -672,6 +670,11 @@ int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmo
         /** Début du bloc "Vérification mot dans la grille et dans la liste" **/
         if (mot_deja_existant == 0)
         {
+            for (int j = 0; j < strlen(tabmots[i]); ++j)
+            {
+                tabmots[i][j] = tolower(tabmots[i][j]);
+            }
+
             mot_verif = Verification_grille(tabmots[i], grille, longueur); // Vérification mot dans la grille
 
             mot_dans_liste = Verification_francais(tabmots[i]); // Vérification mot français

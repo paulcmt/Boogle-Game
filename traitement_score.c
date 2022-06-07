@@ -62,6 +62,13 @@ void Enregistrement_score(float score, short longueur, short temps)
     scanf(" %s", &pseudo);
     /** Fin du bloc de saisi du nom du joueur **/
 
+    for (int i = 0; i < strlen(pseudo); ++i)
+    {
+        pseudo[i] = tolower(pseudo[i]);
+    }
+
+    pseudo[0] = toupper(pseudo[0]);
+
     Suppression_fin_fichier(); // Supprimer la ligne "Fin du fichier" pour incrémenter le score de l'utilisateur correctement
 
     FILE *fichier = NULL;

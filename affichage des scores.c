@@ -90,6 +90,13 @@ void Affichage_par_pseudo(short longueur_fichier)
     fflush(stdin);
     fgets(pseudo, 100, stdin);
 
+    for (int i = 0; i < strlen(pseudo); ++i)
+    {
+        pseudo[i] = tolower(pseudo[i]);
+    }
+
+    pseudo[0] = toupper(pseudo[0]);
+
     FILE *fichier = NULL;
     fichier = fopen("../score.txt", "r");
 
