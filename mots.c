@@ -636,7 +636,6 @@ int Saisie_de_mots(int temps_limite, char grille[8][8], int longueur, char tabmo
 
     /** Déclaration des variables relatives au temps **/
     time_t t1, t2;
-    //double t1 = 0, t2 = 0;
 
     /** Fin du bloc "Déclaration des variables nécessaires pour la fonction" **/
     time(&t1); // Première mesure du temps
