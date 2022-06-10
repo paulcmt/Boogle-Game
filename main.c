@@ -123,7 +123,7 @@ int main()
 
                 longueur = Dimension_grille(); // Demande dimension de la grille
 
-                temps_limite = 10;//Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
+                temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
                 Generation_grille(grille, longueur); // Generation de la grille
 
