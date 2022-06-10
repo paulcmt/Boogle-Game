@@ -142,7 +142,7 @@ void Tri_score()
     char copie_ligne[200]= {0};
 
     // Variable permettant de contrôler que tout a été trié
-    int nombre_de_lignes = 0, permutation = 1;
+    int nombre_de_lignes = 0, permutation = 1, a = 8;
 
     nombre_de_lignes = Nombre_de_lignes(); // Récupération du nombre de ligne contenu par le fichier
 
@@ -154,6 +154,10 @@ void Tri_score()
         tabscore[i] = (char *) malloc(200 * sizeof(char)); // Création d'un tableau de 200 places pour stocker chaque ligne du fichier
     }
     /** Fin "Création tableau dynamique pour la saisie des mots" **/
+
+    /** Début "Création tableau dynamique temporaire pour la saisie des mots" **/
+    float *tabscore_temp = (float *) malloc(nombre_de_lignes * sizeof(float)); // Déclaration double pointeur pour tableau dynamique à deux dimensions
+    /** Fin "Création tableau dynamique temporaire pour la saisie des mots" **/
 
     FILE *fichier = NULL;
     fichier = fopen("../score.txt", "r"); // Ouverture du fichier des scores
@@ -174,7 +178,10 @@ void Tri_score()
 
             for (int k = 0 ; k < nombre_de_lignes - 1; ++k)
             {
-                if (strncmp(tabscore[k+1], tabscore[k], 15) > 0) // Comparaison des score. Si le score de la ligne suivante est suppérieur alors :
+                tabscore_temp[k] = atof(&tabscore[k][a]);
+                tabscore_temp[k+1] = atof(&tabscore[k+1][a]);
+
+                if (tabscore_temp[k+1] > tabscore_temp[k]) // Comparaison des score. Si le score de la ligne suivante est suppérieur alors :
                 {
                     strcpy(copie_ligne, tabscore[k+1]); // Sauvegarde de la ligne suivante
                     strcpy(tabscore[k+1], tabscore[k]); // La ligne suivante reçoit la valeur la plus faible
@@ -209,4 +216,5 @@ void Tri_score()
     }
 
     free(tabscore);
+    free(tabscore_temp);
 }
