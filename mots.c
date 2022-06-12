@@ -447,7 +447,6 @@ int Verification_grille(char mot[], char grille[8][8], int longueur)
 
                 /** Fin du bloc "Position lettre suivante" **/
 
-                //printf("Lettre suivante trouvée\n");
                 nb_lettres_verifiees = nb_lettres_verifiees + 1;
             }
 
@@ -462,7 +461,6 @@ int Verification_grille(char mot[], char grille[8][8], int longueur)
                     c = c - 1;
                 }
                 nb_lettres_verifiees = 0;
-                //printf("Lettre suivante introuvable\n");
 
                 /* La lettre suivante étant introuvable, on restaure les coordonnées de la lettre précedente.
                  * A ces dernière, on incrémente l'indice de la colonne afin de pouvoir parcourir jusqu'à la
@@ -485,16 +483,17 @@ int Verification_grille(char mot[], char grille[8][8], int longueur)
 
             else
             {
-                if (Nb_de_lettres_grille(grille, mot[0], longueur) == 1)
+                if (Nb_de_lettres_grille(grille, mot[0], longueur) >= 1)
                 {
                     return 0;
                 }
+
                 else
                 {
                     c = c - 1;
                 }
+
                 nb_lettres_verifiees = 0;
-                //printf("Lettre suivante introuvable\n");
 
                 /* La lettre suivante étant introuvable, on restaure les coordonnées de la lettre précedente.
                  * A ces dernière, on incrémente l'indice de la colonne afin de pouvoir parcourir jusqu'à la
