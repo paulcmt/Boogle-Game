@@ -121,31 +121,11 @@ int main()
         {
             case 1: // Lancement de la partie
 
-                longueur = 4;//Dimension_grille(); // Demande dimension de la grille
+                longueur = Dimension_grille(); // Demande dimension de la grille
 
                 temps_limite = Temps_de_la_partie(); // Demande du temps pour le jeu à l'utilisateur
 
-                grille[0][0] = 'S';
-                grille[0][1] = 'L';
-                grille[0][2] = 'T';
-                grille[0][3] = 'I';
-
-                grille[1][0] = 'E';
-                grille[1][1] = 'N';
-                grille[1][2] = 'A';
-                grille[1][3] = 'R';
-
-                grille[2][0] = 'R';
-                grille[2][1] = 'B';
-                grille[2][2] = 'O';
-                grille[2][3] = 'E';
-
-                grille[3][0] = 'I';
-                grille[3][1] = 'M';
-                grille[3][2] = 'C';
-                grille[3][3] = 'L';
-
-                //Generation_grille(grille, longueur); // Generation de la grille
+                Generation_grille(grille, longueur); // Generation de la grille
 
                 /** Début "Création tableau dynamique pour la saisie des mots" **/
 
